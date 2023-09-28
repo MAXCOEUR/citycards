@@ -1,9 +1,9 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="radius_button">100dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="fragment_horizontal_margin">16dp</dimen>
-    <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="taille8">8dp</dimen>
+    <dimen name="taille16">16dp</dimen>
+    <dimen name="taille32">32dp</dimen>
+    <dimen name="taille64">64dp</dimen>
+    <dimen name="taille128">128dp</dimen>
+    <dimen name="radius_button">100</dimen>
 </resources>
