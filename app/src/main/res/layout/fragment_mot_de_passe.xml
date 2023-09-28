@@ -32,6 +32,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TinputLayoutMotdePasse"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -39,6 +40,7 @@
                 android:layout_marginEnd="16dp"
                 app:boxStrokeWidth="2dp"
                 app:boxStrokeWidthFocused="4dp"
+                android:hint="Mot de passe"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/progressBar">
@@ -47,12 +49,12 @@
                     android:id="@+id/TinputMotDePasse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#00FFFFFF"
-                    android:hint="Mot de passe" />
+                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TinputLayoutConfirmationMotdePasse"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -60,6 +62,7 @@
                 android:layout_marginEnd="16dp"
                 app:boxStrokeWidth="2dp"
                 app:boxStrokeWidthFocused="4dp"
+                android:hint="Confirmation mot de passe"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TinputLayoutMotdePasse">
@@ -67,9 +70,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TinputConfirmationMotDePasse"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00FB0000"
-                    android:hint="Confirmation mot de passe" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -78,6 +79,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Suivant"
+                android:paddingLeft="@dimen/taille32"
+                android:paddingTop="@dimen/taille16"
+                android:paddingRight="@dimen/taille32"
+                android:paddingBottom="@dimen/taille16"
                 app:cornerRadius="@dimen/radius_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
