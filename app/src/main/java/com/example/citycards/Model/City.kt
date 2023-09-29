@@ -13,13 +13,13 @@ data class City(
     val id : Int?=null,
     @SerializedName("name")
     val name: String?=null,
-    @SerializedName("Region")
-    val Region : String?=null,
-    @SerializedName("Population")
-    val Population : Int?=null,
-    @SerializedName("Longitude")
-    val Longitude : Float?=null,
-    @SerializedName("Latitude")
-    val Latitude : Float?=null,
-    @SerializedName("Country")
-    val Country: String?=null)
+    @SerializedName("region")
+    val region : String?=null,
+    @SerializedName("population")
+    val population : Int?=null,
+    @SerializedName("longitude")
+    val longitude : Float?=null,
+    @SerializedName("latitude")
+    val latitude : Float?=null,
+    @SerializedName("country")
+    val country: String?=null)

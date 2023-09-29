@@ -40,11 +40,11 @@ class MainActivity : AppCompatActivity() {
         )
         val Api = ApiClient.getApiService
         CoroutineScope(Dispatchers.IO).launch {
-            val response = Api.getCities()
+            val response = Api.getCities(1)
             withContext(Dispatchers.Main) {
                 try {
                     if (response.isSuccessful) {
-                        Log.i("Test", "Succes")
+                        Log.i("Test", response.body().toString())
                     } else {
                         Log.i("Test", "Fail")
                     }

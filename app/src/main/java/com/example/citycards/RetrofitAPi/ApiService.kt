@@ -9,7 +9,7 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("cities/")
-    suspend fun getCities(): Response<CityList>
+    suspend fun getCities(@Query("limit")  limiteur: Int): Response<CityList>
 
 }
 
