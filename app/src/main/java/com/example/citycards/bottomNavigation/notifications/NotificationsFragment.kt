@@ -1,12 +1,11 @@
-package com.example.citycards.ui.notifications
+package com.example.citycards.bottomNavigation.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.example.citycards.R
 import com.example.citycards.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {
@@ -22,21 +21,19 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val view = inflater.inflate(R.layout.fragment_notifications, container, false)
+        return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String?=null, param2: String?=null) =
+            NotificationsFragment().apply {
+
+            }
     }
 }

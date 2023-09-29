@@ -1,4 +1,4 @@
-package com.example.citycards.ui.notifications
+package com.example.citycards.bottomNavigation.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
