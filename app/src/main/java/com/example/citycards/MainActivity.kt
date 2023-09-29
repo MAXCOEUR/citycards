@@ -9,11 +9,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.citycards.RetrofitAPi.ApiClient
-import com.example.citycards.RetrofitAPi.ApiService
 import com.example.citycards.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
-        val Api = ApiClient.ApiService
+        val Api = ApiClient.getApiService
         CoroutineScope(Dispatchers.IO).launch {
             val response = Api.getCities()
             withContext(Dispatchers.Main) {
@@ -48,10 +46,10 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Log.i("Test", "Succes")
                     } else {
-                        Log.i("Test", "${response.code()}")
+                        Log.i("Test", "Fail")
                     }
                 } catch (e: HttpException) {
-                    Log.i("Test", "${e.message}")
+                    Log.i("Test", "HttpException")
                 } catch (e: Throwable) {
                     Log.i("Test", "Ooops: Something else went wrong")
                 }

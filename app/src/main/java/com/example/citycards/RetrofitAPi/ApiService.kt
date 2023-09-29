@@ -8,7 +8,9 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("CityList")
+    @GET("cities/")
     suspend fun getCities(): Response<CityList>
+
 }
+
 

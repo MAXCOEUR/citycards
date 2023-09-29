@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val BASE_URL: String = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities/"
+    private const val BASE_URL: String = "https://wft-geo-db.p.rapidapi.com/v1/geo/"
 
 
     private val gson : Gson by lazy {
@@ -25,7 +25,6 @@ object ApiClient {
                 val request = original.newBuilder()
                     .header("X-RapidAPI-Key", "28911db767msha7f0ad07554072fp110999jsna92ff89a4cbc")
                     .header("X-RapidAPI-Host", "wft-geo-db.p.rapidapi.com")
-                    .method(original.method(), original.body())
                     .build()
 
                 return chain.proceed(request)
@@ -43,7 +42,7 @@ object ApiClient {
             .build()
     }
 
-    val ApiService : ApiService by lazy {
+    val getApiService : ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
 
