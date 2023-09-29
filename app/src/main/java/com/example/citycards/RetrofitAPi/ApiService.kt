@@ -1,0 +1,16 @@
+package com.example.citycards.RetrofitAPi
+
+import com.example.citycards.Model.User
+import com.example.citycards.Model.City
+import com.example.citycards.Model.CityList
+import retrofit2.Response
+import retrofit2.http.*
+
+interface ApiService {
+
+    @GET("cities/")
+    suspend fun getCities(@Query("limit")  limiteur: Int): Response<CityList>
+
+}
+
+

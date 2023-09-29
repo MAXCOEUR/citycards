@@ -1,13 +1,20 @@
 package com.example.citycards
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.citycards.RetrofitAPi.ApiClient
 import com.example.citycards.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -29,7 +38,26 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
+        val Api = ApiClient.getApiService
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = Api.getCities(1)
+            withContext(Dispatchers.Main) {
+                try {
+                    if (response.isSuccessful) {
+                        Log.i("Test", response.body().toString())
+                    } else {
+                        Log.i("Test", "Fail")
+                    }
+                } catch (e: HttpException) {
+                    Log.i("Test", "HttpException")
+                } catch (e: Throwable) {
+                    Log.i("Test", "Ooops: Something else went wrong")
+                }
+            }
+        }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 }
+
+
