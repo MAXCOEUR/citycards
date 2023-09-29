@@ -6,17 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".View.CreateFragment.CreationFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_gravity="center">
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -24,6 +21,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="@dimen/taille32"
                 android:layout_marginEnd="32dp"
                 android:progress="25"
                 android:progressTint="@color/secondary"
@@ -51,8 +49,8 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/TinputLayoutEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -66,7 +64,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TinputEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -79,13 +77,13 @@
                 android:paddingTop="@dimen/taille16"
                 android:paddingRight="@dimen/taille32"
                 android:paddingBottom="@dimen/taille16"
-                app:cornerRadius="@dimen/radius_button"
                 android:text="Suivant"
+                app:cornerRadius="@dimen/radius_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TinputLayoutEmail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

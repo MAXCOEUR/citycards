@@ -3,13 +3,18 @@ package com.example.citycards.View
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.ImageButton
+import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
 import com.example.citycards.View.CreateFragment.CreationFragment
 
 class CreateActivity : AppCompatActivity() {
+
+    var createUser:CreateUser= CreateUser()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_create)
         // Obtenez le gestionnaire de fragments
         val fragmentManager = supportFragmentManager
@@ -18,7 +23,7 @@ class CreateActivity : AppCompatActivity() {
         val transaction = fragmentManager.beginTransaction()
 
         // Créez une instance du fragment que vous souhaitez afficher
-        val fragment = CreationFragment.newInstance()
+        val fragment = CreationFragment.newInstance(createUser)
 
         // Remplacez le contenu du FragmentContainerView par votre fragment
         transaction.replace(R.id.fragmentContainerView, fragment)

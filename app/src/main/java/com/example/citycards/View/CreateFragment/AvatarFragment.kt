@@ -13,9 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,8 +29,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AvatarFragment : Fragment() {
+    lateinit var createUser: CreateUser
     val REQUEST_IMAGE_OPEN = 1
-    val REQUEST_STORAGE_PERMISSION=2;
+    val REQUEST_STORAGE_PERMISSION=2
+    lateinit var imagePickerView:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -41,6 +44,7 @@ class AvatarFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_avatar, container, false)
 
         val buttonSuivant = view.findViewById<Button>(R.id.bt_Suivant)
+        imagePickerView= view.findViewById<ImageView>(R.id.iv_ImagePicker)
 
         buttonSuivant.setOnClickListener {
             Log.i("click", "ButtonSuivant.setOnClickListener ")
@@ -48,7 +52,7 @@ class AvatarFragment : Fragment() {
             val transaction = parentFragmentManager.beginTransaction()
 
             // Créez une instance du fragment que vous souhaitez afficher
-            val fragment = SuccesFragment.newInstance()
+            val fragment = SuccesFragment.newInstance(createUser)
 
             // Remplacez le contenu du FragmentContainerView par votre fragment
             transaction.replace(R.id.fragmentContainerView, fragment)
@@ -69,6 +73,10 @@ class AvatarFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
             val fullPhotoUri: Uri? = data?.data
             Log.i("REQUEST_IMAGE_OPEN", fullPhotoUri.toString())
+            createUser.avatar=fullPhotoUri.toString();
+            Picasso.get()
+                .load(fullPhotoUri) // Précisez le chemin du fichier avec le préfixe "file://"
+                .into(imagePickerView)
         }
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -99,9 +107,9 @@ class AvatarFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String?=null, param2: String?=null) =
+        fun newInstance(createUser: CreateUser) =
             AvatarFragment().apply {
-
+                this.createUser=createUser
             }
     }
 }
