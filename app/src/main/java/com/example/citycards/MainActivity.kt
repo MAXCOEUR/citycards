@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 try {
                     if (response.isSuccessful) {
-                        Log.i("Test", "${Api.getCities()}")
+                        Log.i("Test", "Succes")
                     } else {
                         Log.i("Test", "${response.code()}")
                     }

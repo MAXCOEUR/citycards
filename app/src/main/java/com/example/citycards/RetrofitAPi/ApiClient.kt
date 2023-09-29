@@ -12,6 +12,7 @@ object ApiClient {
 
     private const val BASE_URL: String = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities/"
 
+
     private val gson : Gson by lazy {
         GsonBuilder().setLenient().create()
     }

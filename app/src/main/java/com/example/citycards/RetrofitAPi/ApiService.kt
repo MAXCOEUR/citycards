@@ -10,6 +10,5 @@ interface ApiService {
 
     @GET("CityList")
     suspend fun getCities(): Response<CityList>
-
-
 }
+
