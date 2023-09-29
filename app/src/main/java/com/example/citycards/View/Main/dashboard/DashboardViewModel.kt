@@ -1,4 +1,4 @@
-package com.example.citycards.bottomNavigation.dashboard
+package com.example.citycards.View.Main.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.citycards.View.CreateFragment
+package com.example.citycards.View.CreateUser
 
 import android.os.Bundle
 import android.util.Log

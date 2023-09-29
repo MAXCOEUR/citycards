@@ -17,7 +17,7 @@
         android:theme="@style/Theme.CityCards"
         tools:targetApi="31">
         <activity
-            android:name=".View.LoginActivity"
+            android:name=".View.Login.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".View.Main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".View.CreateActivity"
+            android:name=".View.CreateUser.CreateActivity"
             android:exported="true">
 
         </activity>

@@ -1,4 +1,4 @@
-package com.example.citycards.bottomNavigation.home
+package com.example.citycards.View.Main.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.citycards.R
-import com.example.citycards.databinding.FragmentHomeBinding
+import com.example.citycards.databinding.FragmentDashboardBinding
 
-class HomeFragment : Fragment() {
+class DashboardFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         return view
     }
 
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String?=null, param2: String?=null) =
-            HomeFragment().apply {
+            DashboardFragment().apply {
 
             }
     }

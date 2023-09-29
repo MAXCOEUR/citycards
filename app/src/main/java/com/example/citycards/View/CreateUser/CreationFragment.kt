@@ -1,15 +1,13 @@
-package com.example.citycards.View.CreateFragment
+package com.example.citycards.View.CreateUser
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.citycards.Model.CreateUser
-import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout

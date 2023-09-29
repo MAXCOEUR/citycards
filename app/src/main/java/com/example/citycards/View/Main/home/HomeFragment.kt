@@ -1,4 +1,4 @@
-package com.example.citycards.bottomNavigation.notifications
+package com.example.citycards.View.Main.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.citycards.R
-import com.example.citycards.databinding.FragmentNotificationsBinding
+import com.example.citycards.databinding.FragmentHomeBinding
 
-class NotificationsFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -21,7 +21,7 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
         return view
     }
 
@@ -32,7 +32,7 @@ class NotificationsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String?=null, param2: String?=null) =
-            NotificationsFragment().apply {
+            HomeFragment().apply {
 
             }
     }

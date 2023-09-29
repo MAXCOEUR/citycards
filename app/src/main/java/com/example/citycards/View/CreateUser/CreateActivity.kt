@@ -1,13 +1,12 @@
-package com.example.citycards.View
+package com.example.citycards.View.CreateUser
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageButton
 import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
-import com.example.citycards.View.CreateFragment.CreationFragment
+import com.example.citycards.View.CreateUser.CreationFragment
 
 class CreateActivity : AppCompatActivity() {
 

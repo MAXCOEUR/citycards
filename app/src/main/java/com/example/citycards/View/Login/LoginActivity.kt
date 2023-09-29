@@ -1,14 +1,13 @@
-package com.example.citycards.View
+package com.example.citycards.View.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Button
-import com.example.citycards.MainActivity
+import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.R
-import com.example.citycards.View.CreateFragment.MotDePasseFragment
+import com.example.citycards.View.CreateUser.CreateActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

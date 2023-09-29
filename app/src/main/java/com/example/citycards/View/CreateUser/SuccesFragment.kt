@@ -1,4 +1,4 @@
-package com.example.citycards.View.CreateFragment
+package com.example.citycards.View.CreateUser
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import com.example.citycards.MainActivity
+import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
 import com.squareup.picasso.Picasso
