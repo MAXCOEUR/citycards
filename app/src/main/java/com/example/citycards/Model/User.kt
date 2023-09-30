@@ -1,6 +1,15 @@
 package com.example.citycards.Model
 
-data class User(val id: Int, val username: String, val email:String, val password: String, val avatar: String, var Jeton: Int)
+import java.io.Serializable
+
+data class User(
+    val id: Int,
+    val username: String,
+    val email: String,
+    val password: String,
+    val avatar: String?,
+    var jeton: Int
+) : Serializable
 
 data class CreateUser(
     var username: String? = null,
