@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val intent = intent
-        val received: User = intent.getSerializableExtra(MainActivity.CLE_USER) as User
+        user = intent.getSerializableExtra(MainActivity.CLE_USER) as User
 
 
         val fragmentManager = supportFragmentManager

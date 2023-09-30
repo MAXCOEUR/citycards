@@ -5,12 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
+import androidx.activity.viewModels
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
+import com.example.citycards.Model.LoginUser
 import com.example.citycards.Model.User
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.R
 import com.example.citycards.View.CreateUser.CreateUserActivity
+import com.example.citycards.View.CreateUser.CreateUserViewModel
+import com.example.citycards.View.CreateUser.SuccesFragment
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
+    val loginViewModel by viewModels<LoginViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -19,11 +28,39 @@ class LoginActivity : AppCompatActivity() {
         val buttonSeConnecter = findViewById<Button>(R.id.bt_SeConnecter)
         val buttonCreationCompte = findViewById<Button>(R.id.bt_CreationCompte)
 
+        val inputUsernameEmail = findViewById<TextInputEditText>(R.id.TinputUserNameEmail)
+        val inputPassword = findViewById<TextInputEditText>(R.id.TinputMotDePasse)
+
+        val inputLayoutUsernameEmail = findViewById<TextInputLayout>(R.id.TinputLayoutUserNameEmail)
+        val inputLayoutPassword = findViewById<TextInputLayout>(R.id.TinputLayoutMotDePasse)
+
         buttonSeConnecter.setOnClickListener {
-            val changePage = Intent(this, MainActivity::class.java)
-            val  user = User(0,"max","email","mdp",null,0)
-            changePage.putExtra(MainActivity.CLE_USER, user)
-            startActivity(changePage)
+
+            if (inputUsernameEmail.text.toString().isEmpty()) {
+                inputLayoutUsernameEmail.error = "le username/Email ne peut pas etre vide"
+            } else {
+                inputLayoutUsernameEmail.error = null // Effacez l'erreur si le champ est valide
+            }
+
+            if (inputPassword.text.toString().isEmpty()) {
+                inputLayoutPassword.error = "le mdp  ne peut pas etre vide"
+            } else {
+                inputLayoutPassword.error = null // Effacez l'erreur si le champ est valide
+            }
+
+            if(inputUsernameEmail.text.toString().isNotEmpty() && inputPassword.text.toString().isNotEmpty()){
+                val loginUser= LoginUser(inputUsernameEmail.text.toString(),inputPassword.text.toString())
+
+                val userResponseCreate=loginViewModel.loginUser(loginUser)
+
+                userResponseCreate.observe(this) { user->
+                    val changePage = Intent(this, MainActivity::class.java)
+                    changePage.putExtra(MainActivity.CLE_USER, user)
+                    startActivity(changePage)
+                }
+            }
+
+
         }
         buttonCreationCompte.setOnClickListener {
             val changePage = Intent(this, CreateUserActivity::class.java)

@@ -17,3 +17,7 @@ data class CreateUser(
     var password: String? = null,
     var avatar: String? = null
 )
+data class LoginUser(
+    var usernameEmail: String? = null,
+    var password: String? = null,
+)
