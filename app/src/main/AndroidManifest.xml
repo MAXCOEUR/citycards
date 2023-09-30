@@ -30,7 +30,7 @@
             android:exported="true"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".View.CreateUser.CreateActivity"
+            android:name=".View.CreateUser.CreateUserActivity"
             android:exported="true">
 
         </activity>
