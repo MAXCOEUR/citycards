@@ -5,15 +5,22 @@ import android.util.Log
 import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.dashboard.DashboardFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.notifications.NotificationsFragment
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val CLE_USER = "CLE_USER1"
+    }
+
     private lateinit var binding: ActivityMainBinding
+    lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
+        val intent = intent
+        val received: User = intent.getSerializableExtra(MainActivity.CLE_USER) as User
 
 
         val fragmentManager = supportFragmentManager

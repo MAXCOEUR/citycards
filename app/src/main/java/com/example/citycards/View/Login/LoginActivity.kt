@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
+import com.example.citycards.Model.User
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.R
-import com.example.citycards.View.CreateUser.CreateActivity
+import com.example.citycards.View.CreateUser.CreateUserActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +21,12 @@ class LoginActivity : AppCompatActivity() {
 
         buttonSeConnecter.setOnClickListener {
             val changePage = Intent(this, MainActivity::class.java)
+            val  user = User(0,"max","email","mdp",null,0)
+            changePage.putExtra(MainActivity.CLE_USER, user)
             startActivity(changePage)
         }
         buttonCreationCompte.setOnClickListener {
-            val changePage = Intent(this, CreateActivity::class.java)
+            val changePage = Intent(this, CreateUserActivity::class.java)
             startActivity(changePage)
         }
     }

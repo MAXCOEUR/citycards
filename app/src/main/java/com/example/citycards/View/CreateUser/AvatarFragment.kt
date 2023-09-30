@@ -13,26 +13,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
 import com.squareup.picasso.Picasso
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AvatarFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AvatarFragment : Fragment() {
     lateinit var createUser: CreateUser
     val REQUEST_IMAGE_OPEN = 1
     val REQUEST_STORAGE_PERMISSION=2
     lateinit var imagePickerView:ImageView
+
+    val createUserViewModel by viewModels<CreateUserViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -48,17 +43,21 @@ class AvatarFragment : Fragment() {
 
         buttonSuivant.setOnClickListener {
             Log.i("click", "ButtonSuivant.setOnClickListener ")
-            // Commencez la transaction
-            val transaction = parentFragmentManager.beginTransaction()
 
-            // Créez une instance du fragment que vous souhaitez afficher
-            val fragment = SuccesFragment.newInstance(createUser)
 
-            // Remplacez le contenu du FragmentContainerView par votre fragment
-            transaction.replace(R.id.fragmentContainerView, fragment)
+            val userResponseCreate=createUserViewModel.createUser(createUser)
 
-            // Validez la transaction
-            transaction.commit()
+            userResponseCreate.observe(viewLifecycleOwner) { user->
+
+                val transaction = parentFragmentManager.beginTransaction()
+                val fragment = SuccesFragment.newInstance(user)
+                transaction.replace(R.id.fragmentContainerView, fragment)
+                transaction.commit()
+
+            }
+
+
+
         }
 
         val myImageView = view.findViewById<ImageView>(R.id.iv_ImagePicker)
@@ -92,7 +91,8 @@ class AvatarFragment : Fragment() {
         }
     }
     fun imagePicker(){
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        val permission = Manifest.permission.READ_EXTERNAL_STORAGE
+        if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
             // Si la permission n'a pas été accordée, demandez-la à l'utilisateur
             requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_STORAGE_PERMISSION)
         } else {

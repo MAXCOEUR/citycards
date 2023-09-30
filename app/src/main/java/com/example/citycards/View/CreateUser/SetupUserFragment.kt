@@ -14,10 +14,10 @@ import com.google.android.material.textfield.TextInputLayout
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CreationFragment.newInstance] factory method to
+ * Use the [SetupUserFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CreationFragment : Fragment() {
+class SetupUserFragment : Fragment() {
     lateinit var createUser: CreateUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +83,7 @@ class CreationFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(createUser: CreateUser) =
-            CreationFragment().apply {
+            SetupUserFragment().apply {
                 this.createUser=createUser
             }
     }
