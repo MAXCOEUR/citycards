@@ -90,23 +90,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        /*val Api = ApiClient.getApiService
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = Api.getCities(1)
-            withContext(Dispatchers.Main) {
-                try {
-                    if (response.isSuccessful) {
-                        Log.i("Test", response.body().toString())
-                    } else {
-                        Log.i("Test", "Fail")
-                    }
-                } catch (e: HttpException) {
-                    Log.i("Test", "HttpException")
-                } catch (e: Throwable) {
-                    Log.i("Test", "Ooops: Something else went wrong")
-                }
-            }
-        }*/
 
     }
 }
