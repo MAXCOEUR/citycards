@@ -10,16 +10,16 @@ data class CityList(
 
 data class City(
     @SerializedName("id")
-    val id : Int?=null,
+    val id: Int?=null,
     @SerializedName("name")
     val name: String?=null,
     @SerializedName("region")
-    val region : String?=null,
+    val region: String?=null,
     @SerializedName("population")
-    val population : Int?=null,
+    val population: Int?=null,
     @SerializedName("longitude")
-    val longitude : Float?=null,
+    val longitude: Float? =null,
     @SerializedName("latitude")
-    val latitude : Float?=null,
+    val latitude: Float?=null,
     @SerializedName("country")
     val country: String?=null)

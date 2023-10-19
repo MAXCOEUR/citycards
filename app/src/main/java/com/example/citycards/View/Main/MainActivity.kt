@@ -1,12 +1,16 @@
 package com.example.citycards.View.Main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.View.Login.LoginViewModel
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.dashboard.DashboardFragment
 import com.example.citycards.View.Main.home.HomeFragment
@@ -14,7 +18,7 @@ import com.example.citycards.View.Main.notifications.NotificationsFragment
 import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
-
+    val mainViewModel by viewModels<MainViewModel>()
     companion object {
         const val CLE_USER = "CLE_USER1"
     }
@@ -87,6 +91,15 @@ class MainActivity : AppCompatActivity() {
                 else -> return@setOnNavigationItemSelectedListener false
             }
         }
+
+        /*
+        val cityResponseCreate=mainViewModel.getCitysSearch(QueryDataCity())
+
+        cityResponseCreate.observe(this) { cityListe->
+            Log.i("citys",cityListe.body().toString())
+        }
+
+         */
 
 
 
