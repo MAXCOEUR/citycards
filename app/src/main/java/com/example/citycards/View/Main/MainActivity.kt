@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
                     transaction_activity_main.commit()
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_dashboard -> {
-                    Log.e("TAG", "navigation_dashboard" )
+                R.id.navigation_collection -> {
+                    Log.e("TAG", "navigation_collection" )
                     val transaction_activity_main = fragmentManager.beginTransaction()
                     /// Remplacez le contenu du FragmentContainerView par votre fragment
                     transaction_activity_main.replace(R.id.nav_host_fragment_activity_main, dashFragment)

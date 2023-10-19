@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_collection"
         android:name="com.example.citycards.View.Main.collection.CollectionFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_collection"
         tools:layout="@layout/fragment_collection" />
 
     <fragment
