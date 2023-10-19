@@ -4,22 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.CreateFragment.SuccesFragment">
+    tools:context=".View.CreateUser.SuccesFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/iv_ImagePicker2"
+                android:id="@+id/iv_ImagePicker"
                 android:layout_width="204dp"
                 android:layout_height="204dp"
                 android:layout_marginTop="@dimen/taille16"
@@ -48,14 +45,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/taille16"
                 android:paddingLeft="@dimen/taille32"
-                android:paddingTop="@dimen/taille16"
+                android:paddingTop="@dimen/taille8"
                 android:paddingRight="@dimen/taille32"
-                android:paddingBottom="@dimen/taille16"
+                android:paddingBottom="@dimen/taille8"
                 android:text="Terminer"
                 app:cornerRadius="@dimen/radius_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_ImagePicker2" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_ImagePicker" />
 
             <TextView
                 android:id="@+id/textView"
@@ -117,6 +114,6 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
