@@ -1,19 +1,23 @@
 package com.example.citycards.View.Main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.View.Login.LoginViewModel
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.notifications.NotificationsFragment
 
 class MainActivity : AppCompatActivity() {
-
+    val mainViewModel by viewModels<MainViewModel>()
     companion object {
         const val CLE_USER = "CLE_USER1"
     }
@@ -88,24 +92,16 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        val cityResponseCreate=mainViewModel.getCitysSearch(QueryDataCity())
 
-        /*val Api = ApiClient.getApiService
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = Api.getCities(1)
-            withContext(Dispatchers.Main) {
-                try {
-                    if (response.isSuccessful) {
-                        Log.i("Test", response.body().toString())
-                    } else {
-                        Log.i("Test", "Fail")
-                    }
-                } catch (e: HttpException) {
-                    Log.i("Test", "HttpException")
-                } catch (e: Throwable) {
-                    Log.i("Test", "Ooops: Something else went wrong")
-                }
-            }
-        }*/
+        cityResponseCreate.observe(this) { cityListe->
+            Log.i("citys",cityListe.body().toString())
+        }
+
+
+
+
+
 
     }
 }

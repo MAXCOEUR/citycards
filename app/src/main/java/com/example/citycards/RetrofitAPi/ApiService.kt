@@ -8,8 +8,13 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("cities/")
-    suspend fun getCities(@Query("limit")  limiteur: Int): Response<CityList>
+    @GET("cities/?types=CITY&countryIds=Q142&sort=-population")
+    suspend fun getCities(@Query("limit")  limiteur: Int=10,
+                          @Query("namePrefix") namePrefix: String="",
+                          @Query("offset") offset :Int=0,
+                          @Query("minPopulation") minPop: Int=15000,
+                          @Query("maxPopulation") maxPop: Int?=null,
+    ): Response<CityList>
 
 }
 
