@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
-object MainRepository {
+object CityRepository {
     suspend fun getCitysSearch(dataQuery: QueryDataCity): Flow<Response<CityList>> = flow {
         val Api = ApiClient.getApiService
         val response = Api.getCities(dataQuery.limiteur,dataQuery.namePrefix,dataQuery.offset,dataQuery.minPop,dataQuery.maxPop)
