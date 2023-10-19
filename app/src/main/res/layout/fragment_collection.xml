@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Main.dashboard.DashboardFragment">
+    tools:context=".View.Main.collection.CollectionFragment">
 
     <TextView
         android:id="@+id/text_dashboard"

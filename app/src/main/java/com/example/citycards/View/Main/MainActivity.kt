@@ -8,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.databinding.ActivityMainBinding
-import com.example.citycards.View.Main.dashboard.DashboardFragment
+import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.notifications.NotificationsFragment
-import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         // Créez une instance du fragment que vous souhaitez afficher
         val homeFragment = HomeFragment.newInstance()
         val notificationFragment = NotificationsFragment.newInstance()
-        val dashFragment = DashboardFragment.newInstance()
+        val dashFragment = CollectionFragment.newInstance()
 
         // Remplacez le contenu du FragmentContainerView par votre fragment
         transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
