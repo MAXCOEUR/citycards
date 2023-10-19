@@ -22,4 +22,19 @@ data class City(
     @SerializedName("latitude")
     val latitude: Float?=null,
     @SerializedName("country")
-    val country: String?=null)
+    val country: String?=null,
+
+    val favori: Boolean?=null
+){
+    fun getRang(): Int {
+        return when {
+            population == null -> 0
+            population < 50000 -> 5
+            population < 100000 -> 4
+            population < 180000 -> 3
+            population < 500000 -> 2
+            else -> 1
+        }
+    }
+
+}

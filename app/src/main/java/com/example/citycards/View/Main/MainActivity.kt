@@ -92,14 +92,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /*
+
         val cityResponseCreate=mainViewModel.getCitysSearch(QueryDataCity())
 
         cityResponseCreate.observe(this) { cityListe->
             Log.i("citys",cityListe.body().toString())
         }
 
-         */
+
 
 
 
