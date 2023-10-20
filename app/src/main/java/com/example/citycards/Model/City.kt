@@ -10,16 +10,31 @@ data class CityList(
 
 data class City(
     @SerializedName("id")
-    val id : Int?=null,
+    val id: Int?=null,
     @SerializedName("name")
     val name: String?=null,
     @SerializedName("region")
-    val region : String?=null,
+    val region: String?=null,
     @SerializedName("population")
-    val population : Int?=null,
+    val population: Int?=null,
     @SerializedName("longitude")
-    val longitude : Float?=null,
+    val longitude: Float? =null,
     @SerializedName("latitude")
-    val latitude : Float?=null,
+    val latitude: Float?=null,
     @SerializedName("country")
-    val country: String?=null)
+    val country: String?=null,
+
+    val favori: Boolean?=null
+){
+    fun getRang(): Int {
+        return when {
+            population == null -> 0
+            population < 50000 -> 5
+            population < 100000 -> 4
+            population < 180000 -> 3
+            population < 500000 -> 2
+            else -> 1
+        }
+    }
+
+}
