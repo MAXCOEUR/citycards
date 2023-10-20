@@ -1,4 +1,4 @@
-package com.example.citycards.View.Porfile
+package com.example.citycards.View.Profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
