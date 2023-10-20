@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,14 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
-import com.example.citycards.View.CreateUser.CreateUserActivity
-import com.example.citycards.View.Login.LoginViewModel
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.notifications.NotificationsFragment
 import com.example.citycards.View.Profile.ProfileActivity
-import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
@@ -36,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val intent = intent
@@ -51,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         // Créez une instance du fragment que vous souhaitez afficher
         val homeFragment = HomeFragment.newInstance()
         val notificationFragment = NotificationsFragment.newInstance()
-        val dashFragment = CollectionFragment.newInstance()
+        val collectionFragment = CollectionFragment.newInstance()
 
         // Remplacez le contenu du FragmentContainerView par votre fragment
         transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
@@ -78,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                     Log.e("TAG", "navigation_collection" )
                     val transaction_activity_main = fragmentManager.beginTransaction()
                     /// Remplacez le contenu du FragmentContainerView par votre fragment
-                    transaction_activity_main.replace(R.id.nav_host_fragment_activity_main, dashFragment)
+                    transaction_activity_main.replace(R.id.nav_host_fragment_activity_main, collectionFragment)
 
                     // Validez la transaction
                     transaction_activity_main.commit()
