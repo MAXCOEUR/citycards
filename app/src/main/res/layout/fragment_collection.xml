@@ -78,17 +78,18 @@
         app:layout_constraintStart_toEndOf="@+id/regionDropdown"
         app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
 
-    <ListView
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#FF0000"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favoritesButton" />
+        app:layout_constraintTop_toBottomOf="@+id/txtView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
