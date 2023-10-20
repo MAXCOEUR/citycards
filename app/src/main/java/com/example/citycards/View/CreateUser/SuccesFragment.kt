@@ -25,7 +25,11 @@ class SuccesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_succes, container, false)
+        return inflater.inflate(R.layout.fragment_succes, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val iv_imagePicker = view.findViewById<ImageView>(R.id.iv_ImagePicker)
 
@@ -43,7 +47,6 @@ class SuccesFragment : Fragment() {
             changePage.putExtra(MainActivity.CLE_USER, user)
             startActivity(changePage)
         }
-        return view
     }
 
     companion object {

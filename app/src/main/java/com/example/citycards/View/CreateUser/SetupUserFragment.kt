@@ -27,8 +27,11 @@ class SetupUserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_creation, container, false)
+        return inflater.inflate(R.layout.fragment_creation, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val textInputUserName = view.findViewById<TextInputEditText>(R.id.TinputUserName)
         val textInputEmail = view.findViewById<TextInputEditText>(R.id.TinputEmail)
 
@@ -72,8 +75,6 @@ class SetupUserFragment : Fragment() {
             }
 
         }
-
-        return view
     }
     fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}")

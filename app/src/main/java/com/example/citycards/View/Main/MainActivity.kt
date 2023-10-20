@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
         val intent = intent
         user = intent.getSerializableExtra(MainActivity.CLE_USER) as User
