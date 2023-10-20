@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp">
+
+            <ImageView
+                android:id="@+id/iv_ImagePicker2"
+                android:layout_width="204dp"
+                android:layout_height="204dp"
+                android:layout_marginTop="@dimen/taille64"
+                android:background="@drawable/image_border_login"
+                android:src="@drawable/baseline_add_photo_alternate_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/taille32"
+                android:text="UserName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_ImagePicker2" />
+
+            <TextView
+                android:id="@+id/tv_Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/taille8"
+                android:text="Email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_userName" />
+
+            <TextView
+                android:id="@+id/tv_nbjeton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/taille8"
+                android:text="nb_jeton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Email" />
+
+            <Button
+                android:id="@+id/bt_ChgMdp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/taille16"
+                android:backgroundTint="@color/primaryContainer"
+                android:paddingLeft="@dimen/taille32"
+                android:paddingTop="@dimen/taille8"
+                android:paddingRight="@dimen/taille32"
+                android:paddingBottom="@dimen/taille8"
+                android:text="Changer de mot de passe"
+                android:textColor="@color/onPrimaryContainer"
+                app:cornerRadius="@dimen/radius_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nbjeton" />
+
+            <Button
+                android:id="@+id/bt_Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/taille8"
+                android:paddingLeft="@dimen/taille32"
+                android:paddingTop="@dimen/taille8"
+                android:paddingRight="@dimen/taille32"
+                android:paddingBottom="@dimen/taille8"
+                android:text="Sauvegarder"
+                app:cornerRadius="@dimen/radius_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_ChgMdp" />
+
+            <ImageButton
+                android:id="@+id/bt_Exit"
+                android:layout_width="75dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="@dimen/taille16"
+                android:layout_marginEnd="@dimen/taille16"
+                android:background="#00FFFFFF"
+                android:src="@drawable/exit_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

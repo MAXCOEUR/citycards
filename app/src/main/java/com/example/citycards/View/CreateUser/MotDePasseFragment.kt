@@ -34,9 +34,12 @@ class MotDePasseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_mot_de_passe, container, false)
+        return inflater.inflate(R.layout.fragment_mot_de_passe, container, false)
+    }
 
-        val textInputMdp = view.findViewById<TextInputEditText>(R.id.TinputMotDePasse)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val textInputMdp = view.findViewById<TextInputEditText>(R.id.textInputChgConMdp)
         val textInputConfMdp= view.findViewById<TextInputEditText>(R.id.TinputConfirmationMotDePasse)
 
         val textInputLayoutMdp = view.findViewById<TextInputLayout>(R.id.TinputLayoutMotdePasse_creation)
@@ -80,7 +83,6 @@ class MotDePasseFragment : Fragment() {
 
         }
 
-        return view
     }
     fun isValidPassword(password: String): Boolean {
         // Exemple de critères de validation du mot de passe :

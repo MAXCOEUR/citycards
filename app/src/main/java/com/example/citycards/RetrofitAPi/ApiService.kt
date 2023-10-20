@@ -15,7 +15,6 @@ interface ApiService {
                           @Query("minPopulation") minPop: Int=15000,
                           @Query("maxPopulation") maxPop: Int?=null,
     ): Response<CityList>
-
 }
 
 

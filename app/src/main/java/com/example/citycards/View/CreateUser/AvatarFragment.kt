@@ -36,8 +36,11 @@ class AvatarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_avatar, container, false)
+        return inflater.inflate(R.layout.fragment_avatar, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val buttonSuivant = view.findViewById<Button>(R.id.bt_Suivant)
         imagePickerView= view.findViewById<ImageView>(R.id.iv_ImagePicker)
 
@@ -65,8 +68,6 @@ class AvatarFragment : Fragment() {
         myImageView.setOnClickListener {
             imagePicker()
         }
-
-        return view
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
