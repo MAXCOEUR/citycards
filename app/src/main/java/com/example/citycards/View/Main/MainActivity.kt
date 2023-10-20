@@ -13,7 +13,7 @@ import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.notifications.NotificationsFragment
 import java.io.Serializable
 
-class MainActivity : AppCompatActivity() {
+class  MainActivity : AppCompatActivity() {
 
     companion object {
         const val CLE_USER = "CLE_USER1"
