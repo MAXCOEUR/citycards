@@ -36,7 +36,7 @@ class MotDePasseFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_mot_de_passe, container, false)
 
-        val textInputMdp = view.findViewById<TextInputEditText>(R.id.TinputMotDePasse)
+        val textInputMdp = view.findViewById<TextInputEditText>(R.id.textInputChgConMdp)
         val textInputConfMdp= view.findViewById<TextInputEditText>(R.id.TinputConfirmationMotDePasse)
 
         val textInputLayoutMdp = view.findViewById<TextInputLayout>(R.id.TinputLayoutMotdePasse_creation)
