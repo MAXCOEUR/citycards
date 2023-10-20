@@ -39,7 +39,7 @@ class MotDePasseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textInputMdp = view.findViewById<TextInputEditText>(R.id.TinputMotDePasse)
+        val textInputMdp = view.findViewById<TextInputEditText>(R.id.textInputChgConMdp)
         val textInputConfMdp= view.findViewById<TextInputEditText>(R.id.TinputConfirmationMotDePasse)
 
         val textInputLayoutMdp = view.findViewById<TextInputLayout>(R.id.TinputLayoutMotdePasse_creation)

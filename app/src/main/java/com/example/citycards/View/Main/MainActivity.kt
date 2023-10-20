@@ -1,26 +1,32 @@
 package com.example.citycards.View.Main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.View.CreateUser.CreateUserActivity
 import com.example.citycards.View.Login.LoginViewModel
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.dashboard.DashboardFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.notifications.NotificationsFragment
+import com.example.citycards.View.Profile.ProfileActivity
 import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
     companion object {
         const val CLE_USER = "CLE_USER1"
+        const val CLE_USER_RETURN = 1
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -30,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
-
+        val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val intent = intent
         user = intent.getSerializableExtra(MainActivity.CLE_USER) as User
 
@@ -92,6 +97,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btProfile.setOnClickListener {
+            val changePage = Intent(this, ProfileActivity::class.java)
+            changePage.putExtra(ProfileActivity.CLE_USER, user)
+            startActivityForResult(changePage,CLE_USER_RETURN)
+        }
+
+
 
         val cityResponseCreate=mainViewModel.getCitysSearch(QueryDataCity())
 
@@ -100,10 +112,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==CLE_USER_RETURN){
+            if(resultCode==Activity.RESULT_OK){
+                user= data?.getSerializableExtra(CLE_USER) as User
+            }
+        }
     }
 }
 
