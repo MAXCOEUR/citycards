@@ -8,7 +8,7 @@ data class User(
     val email: String,
     val password: String,
     val avatar: String?,
-    var jeton: Int
+    val jeton: Int
 ) : Serializable
 
 data class CreateUser(
