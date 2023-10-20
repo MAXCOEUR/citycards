@@ -99,6 +99,7 @@
                 android:layout_height="41dp"
                 android:layout_marginTop="@dimen/taille16"
                 android:layout_marginEnd="@dimen/taille16"
+                android:background="#00FFFFFF"
                 android:src="@drawable/exit_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
