@@ -20,16 +20,19 @@ object CityRepository {
         emit(response)
     }
     suspend fun getCityCollection(dataQuery: QueryDataCity): Flow<Response<CityList>> = flow {
-        val cityList = CityList(
-            currenOfset = 0, // Vous pouvez ajuster la valeur de currenOfset selon vos besoins
-            data = listOf(
-                City(id = 1, name = "Ville1", region = "Région1", population = 100000, longitude = 50.10f, latitude = 34.0f, country = "Pays1"),
-                City(id = 2, name = "Ville2", region = "Région2", population = 150000, longitude = 47.890f, latitude = 36.789f, country = "Pays2"),
-                City(id = 3, name = "Ville3", region = "Région3", population = 120000, longitude = 46.456f, latitude = 35.678f, country = "Pays3")
-            ),
-            totalCount = 3 // Le nombre total de villes dans la liste
+        val cityList = listOf(
+            City(1, "New York", "New York", 8537673, -74.006F, 40.7128F, "USA", false),
+            City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true),
+            City(3, "Paris", "Île-de-France", 2140526, 2.3522F, 48.8566F, "France", false),
+            City(4, "London", "Greater London", 8982256, -0.1276F, 51.5072F, "UK", false),
+            City(5, "Tokyo", "Kanto", 37435191, 139.6917F, 35.6895F, "Japan", false),
+            City(6, "Sydney", "New South Wales", 5312163, 151.2093F, -33.8688F, "Australia", false),
+            City(7, "Toronto", "Ontario", 2731571, -79.3832F, 43.6511F, "Canada", false),
+            City(8, "Dubai", "Dubai", 3137000, 55.2708F, 25.276987F, "UAE", false),
+            City(9, "Mumbai", "Maharashtra", 12442373, 72.8777F, 19.0760F, "India", false),
+            City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true)
         )
-        val response = Response.success(cityList)
+        val response = Response.success(CityList(data=cityList, currentOffset = 0, totalCount = 0))
         emit(response)
     }
 }

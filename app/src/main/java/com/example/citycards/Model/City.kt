@@ -3,7 +3,7 @@ package com.example.citycards.Model
 import com.google.gson.annotations.SerializedName
 
 data class CityList(
-    val currenOfset: Int,
+    val currentOffset: Int,
     val data: List<City>,
     val totalCount  : Int)
 
@@ -24,7 +24,7 @@ data class City(
     @SerializedName("country")
     val country: String?=null,
 
-    val favori: Boolean?=null
+    var favori: Boolean?=null
 ){
     fun getRang(): Int {
         return when {
