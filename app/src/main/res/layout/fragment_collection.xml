@@ -21,9 +21,13 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/taille8"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_search_bar"
+            android:drawableEnd="@drawable/baseline_search"
             android:hint="Rechercher..."
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,22 +52,29 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:text="Favoris" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"> <!-- Couleur de la zone 2 -->
                 <Spinner
                     android:id="@+id/regionDropdown"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/spinner_border"
+                    android:padding="4dp"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"> <!-- Couleur de la zone 3 -->
 
                 <!-- Contenu de la zone 3 -->
@@ -71,7 +82,11 @@
                 <Spinner
                     android:id="@+id/rankDropdown"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/spinner_border"
+                    android:padding="4dp" />
 
             </LinearLayout>
 
