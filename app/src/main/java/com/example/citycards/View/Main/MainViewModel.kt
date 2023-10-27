@@ -42,6 +42,52 @@ class MainViewModel : ViewModel() {
         return livedata
     }
 
+    fun getCitysCollection_favori(dataQuery: QueryDataCity): LiveData<Response<CityList>> {
+        var livedata = MutableLiveData<Response<CityList>>()
+        viewModelScope.launch {
+            CityRepository.getCityCollection_favori(dataQuery)
+                .catch {
+                    Log.e("erreur",it.toString())
+                }
+                .collect{
+                    livedata.postValue(it)
+                }
+        }
+
+        return livedata
+    }
+
+    fun getRegion(): LiveData<Response<List<String>>> {
+        var livedata = MutableLiveData<Response<List<String>>>()
+        viewModelScope.launch {
+            CityRepository.getRegion()
+                .catch {
+                    Log.e("erreur",it.toString())
+                }
+                .collect{
+                    livedata.postValue(it)
+                }
+        }
+
+        return livedata
+    }
+
+    fun getRang(): LiveData<Response<List<String>>> {
+        var livedata = MutableLiveData<Response<List<String>>>()
+        viewModelScope.launch {
+            CityRepository.getRank()
+                .catch {
+                    Log.e("erreur",it.toString())
+                }
+                .collect{
+                    livedata.postValue(it)
+                }
+        }
+
+        return livedata
+    }
+
+
     fun getCitysRandom(offset:Int,minPop:Int, maxPop:Int): LiveData<Response<CityList>> {
         var livedata = MutableLiveData<Response<CityList>>()
         viewModelScope.launch {
