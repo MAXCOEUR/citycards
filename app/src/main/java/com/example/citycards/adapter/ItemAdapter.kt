@@ -91,6 +91,7 @@ class ItemAdapter(
         holder.favoriButton.setOnClickListener{
             dataset[position].favori?.let {
                 dataset[position].favori= !it
+                //set favori bd
                 notifyDataSetChanged()
             }
         }

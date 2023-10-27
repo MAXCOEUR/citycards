@@ -12,15 +12,26 @@ import java.util.Date
 object CityRepository {
     suspend fun getCitysSearch(dataQuery: QueryDataCity): Flow<Response<CityList>> = flow {
         val Api = ApiClient.getApiService
-        val response = Api.getCities(dataQuery.limiteur,dataQuery.namePrefix,dataQuery.offset,dataQuery.minPop,dataQuery.maxPop)
+        val response = Api.getCities(
+            dataQuery.limiteur,
+            dataQuery.namePrefix,
+            dataQuery.offset,
+            dataQuery.minPop,
+            dataQuery.maxPop
+        )
         emit(response)
     }
-    suspend fun getCityRandom(offet:Int,minPop:Int, maxPop:Int): Flow<Response<CityList>> = flow {
-        val Api = ApiClient.getApiService
-        val response = Api.getCities(offset = offet,minPop = minPop, maxPop = maxPop)
-        emit(response)
-    }
-    suspend fun getCityCollection(dataQuery: QueryDataCity): Flow<Response<CityList>> = flow {
+
+    suspend fun getCityRandom(offet: Int, minPop: Int, maxPop: Int): Flow<Response<CityList>> =
+        flow {
+            val Api = ApiClient.getApiService
+            val response = Api.getCities(offset = offet, minPop = minPop, maxPop = maxPop)
+            emit(response)
+        }
+
+    suspend fun getCityCollection(
+        dataQuery: QueryDataCity,
+    ): Flow<Response<CityList>> = flow {
         val cityList = listOf(
             City(1, "New York", "New York", 8537673, -74.006F, 40.7128F, "USA", false, Date()),
             City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true, Date()),
@@ -33,7 +44,32 @@ object CityRepository {
             City(9, "Mumbai", "Maharashtra", 12442373, 72.8777F, 19.0760F, "India", false, Date()),
             City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true, Date())
         )
-        val response = Response.success(CityList(data=cityList, currentOffset = 0, totalCount = 0))
+        val response =
+            Response.success(CityList(data = cityList, currentOffset = 0, totalCount = 0))
+        emit(response)
+    }
+
+    suspend fun getCityCollection_favori(
+        dataQuery: QueryDataCity,
+    ): Flow<Response<CityList>> = flow {
+        val cityList = listOf(
+            City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true),
+            City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true)
+        )
+        val response =
+            Response.success(CityList(data = cityList, currentOffset = 0, totalCount = 0))
+        emit(response)
+    }
+
+    suspend fun getRegion(): Flow<Response<List<String>>> = flow {
+        val regionList = listOf("Toutes les régions","California", "Rio de Janeiro", "New York", "Île-de-France", "Greater London", "Kanto", "New South Wales", "Ontario", "Dubai", "Maharashtra")
+        val response = Response.success(regionList)
+        emit(response)
+    }
+
+    suspend fun getRank(): Flow<Response<List<String>>> = flow {
+        val regionList = listOf("Tous les rangs","Petite ville", "Moyenne ville", "Grande ville", "Métropole", "Mégapole")
+        val response = Response.success(regionList)
         emit(response)
     }
 }

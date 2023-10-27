@@ -7,89 +7,90 @@
     android:layout_height="match_parent"
     tools:context=".View.Main.collection.CollectionFragment">
 
-    <!-- Menu déroulant pour la région -->
-
-    <EditText
-        android:id="@+id/searchEditText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="383dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        android:hint="Rechercher..."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/favoritesButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Favoris"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Menu déroulant pour le rang -->
-    <TextView
-        android:id="@+id/txtView"
-        android:layout_width="113dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="28dp"
-        android:text="Region"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
-        app:layout_constraintStart_toEndOf="@+id/favoritesButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+        <EditText
+            android:id="@+id/searchEditText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:hint="Rechercher..."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/regionDropdown"
-        android:layout_width="113dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
-        app:layout_constraintStart_toEndOf="@+id/favoritesButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchEditText">
 
-    <TextView
-        android:id="@+id/txtViewRang"
-        android:layout_width="113dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="28dp"
-        android:text="Rang"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
-        app:layout_constraintStart_toEndOf="@+id/regionDropdown"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"> <!-- Couleur de la zone 1 -->
+                <Button
+                    android:id="@+id/favoritesButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Favoris" />
+            </LinearLayout>
 
-    <Spinner
-        android:id="@+id/rankDropdown"
-        android:layout_width="113dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
-        app:layout_constraintStart_toEndOf="@+id/regionDropdown"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"> <!-- Couleur de la zone 2 -->
+                <Spinner
+                    android:id="@+id/regionDropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"> <!-- Couleur de la zone 3 -->
+
+                <!-- Contenu de la zone 3 -->
+                <!-- Vous pouvez placer d'autres layouts ou vues à l'intérieur de celui-ci -->
+                <Spinner
+                    android:id="@+id/rankDropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:layout_marginTop="@dimen/taille8"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtView" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
