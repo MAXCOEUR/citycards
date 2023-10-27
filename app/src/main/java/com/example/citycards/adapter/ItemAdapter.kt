@@ -1,6 +1,8 @@
 package com.example.citycards.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,15 +13,17 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.Model.City
 import com.example.citycards.R
+import com.example.citycards.View.CityDetail.CityDetail
+import com.example.citycards.View.Main.MainActivity
 
 class ItemAdapter(
     private val context: Context,
     private val dataset: List<City>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textViewTitle: TextView = view.findViewById(R.id.item_title)
@@ -91,7 +95,9 @@ class ItemAdapter(
             }
         }
         holder.constraintBack.setOnClickListener{
-            Log.e("click carte", "carte cliquée")
+            val changePage = Intent(context, CityDetail::class.java)
+            changePage.putExtra(CityDetail.CLE_CITY, item)
+            (context as Activity).startActivityForResult(changePage, CityDetail.CLE_CITY_RETURN)
         }
     }
 

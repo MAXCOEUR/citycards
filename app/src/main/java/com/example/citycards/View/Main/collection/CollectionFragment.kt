@@ -1,5 +1,7 @@
 package com.example.citycards.View.Main.collection
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
+import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.View.CityDetail.CityDetail
+import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.View.Main.MainViewModel
 import com.example.citycards.adapter.ItemAdapter
 import com.example.citycards.databinding.FragmentCollectionBinding
@@ -70,4 +75,23 @@ class CollectionFragment : Fragment() {
 
             }
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            val citytmp= data?.getSerializableExtra(CityDetail.CLE_CITY) as City
+            val city = tabcity.find { it.idUnique==citytmp.idUnique }
+            city?.let {
+                it.favori=citytmp.favori
+            }
+        }
+        else if (resultCode == CityDetail.DELETE_CITY) {
+            val citytmp= data?.getSerializableExtra(CityDetail.CLE_CITY) as City
+            val city = tabcity.find { it.idUnique==citytmp.idUnique }
+            city?.let {
+                tabcity.remove(it)
+            }
+        }
+    }
+
 }

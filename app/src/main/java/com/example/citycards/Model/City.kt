@@ -1,6 +1,7 @@
 package com.example.citycards.Model
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class CityList(
     val currentOffset: Int,
@@ -9,8 +10,8 @@ data class CityList(
 
 
 data class City(
-    @SerializedName("id")
-    val id: Int?=null,
+    @SerializedName("idUnique")
+    val idUnique: Int?=null,
     @SerializedName("name")
     val name: String?=null,
     @SerializedName("region")
@@ -24,8 +25,9 @@ data class City(
     @SerializedName("country")
     val country: String?=null,
 
-    var favori: Boolean?=null
-){
+    var favori: Boolean?=null,
+    var dateObtention: Date?=null
+): java.io.Serializable {
     fun getRang(): Int {
         return when {
             population == null -> 0
