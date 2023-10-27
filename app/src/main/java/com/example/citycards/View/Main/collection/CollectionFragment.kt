@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
@@ -32,7 +33,7 @@ class CollectionFragment : Fragment() {
     val tabcity = mutableListOf<City>()
     lateinit var dropdown_region: Spinner
     lateinit var dropdown_rang: Spinner
-    lateinit var recherche_field: Spinner
+    lateinit var recherche_field: EditText
     lateinit var adapter: ItemAdapter
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -203,6 +204,7 @@ class CollectionFragment : Fragment() {
             val city = tabcity.find { it.idUnique==citytmp.idUnique }
             city?.let {
                 it.favori=citytmp.favori
+                adapter.notifyDataSetChanged()
             }
         }
         else if (resultCode == CityDetail.DELETE_CITY) {
@@ -210,6 +212,7 @@ class CollectionFragment : Fragment() {
             val city = tabcity.find { it.idUnique==citytmp.idUnique }
             city?.let {
                 tabcity.remove(it)
+                adapter.notifyDataSetChanged()
             }
         }
     }
