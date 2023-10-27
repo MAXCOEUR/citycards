@@ -38,6 +38,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/onPrimary"
+            android:textSize="@dimen/TitreNavBar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/bt_profil"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout5"

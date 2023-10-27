@@ -28,7 +28,13 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+        super.onViewCreated(view, savedInstanceState);
+
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_titre);
+        if (TitreActivity != null) {
+            TitreActivity.text="Ouverture"
+        }
         val switch = view.findViewById<Switch>(R.id.switch1)
         val image_rond = view.findViewById<ImageButton>(R.id.image_rond);
         val image_carte = view.findViewById<ImageView>(R.id.image_carte_1);

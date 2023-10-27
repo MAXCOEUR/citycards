@@ -9,6 +9,7 @@
 
     <dimen name="Fonttaille8">8sp</dimen>
     <dimen name="Fonttaille16">16sp</dimen>
+    <dimen name="TitreNavBar">24sp</dimen>
     <dimen name="Fonttaille32">32sp</dimen>
     <dimen name="Fonttaille64">64sp</dimen>
     <dimen name="Fonttaille128">128sp</dimen>

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.Model.CreateUser
 import com.example.citycards.Model.User
@@ -30,6 +31,11 @@ class SuccesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_Titre);
+        if (TitreActivity != null) {
+            TitreActivity.text = "Succes"
+        }
 
         val iv_imagePicker = view.findViewById<ImageView>(R.id.iv_ImagePicker)
 

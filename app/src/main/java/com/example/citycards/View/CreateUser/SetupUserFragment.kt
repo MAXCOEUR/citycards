@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
@@ -32,6 +33,12 @@ class SetupUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_Titre);
+        if (TitreActivity != null) {
+            TitreActivity.text = "Création"
+        }
+
         val textInputUserName = view.findViewById<TextInputEditText>(R.id.TinputUserName)
         val textInputEmail = view.findViewById<TextInputEditText>(R.id.TinputEmail)
 

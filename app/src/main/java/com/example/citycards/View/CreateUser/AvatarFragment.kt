@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -41,6 +42,12 @@ class AvatarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_Titre);
+        if (TitreActivity != null) {
+            TitreActivity.text = "Avatar"
+        }
+
         val buttonSuivant = view.findViewById<Button>(R.id.bt_Suivant)
         imagePickerView= view.findViewById<ImageView>(R.id.iv_ImagePicker)
 

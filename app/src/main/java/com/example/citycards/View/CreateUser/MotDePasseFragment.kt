@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.example.citycards.Model.CreateUser
 import com.example.citycards.R
 import com.google.android.material.textfield.TextInputEditText
@@ -39,6 +40,11 @@ class MotDePasseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_Titre);
+        if (TitreActivity != null) {
+            TitreActivity.text = "Mot de passe"
+        }
+
         val textInputMdp = view.findViewById<TextInputEditText>(R.id.textInputChgConMdp)
         val textInputConfMdp= view.findViewById<TextInputEditText>(R.id.TinputConfirmationMotDePasse)
 
