@@ -43,8 +43,12 @@ object CityRepository {
             City(9, "Mumbai", "Maharashtra", 12442373, 72.8777F, 19.0760F, "India", false),
             City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true)
         )
+        var filteredCity = cityList.filter { it.name?.lowercase()?.contains(dataQuery.namePrefix.lowercase()) ?: true }
+        if (dataQuery.region != "Toutes les régions") {
+            filteredCity = filteredCity.filter { it.region == dataQuery.region }
+        }
         val response =
-            Response.success(CityList(data = cityList, currentOffset = 0, totalCount = 0))
+            Response.success(CityList(data = filteredCity, currentOffset = 0, totalCount = 0))
         emit(response)
     }
 
@@ -55,8 +59,12 @@ object CityRepository {
             City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true),
             City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true)
         )
+        var filteredCity = cityList.filter { it.name?.lowercase()?.contains(dataQuery.namePrefix.lowercase()) ?: true }
+        if (dataQuery.region != "Toutes les régions") {
+            filteredCity = filteredCity.filter { it.region == dataQuery.region }
+        }
         val response =
-            Response.success(CityList(data = cityList, currentOffset = 0, totalCount = 0))
+            Response.success(CityList(data = filteredCity, currentOffset = 0, totalCount = 0))
         emit(response)
     }
 
