@@ -3,7 +3,6 @@ package com.example.citycards.View.Main.collection
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,13 +18,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
-import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.View.CityDetail.CityDetail
-import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.View.Main.MainViewModel
+import com.example.citycards.adapter.CustomSpinnerAdapter
 import com.example.citycards.adapter.ItemAdapter
-import com.example.citycards.databinding.FragmentCollectionBinding
 
 class CollectionFragment : Fragment() {
     val mainViewModel by activityViewModels<MainViewModel>()
@@ -137,9 +133,10 @@ class CollectionFragment : Fragment() {
         var regions = mainViewModel.getRegion()
         regions.observe(viewLifecycleOwner){ regions ->
             regions.body()?.let{
-                val region_adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it)
-                region_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                dropdown_region.adapter = region_adapter
+                //val region_adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it)
+
+                //region_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                dropdown_region.adapter = CustomSpinnerAdapter(requireContext(), it)
             }
         }
     }
@@ -148,9 +145,9 @@ class CollectionFragment : Fragment() {
         var rangs = mainViewModel.getRang()
         rangs.observe(viewLifecycleOwner){ rangs ->
             rangs.body()?.let{
-                val rang_adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it)
-                rang_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                dropdown_rang.adapter = rang_adapter
+                //val rang_adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it)
+                //rang_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                dropdown_rang.adapter =  CustomSpinnerAdapter(requireContext(), it)
             }
 
         }
