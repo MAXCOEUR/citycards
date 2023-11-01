@@ -35,7 +35,7 @@ object CityRepository {
         val cityList = listOf(
             City(1, "New York", "New York", 8537673, -74.006F, 40.7128F, "USA", false, Date()),
             City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true, Date()),
-            City(3, "Paris", "Île-de-France", 2140526, 2.3522F, 48.8566F, "France", false, Date()),
+            City(3, "Paris", "Île-de-France", 2140526, 2.3520F, 48.8566F, "France", false, Date()),
             City(4, "London", "Greater London", 8982256, -0.1276F, 51.5072F, "UK", false, Date()),
             City(5, "Tokyo", "Kanto", 37435191, 139.6917F, 35.6895F, "Japan", false, Date()),
             City(6, "Sydney", "New South Wales", 5312163, 151.2093F, -33.8688F, "Australia", false, Date()),
@@ -45,7 +45,7 @@ object CityRepository {
             City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true, Date())
         )
         var filteredCity = cityList.filter { it.name?.lowercase()?.contains(dataQuery.namePrefix.lowercase()) ?: true }
-        if (dataQuery.region != "Toutes les régions") {
+        if (dataQuery.region!=null && dataQuery.region != "Toutes les régions") {
             filteredCity = filteredCity.filter { it.region == dataQuery.region }
         }
         val response =

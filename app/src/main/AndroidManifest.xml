@@ -37,7 +37,9 @@
         <activity
             android:name=".View.MapCollection.MapCollection"
             android:exported="true"
-            android:label="@string/title_activity_map_collection" />
+            android:label="@string/title_activity_map_collection" >
+
+        </activity>
         <activity
             android:name=".View.Login.LoginActivity"
             android:exported="true">

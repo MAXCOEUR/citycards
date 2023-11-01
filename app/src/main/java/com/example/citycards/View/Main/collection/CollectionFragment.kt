@@ -25,8 +25,10 @@ import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.R
 import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.View.Main.MainViewModel
+import com.example.citycards.View.MapCollection.MapCollection
 import com.example.citycards.adapter.CustomSpinnerAdapter
 import com.example.citycards.adapter.ItemAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CollectionFragment : Fragment() {
     val mainViewModel by activityViewModels<MainViewModel>()
@@ -53,6 +55,7 @@ class CollectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         val btn_favori = view.findViewById<Button>(R.id.favoritesButton)
+        val btn_map = view.findViewById<FloatingActionButton>(R.id.bt_map)
         dropdown_region = view.findViewById(R.id.regionDropdown)
         dropdown_rang = view.findViewById(R.id.rankDropdown)
         recherche_field = view.findViewById(R.id.searchEditText)
@@ -113,6 +116,10 @@ class CollectionFragment : Fragment() {
 
             }
         })
+        btn_map.setOnClickListener(){
+            val changePage = Intent(context, MapCollection::class.java)
+            (context as Activity).startActivity(changePage)
+        }
     }
 
     fun askAPI(){
