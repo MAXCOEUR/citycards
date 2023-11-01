@@ -21,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.text.NumberFormat
+import kotlin.concurrent.thread
 
 class CityDetail : AppCompatActivity() {
 
@@ -164,10 +165,9 @@ class CityDetail : AppCompatActivity() {
                 val latLng = LatLng(latitude.toDouble(), longitude.toDouble())
 
                 // Ajoutez un marqueur à la carte
-                googleMap.addMarker(MarkerOptions().position(latLng).title("Titre du marqueur").snippet("Description du marqueur"))
+                googleMap.addMarker(MarkerOptions().position(latLng))
 
                 // Déplacez la caméra vers la position du marqueur
-
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f),5000,null)
             }
         }
