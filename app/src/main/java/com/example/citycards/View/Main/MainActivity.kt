@@ -9,9 +9,12 @@ import android.widget.ImageButton
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
@@ -27,6 +30,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var user: User
+    lateinit var homeFragment :Fragment
+    lateinit var notificationFragment :Fragment
+    lateinit var collectionFragment :Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +51,9 @@ class MainActivity : AppCompatActivity() {
         val transaction = fragmentManager.beginTransaction()
 
         // Créez une instance du fragment que vous souhaitez afficher
-        val homeFragment = HomeFragment.newInstance()
-        val notificationFragment = NotificationsFragment.newInstance()
-        val collectionFragment = CollectionFragment.newInstance()
+        homeFragment = HomeFragment.newInstance()
+        notificationFragment = NotificationsFragment.newInstance()
+        collectionFragment = CollectionFragment.newInstance()
 
         // Remplacez le contenu du FragmentContainerView par votre fragment
         transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
@@ -117,6 +123,9 @@ class MainActivity : AppCompatActivity() {
             if(resultCode==Activity.RESULT_OK){
                 user= data?.getSerializableExtra(CLE_USER) as User
             }
+        }
+        else if(requestCode== CityDetail.CLE_CITY_RETURN){
+            collectionFragment.onActivityResult(requestCode,resultCode,data)
         }
     }
 }
