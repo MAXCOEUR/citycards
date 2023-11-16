@@ -1,6 +1,5 @@
 package com.example.citycards.Repository
 
-import com.example.citycards.Model.CreateUser
 import com.example.citycards.Model.LoginUser
 import com.example.citycards.Model.User
 import kotlinx.coroutines.delay
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 object UserRepository {
-    suspend fun createUser(createuser: CreateUser) : Flow<User> = flow {
+    suspend fun createUser(createuser: User) : Flow<User> = flow {
         delay(3000)
         val user = User(
             0,

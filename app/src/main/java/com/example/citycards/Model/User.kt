@@ -5,20 +5,13 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 @Entity
 data class User(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val username: String,
-    val email: String,
-    val password: String,
-    val avatar: String?,
-    var jeton: Int
-) : Serializable
-
-data class CreateUser(
+    @PrimaryKey(autoGenerate = true) val id: Int?=null,
     var username: String? = null,
     var email: String? = null,
     var password: String? = null,
-    var avatar: String? = null
-)
+    var avatar: String? = null,
+    var jeton: Int? = null
+) : Serializable
 data class LoginUser(
     var usernameEmail: String? = null,
     var password: String? = null,

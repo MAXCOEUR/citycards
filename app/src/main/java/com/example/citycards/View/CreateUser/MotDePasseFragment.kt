@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.example.citycards.Model.CreateUser
+import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -25,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class MotDePasseFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    lateinit var createUser: CreateUser
+    lateinit var createUser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +112,7 @@ class MotDePasseFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(createUser: CreateUser) =
+        fun newInstance(createUser: User) =
             MotDePasseFragment().apply {
                 this.createUser=createUser
             }

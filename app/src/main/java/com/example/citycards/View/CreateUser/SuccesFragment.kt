@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.citycards.View.Main.MainActivity
-import com.example.citycards.Model.CreateUser
 import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.squareup.picasso.Picasso

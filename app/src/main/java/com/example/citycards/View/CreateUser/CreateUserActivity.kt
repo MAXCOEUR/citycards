@@ -6,12 +6,12 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.citycards.Model.CreateUser
+import com.example.citycards.Model.User
 import com.example.citycards.R
 
 class CreateUserActivity : AppCompatActivity() {
 
-    var createUser:CreateUser= CreateUser()
+    var createUser:User= User()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)

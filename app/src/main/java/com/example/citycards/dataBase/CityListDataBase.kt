@@ -21,9 +21,10 @@ internal abstract class CityListDataBase : RoomDatabase() {
                 "city-db"
             ).build()
         }
-    }
 
-    fun getInstance(): CityListDataBase {
-        return instance
+
+        fun getInstance(): CityListDataBase {
+            return instance
+        }
     }
 }

@@ -17,13 +17,13 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.example.citycards.Model.CreateUser
+import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.squareup.picasso.Picasso
 
 
 class AvatarFragment : Fragment() {
-    lateinit var createUser: CreateUser
+    lateinit var createUser: User
     val REQUEST_IMAGE_OPEN = 1
     val REQUEST_STORAGE_PERMISSION=2
     lateinit var imagePickerView:ImageView
@@ -115,7 +115,7 @@ class AvatarFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(createUser: CreateUser) =
+        fun newInstance(createUser: User) =
             AvatarFragment().apply {
                 this.createUser=createUser
             }
