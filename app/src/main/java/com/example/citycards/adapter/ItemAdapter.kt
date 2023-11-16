@@ -3,7 +3,6 @@ package com.example.citycards.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +10,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.Model.City
 import com.example.citycards.R
 import com.example.citycards.View.CityDetail.CityDetail
-import com.example.citycards.View.Main.MainActivity
 
 class ItemAdapter(
     private val context: Context,
@@ -52,8 +48,8 @@ class ItemAdapter(
         val star =  dataset[position].favori
         when (star){
             null -> holder.favoriButton.visibility = View.GONE
-            false -> holder.favoriButton.setImageResource(R.drawable.star_outline)
-            true -> holder.favoriButton.setImageResource(R.drawable.star)
+            false -> holder.favoriButton.setImageResource(R.drawable.img_star_outline)
+            true -> holder.favoriButton.setImageResource(R.drawable.img_star)
         }
         when (rang){
             0 -> Log.e("erreur", "le rang est 0")

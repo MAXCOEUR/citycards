@@ -43,7 +43,7 @@
                     android:layout_height="339dp"
                     android:backgroundTint="#00FFFFFF"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/rond_ouverture_x1"
+                    android:src="@drawable/back_rond_ouverture_x1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nb_jeton" />
@@ -55,7 +55,7 @@
                     android:scaleType="centerInside"
                     android:scaleX="0.65"
                     android:scaleY="0.65"
-                    android:src="@drawable/logo"
+                    android:src="@drawable/img_logo"
                     app:layout_constraintBottom_toBottomOf="@+id/image_rond"
                     app:layout_constraintEnd_toEndOf="@+id/image_rond"
                     app:layout_constraintStart_toStartOf="@+id/image_rond"

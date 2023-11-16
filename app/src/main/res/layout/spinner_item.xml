@@ -26,6 +26,6 @@
         android:contentDescription="Image à droite"
         android:scaleType="fitCenter"
 
-        android:src="@drawable/baseline_arrow_down" />
+        android:src="@drawable/img_arrow_down" />
 </LinearLayout>
 

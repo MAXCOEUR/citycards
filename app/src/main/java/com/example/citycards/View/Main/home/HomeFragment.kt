@@ -8,11 +8,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.R
-import com.example.citycards.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
@@ -41,14 +38,14 @@ class HomeFragment : Fragment() {
         val texte_carte = view.findViewById<TextView>(R.id.tirer_carte);
         switch.setOnClickListener {
             if(switch.isChecked) {
-                image_rond.setImageResource(R.drawable.rond_ouverture_x10);
+                image_rond.setImageResource(R.drawable.back_rond_ouverture_x10);
                 texte_carte.text="Tirer 10 cartes";
-                image_carte.setImageResource(R.drawable.carte_multiple);
+                image_carte.setImageResource(R.drawable.img_multiple_card);
             }
             else{
-                image_rond.setImageResource(R.drawable.rond_ouverture_x1);
+                image_rond.setImageResource(R.drawable.back_rond_ouverture_x1);
                 texte_carte.text="Tirer 1 carte";
-                image_carte.setImageResource(R.drawable.logo);
+                image_carte.setImageResource(R.drawable.img_logo);
             }
 
         }

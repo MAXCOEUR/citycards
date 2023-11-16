@@ -21,7 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.text.NumberFormat
-import kotlin.concurrent.thread
 
 class CityDetail : AppCompatActivity() {
 
@@ -175,8 +174,8 @@ class CityDetail : AppCompatActivity() {
     fun updateStar(){
         when (city.favori){
             null -> bt_favorie.visibility = View.GONE
-            false -> bt_favorie.setImageResource(R.drawable.star_outline)
-            true -> bt_favorie.setImageResource(R.drawable.star)
+            false -> bt_favorie.setImageResource(R.drawable.img_star_outline)
+            true -> bt_favorie.setImageResource(R.drawable.img_star)
         }
     }
     override fun onBackPressed() {

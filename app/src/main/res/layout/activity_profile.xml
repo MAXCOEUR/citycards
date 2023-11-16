@@ -43,7 +43,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="@dimen/taille8"
-            android:background="@drawable/baseline_arrow_white_24"
+            android:background="@drawable/img_arrow_left"
             android:padding="@dimen/taille32"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

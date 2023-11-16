@@ -25,7 +25,7 @@
             android:layout_marginBottom="@dimen/taille8"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="fitCenter"
-            android:src="@drawable/baseline_account_circle_24"
+            android:src="@drawable/img_account_circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
             android:layout_marginStart="@dimen/taille8"
             android:layout_marginTop="@dimen/taille8"
             android:layout_marginBottom="@dimen/taille8"
-            android:background="@drawable/jeton_border"
+            android:background="@drawable/border_jeton"
             android:padding="@dimen/taille8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
-                android:src="@drawable/coin_white"
+                android:src="@drawable/img_coin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_nbrJeton"
                 app:layout_constraintTop_toTopOf="parent" />

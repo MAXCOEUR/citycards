@@ -6,7 +6,7 @@
     android:id="@+id/carte_1"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@drawable/carte"
+    android:background="@drawable/border_card"
     android:backgroundTint="@color/primary"
     android:layout_marginTop="@dimen/taille16"
     android:layout_marginStart="4dp"
@@ -19,7 +19,7 @@
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:backgroundTint="#00FFFFFF"
-        android:src="@drawable/star_outline"
+        android:src="@drawable/img_star_outline"
         app:layout_constraintBottom_toTopOf="@+id/separation_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

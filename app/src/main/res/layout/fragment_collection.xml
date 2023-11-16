@@ -23,8 +23,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/taille8"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_search_bar"
-            android:drawableEnd="@drawable/baseline_search"
+            android:background="@drawable/back_rounded_search_bar"
+            android:drawableEnd="@drawable/img_search"
             android:hint="Rechercher..."
             android:paddingStart="@dimen/taille8"
             android:paddingEnd="4dp"
@@ -55,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
-                    android:drawableEnd="@drawable/star"
+                    android:drawableEnd="@drawable/img_star"
                     android:text="Favoris" />
             </LinearLayout>
 
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
-                    android:background="@drawable/spinner_border"
+                    android:background="@drawable/border_spinner"
                     android:padding="4dp"
                     android:spinnerMode="dropdown" />
             </LinearLayout>
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
-                    android:background="@drawable/spinner_border"
+                    android:background="@drawable/border_spinner"
                     android:padding="4dp" />
 
             </LinearLayout>
@@ -117,7 +117,7 @@
         android:layout_marginEnd="@dimen/taille8"
         android:layout_marginBottom="@dimen/taille8"
         android:clickable="true"
-        android:src="@drawable/map_location_pin"
+        android:src="@drawable/img_map_pin"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
