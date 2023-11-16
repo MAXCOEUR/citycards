@@ -1,9 +1,11 @@
 package com.example.citycards.Model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
-
+@Entity
 data class User(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val username: String,
     val email: String,
     val password: String,
