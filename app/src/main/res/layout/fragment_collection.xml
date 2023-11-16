@@ -47,11 +47,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_weight="1"> <!-- Couleur de la zone 1 -->
+                android:layout_weight="1">
+
                 <Button
                     android:id="@+id/favoritesButton"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
+                    android:textSize="12sp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
@@ -62,7 +64,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"> <!-- Couleur de la zone 2 -->
+                android:layout_weight="1">
                 <Spinner
                     android:id="@+id/regionDropdown"
                     android:layout_width="match_parent"
@@ -77,7 +79,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"> <!-- Couleur de la zone 3 -->
+                android:layout_weight="1">
 
                 <!-- Contenu de la zone 3 -->
                 <!-- Vous pouvez placer d'autres layouts ou vues à l'intérieur de celui-ci -->
