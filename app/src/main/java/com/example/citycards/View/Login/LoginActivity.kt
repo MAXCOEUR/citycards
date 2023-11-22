@@ -36,9 +36,18 @@ class LoginActivity : AppCompatActivity() {
         val inputLayoutPassword = findViewById<TextInputLayout>(R.id.textInputLayoutChgConMdp)
 
         //for dev
-        val changePage = Intent(this, MainActivity::class.java)
-        changePage.putExtra(MainActivity.CLE_USER, User(username = "username", email = "email"))
-        startActivity(changePage)
+        val userResponseCreate=loginViewModel.loginUser(LoginUser("aze@gmail.com","Azerty123?"))
+
+        userResponseCreate.observe(this) { user->
+            if(user.email!="" && user.username!=""){
+                val changePage = Intent(this, MainActivity::class.java)
+                changePage.putExtra(MainActivity.CLE_USER, user)
+                startActivity(changePage)
+            }
+            else{
+                Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
+            }
+        }
 
         buttonSeConnecter.setOnClickListener {
 
