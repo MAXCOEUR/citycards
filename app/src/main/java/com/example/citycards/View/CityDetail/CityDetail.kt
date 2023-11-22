@@ -62,16 +62,17 @@ class CityDetail : AppCompatActivity() {
         val formattedPopulation = NumberFormat.getNumberInstance().format(city.population)
         tv_hab.text="$formattedPopulation habitants"
 
-        val dateFormat = SimpleDateFormat("d MMM. yyyy HH:mm")
-        tv_date.text = dateFormat.format(city.dateObtention)
+        if (city.favori!=null){
+            val dateFormat = SimpleDateFormat("d MMM. yyyy HH:mm")
+            tv_date.text = dateFormat.format(city.dateObtention)
+        }
+        else {
+            tv_date.visibility = View.GONE
+            constraint_fav_del.visibility = View.GONE
+        }
+
 
         updateStar()
-
-        if(city.favori==null){
-            constraint_fav_del.visibility= View.GONE
-        }else{
-            constraint_fav_del.visibility= View.VISIBLE
-        }
 
         val rang = city.getRang()
         when (rang){

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
@@ -97,6 +98,8 @@ class MapCollection : AppCompatActivity(), OnMapReadyCallback {
                 val city = tabcity.find { it.idUnique==citytmp.idUnique }
                 city?.let {
                     tabcity.remove(it)
+                    Toast.makeText(this, "+ 50 jetons", Toast.LENGTH_SHORT).show()
+                    // currentUser.jeton += card_value * 2
                     updateCluster()
                 }
             }

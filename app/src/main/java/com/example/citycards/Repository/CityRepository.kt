@@ -12,7 +12,7 @@ import java.util.Date
 object CityRepository {
     suspend fun getCitysSearch(dataQuery: QueryDataCity): Flow<Response<CityList>> = flow {
         val Api = ApiClient.getApiService
-        val response = Api.getCities(
+        var response = Api.getCities(
             dataQuery.limiteur,
             dataQuery.namePrefix,
             dataQuery.offset,

@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -77,7 +78,7 @@ class CollectionFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    query.offset += 10
+                        query.offset += 10
                         askAPI()
                 }
             }
@@ -202,6 +203,8 @@ class CollectionFragment : Fragment() {
             val city = tabcity.find { it.idUnique==citytmp.idUnique }
             city?.let {
                 tabcity.remove(it)
+                Toast.makeText(context, "+ 50 jetons", Toast.LENGTH_SHORT).show()
+                // currentUser.jeton += card_value * 2
                 adapter.notifyDataSetChanged()
             }
         }

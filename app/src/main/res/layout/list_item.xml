@@ -20,6 +20,7 @@
         android:layout_marginStart="8dp"
         android:backgroundTint="#00FFFFFF"
         android:src="@drawable/img_star_outline"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/separation_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

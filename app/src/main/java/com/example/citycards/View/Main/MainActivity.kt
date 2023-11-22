@@ -10,7 +10,6 @@ import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
@@ -18,7 +17,7 @@ import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
-import com.example.citycards.View.Main.notifications.NotificationsFragment
+import com.example.citycards.View.Main.search.SearchFragment
 import com.example.citycards.View.Profile.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var user: User
     lateinit var homeFragment :Fragment
-    lateinit var notificationFragment :Fragment
+    lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         // Créez une instance du fragment que vous souhaitez afficher
         homeFragment = HomeFragment.newInstance()
-        notificationFragment = NotificationsFragment.newInstance()
+        searchFragment = SearchFragment.newInstance()
         collectionFragment = CollectionFragment.newInstance()
 
         // Remplacez le contenu du FragmentContainerView par votre fragment
@@ -86,11 +85,11 @@ class MainActivity : AppCompatActivity() {
                     transaction_activity_main.commit()
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_notifications -> {
+                R.id.navigation_search -> {
                     Log.e("TAG", "navigation_notifications" )
                     val transaction_activity_main = fragmentManager.beginTransaction()
                     /// Remplacez le contenu du FragmentContainerView par votre fragment
-                    transaction_activity_main.replace(R.id.nav_host_fragment_activity_main, notificationFragment)
+                    transaction_activity_main.replace(R.id.nav_host_fragment_activity_main, searchFragment)
 
                     // Validez la transaction
                     transaction_activity_main.commit()
@@ -109,11 +108,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val cityResponseCreate=mainViewModel.getCitysSearch(QueryDataCity())
 
-        cityResponseCreate.observe(this) { cityListe->
-            Log.i("citys",cityListe.body().toString())
-        }
 
 
     }
