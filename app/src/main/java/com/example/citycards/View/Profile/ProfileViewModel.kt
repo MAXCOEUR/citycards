@@ -11,16 +11,5 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
 
-    fun createUser(createuser: User): LiveData<User> {
-        var livedata = MutableLiveData<User>()
-        viewModelScope.launch {
-            val data = UserRepository.loginUser(LoginUser())
-            data.collect {
-                livedata.postValue(it)
-            }
 
-        }
-
-        return livedata
-    }
 }

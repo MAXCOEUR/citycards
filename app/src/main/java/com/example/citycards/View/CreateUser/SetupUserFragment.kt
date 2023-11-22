@@ -66,8 +66,8 @@ class SetupUserFragment : Fragment() {
             if (textInputUserName.text.toString().isNotEmpty() && textInputEmail.text.toString().isNotEmpty() && isValidEmail(textInputEmail.text.toString())) {
                 // Commencez la transaction
 
-                createUser.email=textInputEmail.text.toString()
-                createUser.username=textInputUserName.text.toString()
+
+                createUser = User(email = textInputEmail.text.toString(), username = textInputUserName.text.toString())
 
                 val transaction = parentFragmentManager.beginTransaction()
 
@@ -90,9 +90,8 @@ class SetupUserFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(createUser: User) =
+        fun newInstance() =
             SetupUserFragment().apply {
-                this.createUser=createUser
             }
     }
 }

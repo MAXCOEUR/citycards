@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -20,10 +19,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import com.example.citycards.Model.User
 import com.example.citycards.R
-import com.example.citycards.View.CreateUser.AvatarFragment
 import com.example.citycards.View.Login.LoginActivity
 import com.example.citycards.View.Main.MainActivity
-import com.example.citycards.databinding.ActivityProfileBinding
 import com.squareup.picasso.Picasso
 
 
@@ -175,7 +172,7 @@ class UserFragment : Fragment() {
                 user.email,
                 user.password,
                 fullPhotoUri.toString(),
-                user.jeton
+                user.token
             )
             Picasso.get()
                 .load(fullPhotoUri) // Précisez le chemin du fichier avec le préfixe "file://"

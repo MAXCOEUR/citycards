@@ -8,14 +8,15 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.dataBase.CityListDataBase
 
 class CreateUserActivity : AppCompatActivity() {
 
-    var createUser:User= User()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_create)
+
 
         // Obtenez le gestionnaire de fragments
         val fragmentManager = supportFragmentManager
@@ -24,7 +25,7 @@ class CreateUserActivity : AppCompatActivity() {
         val transaction = fragmentManager.beginTransaction()
 
         // Créez une instance du fragment que vous souhaitez afficher
-        val fragment = SetupUserFragment.newInstance(createUser)
+        val fragment = SetupUserFragment.newInstance()
 
         // Remplacez le contenu du FragmentContainerView par votre fragment
         transaction.replace(R.id.fragmentContainerView, fragment)

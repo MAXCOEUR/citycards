@@ -15,7 +15,6 @@ import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import com.example.citycards.Model.User
 import com.example.citycards.R
-import com.example.citycards.View.CreateUser.AvatarFragment
 import com.example.citycards.View.Main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -84,7 +83,7 @@ class ChangePasswordFragment : Fragment()  {
             }
 
             if (textInputMdp.text.toString().isNotEmpty() && isValidPassword(textInputMdp.text.toString()) && textInputConfMdp.text.toString().isNotEmpty() && textInputConfMdp.text.toString()==textInputMdp.text.toString()){
-                user=User(user.id,user.username,user.email,textInputMdp.text.toString(),user.avatar,user.jeton)
+                user=User(user.id,user.username,user.email,textInputMdp.text.toString(),user.avatar,user.token)
                 val returnIntent = Intent();
                 returnIntent.putExtra(MainActivity.CLE_USER, user);
                 activity?.setResult(Activity.RESULT_OK, returnIntent);
@@ -125,7 +124,7 @@ class ChangePasswordFragment : Fragment()  {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
             val fullPhotoUri: Uri? = data?.data
             Log.i("REQUEST_IMAGE_OPEN", fullPhotoUri.toString())
-            user = User(user.id,user.username,user.email,user.password,fullPhotoUri.toString(),user.jeton)
+            user = User(user.id,user.username,user.email,user.password,fullPhotoUri.toString(),user.token)
             Picasso.get()
                 .load(fullPhotoUri) // Précisez le chemin du fichier avec le préfixe "file://"
                 .into(imagePickerView)

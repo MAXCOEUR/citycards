@@ -2,36 +2,25 @@ package com.example.citycards.Repository
 
 import com.example.citycards.Model.LoginUser
 import com.example.citycards.Model.User
+import com.example.citycards.dataBase.DBDataSource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 
 object UserRepository {
     suspend fun createUser(createuser: User) : Flow<User> = flow {
-        delay(3000)
-        val user = User(
-            0,
-            createuser.username ?: "", // Utilisez createuser.username s'il n'est pas null, sinon une chaîne vide
-            createuser.email ?: "",
-            createuser.password ?: "",
-            createuser.avatar,
-            0
-        )
-
+        DBDataSource.insertUser(createuser);
+        val user = DBDataSource.getUser(createuser.email)
         emit(user)
     }
-    suspend fun loginUser(user: LoginUser) : Flow<User> = flow {
-        delay(1000)
-        val user = User(
-            0,
-            user.usernameEmail ?: "", // Utilisez createuser.username s'il n'est pas null, sinon une chaîne vide
-            "max@outlook.fr",
-            user.password ?: "",
-            null,
-            0
-        )
+    suspend fun loginUser(loginUser: LoginUser) : Flow<User> = flow {
+        val user = DBDataSource.getUser(loginUser.userEmail)
 
-        emit(user)
+        if(user!=null && loginUser.password==user.password){
+            emit(user)
+        }
+        else{
+            emit(User(username = "", email = ""))
+        }
     }
 }

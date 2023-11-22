@@ -1,5 +1,7 @@
 package com.example.citycards.Model
 
+import androidx.room.Entity
+import androidx.room.ForeignKey
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
@@ -9,6 +11,10 @@ data class CityList(
     val totalCount  : Int)
 
 
+@Entity(foreignKeys = arrayOf(ForeignKey(entity = User::class,
+    parentColumns = arrayOf("id"),
+    childColumns = arrayOf("owner"),
+    onDelete = ForeignKey.CASCADE)))
 data class City(
     @SerializedName("idUnique")
     val idUnique: Int?=null,
@@ -26,7 +32,9 @@ data class City(
     val country: String?=null,
 
     var favori: Boolean?=null,
-    var dateObtention: Date?=null
+    var dateObtention: Date?=null,
+    val owner: Int
+
 ): java.io.Serializable {
     fun getRang(): Int {
         return when {

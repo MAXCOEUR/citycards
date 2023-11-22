@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.citycards.Model.LoginUser
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.R
 import com.example.citycards.View.CreateUser.CreateUserActivity
+import com.example.citycards.dataBase.CityListDataBase
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -20,10 +22,13 @@ class LoginActivity : AppCompatActivity() {
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_login)
 
+        //On instancie la base de données
+        CityListDataBase.initDatabase(this)
+
         val buttonSeConnecter = findViewById<Button>(R.id.bt_SeConnecter)
         val buttonCreationCompte = findViewById<Button>(R.id.bt_CreationCompte)
 
-        val inputUsernameEmail = findViewById<TextInputEditText>(R.id.textInputChgMdp)
+        val inputEmail = findViewById<TextInputEditText>(R.id.textInputChgMdp)
         val inputPassword = findViewById<TextInputEditText>(R.id.textInputChgConMdp)
 
         val inputLayoutUsernameEmail = findViewById<TextInputLayout>(R.id.TinputLayoutUserNameEmail)
@@ -31,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
 
         buttonSeConnecter.setOnClickListener {
 
-            if (inputUsernameEmail.text.toString().isEmpty()) {
+            if (inputEmail.text.toString().isEmpty()) {
                 inputLayoutUsernameEmail.error = "le username/Email ne peut pas etre vide"
             } else {
                 inputLayoutUsernameEmail.error = null // Effacez l'erreur si le champ est valide
@@ -43,15 +48,20 @@ class LoginActivity : AppCompatActivity() {
                 inputLayoutPassword.error = null // Effacez l'erreur si le champ est valide
             }
 
-            if(inputUsernameEmail.text.toString().isNotEmpty() && inputPassword.text.toString().isNotEmpty()){
-                val loginUser= LoginUser(inputUsernameEmail.text.toString(),inputPassword.text.toString())
+            if(inputEmail.text.toString().isNotEmpty() && inputPassword.text.toString().isNotEmpty()){
+                val loginUser= LoginUser(inputEmail.text.toString(),inputPassword.text.toString())
 
                 val userResponseCreate=loginViewModel.loginUser(loginUser)
 
                 userResponseCreate.observe(this) { user->
-                    val changePage = Intent(this, MainActivity::class.java)
-                    changePage.putExtra(MainActivity.CLE_USER, user)
-                    startActivity(changePage)
+                    if(user.email!="" && user.username!=""){
+                        val changePage = Intent(this, MainActivity::class.java)
+                        changePage.putExtra(MainActivity.CLE_USER, user)
+                        startActivity(changePage)
+                    }
+                    else{
+                        Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
+                    }
                 }
             }
 

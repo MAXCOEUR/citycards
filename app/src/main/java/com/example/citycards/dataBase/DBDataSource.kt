@@ -8,7 +8,8 @@ object DBDataSource{
         CityListDataBase.getInstance().UserDAO().insertUser(user)
     }
 
-    suspend fun insertUser() {
-        DBDataSource.insertUser()
+    suspend fun getUser(mail: String) :User {
+        return CityListDataBase.getInstance().UserDAO().getUserFromMail(mail);
     }
+
 }
