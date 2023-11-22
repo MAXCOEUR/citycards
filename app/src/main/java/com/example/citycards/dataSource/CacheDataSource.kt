@@ -3,16 +3,16 @@ package com.example.citycards.dataSource
 import com.example.citycards.Model.User
 
 class CacheDataSource private constructor() {
-    private var user: User = User(username = "", email = "")
+    private var userLogin: User = User(username = "", email = "")
 
     // Méthode pour définir l'utilisateur
-    fun setUser(user: User) {
-        this.user = user
+    fun setUserLogin(user: User) {
+        this.userLogin = user
     }
 
     // Méthode pour récupérer l'utilisateur
-    fun getUser(): User {
-        return user
+    fun getUserLogin(): User {
+        return userLogin
     }
 
     // Singleton
