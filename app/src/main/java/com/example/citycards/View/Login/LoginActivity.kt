@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.citycards.Model.LoginUser
+import com.example.citycards.Model.User
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.R
 import com.example.citycards.View.CreateUser.CreateUserActivity
@@ -33,6 +34,11 @@ class LoginActivity : AppCompatActivity() {
 
         val inputLayoutUsernameEmail = findViewById<TextInputLayout>(R.id.TinputLayoutUserNameEmail)
         val inputLayoutPassword = findViewById<TextInputLayout>(R.id.textInputLayoutChgConMdp)
+
+        //for dev
+        val changePage = Intent(this, MainActivity::class.java)
+        changePage.putExtra(MainActivity.CLE_USER, User(username = "username", email = "email"))
+        startActivity(changePage)
 
         buttonSeConnecter.setOnClickListener {
 
