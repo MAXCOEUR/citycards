@@ -11,8 +11,10 @@ import com.example.citycards.Model.LoginUser
 import com.example.citycards.Model.User
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.CreateUser.CreateUserActivity
 import com.example.citycards.dataBase.CityListDataBase
+import com.example.citycards.dataSource.CacheDataSource
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -40,8 +42,8 @@ class LoginActivity : AppCompatActivity() {
 
         userResponseCreate.observe(this) { user->
             if(user.email!="" && user.username!=""){
+                UserRepository.setUserLogin(user)
                 val changePage = Intent(this, MainActivity::class.java)
-                changePage.putExtra(MainActivity.CLE_USER, user)
                 startActivity(changePage)
             }
             else{
@@ -70,8 +72,8 @@ class LoginActivity : AppCompatActivity() {
 
                 userResponseCreate.observe(this) { user->
                     if(user.email!="" && user.username!=""){
+                        UserRepository.setUserLogin(user)
                         val changePage = Intent(this, MainActivity::class.java)
-                        changePage.putExtra(MainActivity.CLE_USER, user)
                         startActivity(changePage)
                     }
                     else{

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
@@ -30,12 +31,11 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
     companion object {
-        const val CLE_USER = "CLE_USER1"
+        //const val CLE_USER = "CLE_USER1"
         const val CLE_USER_RETURN = 1
     }
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var user: User
     lateinit var homeFragment :Fragment
     lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
@@ -47,10 +47,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
-        val intent = intent
-        user = intent.getSerializableExtra(MainActivity.CLE_USER) as User
         val jetons = findViewById<TextView>(R.id.tv_nbrJeton)
-        jetons.text = user.token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
         val fragmentManager = supportFragmentManager
 
@@ -110,7 +107,6 @@ class MainActivity : AppCompatActivity() {
 
         btProfile.setOnClickListener {
             val changePage = Intent(this, ProfileActivity::class.java)
-            changePage.putExtra(ProfileActivity.CLE_USER, user)
             startActivityForResult(changePage,CLE_USER_RETURN)
         }
 
@@ -127,17 +123,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
-
-
-
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==CLE_USER_RETURN){
             if(resultCode==Activity.RESULT_OK){
-                user= data?.getSerializableExtra(CLE_USER) as User
             }
         }
         else if(requestCode== CityDetail.CLE_CITY_RETURN){

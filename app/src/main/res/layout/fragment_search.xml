@@ -37,7 +37,7 @@
         android:id="@+id/rankDropdown"
         android:layout_width="136dp"
         android:layout_height="56dp"
-        android:layout_marginTop="@dimen/taille16"
+        android:layout_marginTop="@dimen/taille8"
         android:background="@drawable/border_spinner"
         android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"

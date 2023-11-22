@@ -12,11 +12,12 @@ import android.widget.TextView
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
+import com.example.citycards.dataSource.CacheDataSource
 import com.squareup.picasso.Picasso
 
 class SuccesFragment : Fragment() {
     lateinit var user: User
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -54,8 +55,8 @@ class SuccesFragment : Fragment() {
         val buttonSuivant = view.findViewById<Button>(R.id.bt_Suivant)
 
         buttonSuivant.setOnClickListener{
+            UserRepository.setUserLogin(user)
             val changePage = Intent(requireActivity(), MainActivity::class.java)
-            changePage.putExtra(MainActivity.CLE_USER, user)
             startActivity(changePage)
         }
     }
