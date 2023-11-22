@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.citycards.View.Main.MainActivity
-import com.example.citycards.Model.CreateUser
 import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.squareup.picasso.Picasso
@@ -36,6 +35,12 @@ class SuccesFragment : Fragment() {
         if (TitreActivity != null) {
             TitreActivity.text = "Succes"
         }
+
+        val tv_userName = activity?.findViewById<TextView>(R.id.tv_userName);
+        val tv_email = activity?.findViewById<TextView>(R.id.tv_email);
+
+        tv_userName?.text=user.username;
+        tv_email?.text=user.email;
 
         val iv_imagePicker = view.findViewById<ImageView>(R.id.iv_ImagePicker)
 

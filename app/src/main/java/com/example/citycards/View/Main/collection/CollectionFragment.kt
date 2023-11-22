@@ -78,8 +78,8 @@ class CollectionFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        query.offset += 10
-                        askAPI()
+                    query.offset += 10
+                    askAPI()
                 }
             }
         })

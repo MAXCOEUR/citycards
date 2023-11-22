@@ -1,23 +1,27 @@
 package com.example.citycards.Model
 
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import java.io.Serializable
+import java.util.Date
 
+@Entity(indices = [Index(
+    value = ["email"],
+    unique = true
+)])
 data class User(
-    val id: Int,
-    val username: String,
-    val email: String,
-    val password: String,
-    val avatar: String?,
-    var jeton: Int
+    @PrimaryKey(autoGenerate = true) val id: Int?=null,
+    var username: String,
+    var email: String,
+    var password: String? = null,
+    var avatar: String? = null,
+    var token: Int = 0,
+    var lastClaimToken: Long= 0,
 ) : Serializable
 
-data class CreateUser(
-    var username: String? = null,
-    var email: String? = null,
-    var password: String? = null,
-    var avatar: String? = null
-)
+
 data class LoginUser(
-    var usernameEmail: String? = null,
-    var password: String? = null,
+    var userEmail: String,
+    var password: String,
 )

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.citycards.Model.CreateUser
+import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -19,7 +19,7 @@ import com.google.android.material.textfield.TextInputLayout
  * create an instance of this fragment.
  */
 class SetupUserFragment : Fragment() {
-    lateinit var createUser: CreateUser
+    lateinit var createUser: User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -66,8 +66,8 @@ class SetupUserFragment : Fragment() {
             if (textInputUserName.text.toString().isNotEmpty() && textInputEmail.text.toString().isNotEmpty() && isValidEmail(textInputEmail.text.toString())) {
                 // Commencez la transaction
 
-                createUser.email=textInputEmail.text.toString()
-                createUser.username=textInputUserName.text.toString()
+
+                createUser = User(email = textInputEmail.text.toString(), username = textInputUserName.text.toString())
 
                 val transaction = parentFragmentManager.beginTransaction()
 
@@ -90,9 +90,8 @@ class SetupUserFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(createUser: CreateUser) =
+        fun newInstance() =
             SetupUserFragment().apply {
-                this.createUser=createUser
             }
     }
 }

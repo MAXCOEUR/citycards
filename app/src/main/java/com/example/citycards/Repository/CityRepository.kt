@@ -4,6 +4,7 @@ import com.example.citycards.Model.City
 import com.example.citycards.Model.CityList
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.RetrofitAPi.ApiClient
+import com.example.citycards.dataBase.DBDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -33,17 +34,18 @@ object CityRepository {
         dataQuery: QueryDataCity,
     ): Flow<Response<CityList>> = flow {
         val cityList = listOf(
-            City(1, "New York", "New York", 8537673, -74.006F, 40.7128F, "USA", false, Date()),
-            City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true, Date()),
-            City(3, "Paris", "Île-de-France", 2140526, 2.3520F, 48.8566F, "France", false, Date()),
-            City(4, "London", "Greater London", 8982256, -0.1276F, 51.5072F, "UK", false, Date()),
-            City(5, "Tokyo", "Kanto", 37435191, 139.6917F, 35.6895F, "Japan", false, Date()),
-            City(6, "Sydney", "New South Wales", 5312163, 151.2093F, -33.8688F, "Australia", false, Date()),
-            City(7, "Toronto", "Ontario", 2731571, -79.3832F, 43.6511F, "Canada", false, Date()),
-            City(8, "Dubai", "Dubai", 3137000, 55.2708F, 25.276987F, "UAE", false, Date()),
-            City(9, "Mumbai", "Maharashtra", 12442373, 72.8777F, 19.0760F, "India", false, Date()),
-            City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true, Date())
+            City(1, "New York", "New York", 8537673, -74.006F, 40.7128F, "USA", false, Date().time,1),
+            City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true, Date().time,1),
+            City(3, "Paris", "Île-de-France", 2140526, 2.3520F, 48.8566F, "France", false, Date().time,1),
+            City(4, "London", "Greater London", 8982256, -0.1276F, 51.5072F, "UK", false, Date().time,1),
+            City(5, "Tokyo", "Kanto", 37435191, 139.6917F, 35.6895F, "Japan", false, Date().time,1),
+            City(6, "Sydney", "New South Wales", 5312163, 151.2093F, -33.8688F, "Australia", false,Date().time,1),
+            City(7, "Toronto", "Ontario", 2731571, -79.3832F, 43.6511F, "Canada", false, Date().time,1),
+            City(8, "Dubai", "Dubai", 3137000, 55.2708F, 25.276987F, "UAE", false, Date().time,1),
+            City(9, "Mumbai", "Maharashtra", 12442373, 72.8777F, 19.0760F, "India", false, Date().time,1),
+            City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true, Date().time,1)
         )
+        DBDataSource.insertCity(City(1, "New York", "New York", 8537673, -74.006F, 40.7128F, "USA", false, Date().time,1));
         var filteredCity = cityList.filter { it.name?.lowercase()?.contains(dataQuery.namePrefix.lowercase()) ?: true }
         if (dataQuery.region!=null && dataQuery.region != "Toutes les régions") {
             filteredCity = filteredCity.filter { it.region == dataQuery.region }
@@ -57,8 +59,8 @@ object CityRepository {
         dataQuery: QueryDataCity,
     ): Flow<Response<CityList>> = flow {
         val cityList = listOf(
-            City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true),
-            City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true)
+            City(2, "Los Angeles", "California", 39776830, -118.2437F, 34.0522F, "USA", true,owner=1),
+            City(10, "Rio de Janeiro", "Rio de Janeiro", 12, -43.1729F, -22.9068F, "Brazil", true,owner=1)
         )
         var filteredCity = cityList.filter { it.name?.lowercase()?.contains(dataQuery.namePrefix.lowercase()) ?: true }
         if (dataQuery.region != "Toutes les régions") {

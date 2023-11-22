@@ -19,6 +19,8 @@ import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.search.SearchFragment
 import com.example.citycards.View.Profile.ProfileActivity
+import com.example.citycards.dataBase.CityListDataBase
+import com.example.citycards.dataBase.DBDataSource
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val intent = intent
