@@ -1,5 +1,6 @@
 package com.example.citycards.dataBase
 
+import com.example.citycards.Model.City
 import com.example.citycards.Model.User
 
 object DBDataSource{
@@ -10,6 +11,10 @@ object DBDataSource{
 
     suspend fun getUser(mail: String) :User {
         return CityListDataBase.getInstance().UserDAO().getUserFromMail(mail);
+    }
+
+    suspend fun insertCity(city: City){
+        CityListDataBase.getInstance().CityDAO().insertCity(city)
     }
 
 }
