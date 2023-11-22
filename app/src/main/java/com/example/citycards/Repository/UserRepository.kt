@@ -23,4 +23,10 @@ object UserRepository {
             emit(User(username = "", email = ""))
         }
     }
+
+    suspend fun updateUser(user: User) : Flow<User> = flow {
+        DBDataSource.updateUser(user)
+        val updated_user =DBDataSource.getUser(user.email)
+        emit(updated_user)
+    }
 }

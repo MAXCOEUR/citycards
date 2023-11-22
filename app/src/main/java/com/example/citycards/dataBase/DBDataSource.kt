@@ -17,4 +17,8 @@ object DBDataSource{
         CityListDataBase.getInstance().CityDAO().insertCity(city)
     }
 
+    suspend fun updateUser(user: User){
+        CityListDataBase.getInstance().UserDAO().updateUsers(user)
+    }
+
 }

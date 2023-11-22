@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
             TitreActivity.text="Ouverture"
         }
         val switch = view.findViewById<Switch>(R.id.switch1)
+        val nb_jeton = view.findViewById<TextView>(R.id.nb_jeton)
         val image_rond = view.findViewById<ImageButton>(R.id.image_rond);
         val image_carte = view.findViewById<ImageView>(R.id.image_carte_1);
         val texte_carte = view.findViewById<TextView>(R.id.tirer_carte);

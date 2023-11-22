@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.citycards.Model.User
 
 @Dao
@@ -20,5 +21,8 @@ interface UserDAO {
 
     @Query("Select * from User where email=:email limit 1")
     suspend fun getUserFromMail(email: String): User
+
+    @Update
+    suspend fun updateUsers(vararg user: User)
 
 }

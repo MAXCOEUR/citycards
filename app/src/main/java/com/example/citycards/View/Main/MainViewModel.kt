@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.citycards.Model.CityList
 import com.example.citycards.Model.QueryDataCity
+import com.example.citycards.Model.User
 import com.example.citycards.Repository.CityRepository
+import com.example.citycards.Repository.UserRepository
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -100,6 +103,19 @@ class MainViewModel : ViewModel() {
                 }
         }
 
+        return livedata
+    }
+
+    fun updateUser(user:User): LiveData<User>{
+        var livedata = MutableLiveData<User>()
+        viewModelScope.launch {
+            UserRepository.updateUser(user)
+                .catch {
+                    Log.e("erreur update",it.toString())
+                }.collect{
+                    livedata.postValue(it)
+                }
+        }
         return livedata
     }
 }

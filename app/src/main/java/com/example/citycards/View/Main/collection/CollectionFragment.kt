@@ -24,8 +24,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
+import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.View.CityDetail.CityDetail
+import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.View.Main.MainViewModel
 import com.example.citycards.View.MapCollection.MapCollection
 import com.example.citycards.adapter.CustomSpinnerAdapter
@@ -55,7 +57,7 @@ class CollectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_titre);
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_titre)
         if (TitreActivity != null) {
             TitreActivity.text = "Collection"
         }

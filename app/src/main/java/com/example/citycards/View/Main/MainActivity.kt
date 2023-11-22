@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
@@ -21,6 +24,8 @@ import com.example.citycards.View.Main.search.SearchFragment
 import com.example.citycards.View.Profile.ProfileActivity
 import com.example.citycards.dataBase.CityListDataBase
 import com.example.citycards.dataBase.DBDataSource
+import java.util.Date
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
@@ -41,12 +46,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val intent = intent
         user = intent.getSerializableExtra(MainActivity.CLE_USER) as User
-
-
+        val jetons = findViewById<TextView>(R.id.tv_nbrJeton)
+        jetons.text = user.token.toString()
+        val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
         val fragmentManager = supportFragmentManager
 
         // Commencez la transaction
@@ -107,6 +112,19 @@ class MainActivity : AppCompatActivity() {
             val changePage = Intent(this, ProfileActivity::class.java)
             changePage.putExtra(ProfileActivity.CLE_USER, user)
             startActivityForResult(changePage,CLE_USER_RETURN)
+        }
+
+        btToken.setOnClickListener{
+            val lastClaim = user.lastClaimToken
+            val cooldownClaim = TimeUnit.DAYS.toMillis(1) // 1 jour de délai entre la récupération des jetons
+            if (Date().time - lastClaim  > cooldownClaim){
+                user.token += 30
+                Toast.makeText(this,"+ 30 Jetons !",Toast.LENGTH_SHORT).show()
+                user.lastClaimToken = Date().time
+                jetons.text = user.token.toString()
+                mainViewModel.updateUser(user)
+            }
+
         }
 
 
