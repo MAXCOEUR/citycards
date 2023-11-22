@@ -15,7 +15,9 @@ import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.Main.MainActivity
+import com.example.citycards.dataSource.CacheDataSource
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
@@ -24,7 +26,6 @@ class ChangePasswordFragment : Fragment()  {
     val REQUEST_IMAGE_OPEN = 1
     val REQUEST_STORAGE_PERMISSION=2
     lateinit var imagePickerView: ImageView
-    lateinit var user: User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
@@ -32,7 +33,7 @@ class ChangePasswordFragment : Fragment()  {
                 val transaction = parentFragmentManager.beginTransaction()
 
                 // Créez une instance du fragment que vous souhaitez afficher
-                val fragment = UserFragment.newInstance(user)
+                val fragment = UserFragment.newInstance()
 
                 // Remplacez le contenu du FragmentContainerView par votre fragment
                 transaction.replace(R.id.fragmentContainerView, fragment)
@@ -83,9 +84,9 @@ class ChangePasswordFragment : Fragment()  {
             }
 
             if (textInputMdp.text.toString().isNotEmpty() && isValidPassword(textInputMdp.text.toString()) && textInputConfMdp.text.toString().isNotEmpty() && textInputConfMdp.text.toString()==textInputMdp.text.toString()){
-                user=User(user.id,user.username,user.email,textInputMdp.text.toString(),user.avatar,user.token)
+                var user = User(UserRepository.getUserLogin().id,UserRepository.getUserLogin().username,UserRepository.getUserLogin().email,textInputMdp.text.toString(),UserRepository.getUserLogin().avatar,UserRepository.getUserLogin().token)
                 val returnIntent = Intent();
-                returnIntent.putExtra(MainActivity.CLE_USER, user);
+                UserRepository.setUserLogin(user)
                 activity?.setResult(Activity.RESULT_OK, returnIntent);
                 activity?.onBackPressed()
             }
@@ -102,9 +103,8 @@ class ChangePasswordFragment : Fragment()  {
 
     companion object {
         @JvmStatic
-        fun newInstance(user: User) =
+        fun newInstance() =
             ChangePasswordFragment().apply {
-                this.user = user
             }
     }
     fun isValidPassword(password: String): Boolean {
@@ -124,7 +124,7 @@ class ChangePasswordFragment : Fragment()  {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
             val fullPhotoUri: Uri? = data?.data
             Log.i("REQUEST_IMAGE_OPEN", fullPhotoUri.toString())
-            user = User(user.id,user.username,user.email,user.password,fullPhotoUri.toString(),user.token)
+            UserRepository.setUserLogin(User(UserRepository.getUserLogin().id,UserRepository.getUserLogin().username,UserRepository.getUserLogin().email,UserRepository.getUserLogin().password,fullPhotoUri.toString(),UserRepository.getUserLogin().token))
             Picasso.get()
                 .load(fullPhotoUri) // Précisez le chemin du fichier avec le préfixe "file://"
                 .into(imagePickerView)
