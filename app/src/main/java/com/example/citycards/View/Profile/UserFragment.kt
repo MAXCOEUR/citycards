@@ -166,14 +166,7 @@ class UserFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
             val fullPhotoUri: Uri? = data?.data
             Log.i("REQUEST_IMAGE_OPEN", fullPhotoUri.toString())
-            UserRepository.setUserLogin(User(
-                UserRepository.getUserLogin().id,
-                UserRepository.getUserLogin().username,
-                UserRepository.getUserLogin().email,
-                UserRepository.getUserLogin().password,
-                fullPhotoUri.toString(),
-                UserRepository.getUserLogin().token
-            ))
+            UserRepository.getUserLogin().avatar=fullPhotoUri.toString()
             Picasso.get()
                 .load(fullPhotoUri) // Précisez le chemin du fichier avec le préfixe "file://"
                 .into(imagePickerView)
