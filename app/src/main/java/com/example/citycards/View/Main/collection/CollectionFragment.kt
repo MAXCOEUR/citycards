@@ -26,12 +26,14 @@ import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.Repository.CityRepository
 import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.View.Main.MainActivity
 import com.example.citycards.View.Main.MainViewModel
 import com.example.citycards.View.MapCollection.MapCollection
 import com.example.citycards.adapter.CustomSpinnerAdapter
 import com.example.citycards.adapter.ItemAdapter
+import com.example.citycards.dataBase.DBDataSource
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CollectionFragment : Fragment() {
@@ -205,9 +207,9 @@ class CollectionFragment : Fragment() {
             val city = tabcity.find { it.idUnique==citytmp.idUnique }
             city?.let {
                 tabcity.remove(it)
-                Toast.makeText(context, "+ 50 jetons", Toast.LENGTH_SHORT).show()
-                // currentUser.jeton += card_value * 2
+                Toast.makeText(context, "+ jetons", Toast.LENGTH_SHORT).show()
                 adapter.notifyDataSetChanged()
+                mainViewModel.deleteCity(it)
             }
         }
     }

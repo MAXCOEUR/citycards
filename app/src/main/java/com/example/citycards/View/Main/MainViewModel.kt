@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.citycards.Model.City
 import com.example.citycards.Model.CityList
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
@@ -109,6 +110,19 @@ class MainViewModel : ViewModel() {
         var livedata = MutableLiveData<User>()
         viewModelScope.launch {
             UserRepository.updateUser(user)
+                .catch {
+                    Log.e("erreur update",it.toString())
+                }.collect{
+                    livedata.postValue(it)
+                }
+        }
+        return livedata
+    }
+
+    fun deleteCity(city: City): LiveData<City>{
+        var livedata = MutableLiveData<City>()
+        viewModelScope.launch {
+            CityRepository.deleteCity(city)
                 .catch {
                     Log.e("erreur update",it.toString())
                 }.collect{

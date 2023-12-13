@@ -82,4 +82,9 @@ object CityRepository {
         val response = Response.success(regionList)
         emit(response)
     }
+
+    suspend fun deleteCity(City: City): Flow<City> = flow {
+        DBDataSource.deleteCity(City)
+        emit(City)
+    }
 }
