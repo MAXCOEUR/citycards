@@ -9,7 +9,13 @@ object DBDataSource{
     suspend fun insertUser(user: User) {
         CityListDataBase.getInstance().UserDAO().insertUser(user)
     }
+    suspend fun getAllCities(user: Int):List<City>{
+        return CityListDataBase.getInstance().CityDAO().getAllOfCities(user)
+    }
 
+    suspend fun getAllFavoriteCities(user: Int):List<City>{
+        return CityListDataBase.getInstance().CityDAO().getAllOfFavoriteCitites(user)
+    }
     suspend fun getUser(mail: String) :User {
         return CityListDataBase.getInstance().UserDAO().getUserFromMail(mail);
     }

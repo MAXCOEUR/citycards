@@ -16,6 +16,7 @@ import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
+import com.example.citycards.Repository.CityRepository
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.Main.MainViewModel
 import kotlin.random.Random
@@ -97,7 +98,7 @@ class HomeFragment : Fragment() {
 
     fun GetOneCity(){
             user.token=user.token-10
-            var rang= Random.nextInt(1,100)
+            var rang= Random.nextInt(1,101)
             when {
                 rang <= 80 -> rang= 5
                 rang <= 90 -> rang=4
@@ -114,7 +115,7 @@ class HomeFragment : Fragment() {
             val cityResponseCreate = mainViewModel.getCitysRandom(1,offset,plage.first,plage.second)
             cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
                 cityListe.body()?.let {
-                    Log.d("city", it.toString() )
+
                 }
             }
     }
