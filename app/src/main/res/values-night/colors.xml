@@ -31,4 +31,6 @@
     <color name="surfaceTint">#B1C5FF</color>
     <color name="outlineVariant">#44464F</color>
     <color name="scrim">#000000</color>
+    <color name="surfaceDim">#121316</color>
+
 </resources>

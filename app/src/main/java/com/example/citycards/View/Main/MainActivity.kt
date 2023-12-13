@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val jetons = findViewById<TextView>(R.id.tv_nbrJeton)
+        jetons.text = UserRepository.getUserLogin().token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
         val fragmentManager = supportFragmentManager
 
@@ -111,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btToken.setOnClickListener{
+            val user = UserRepository.getUserLogin()
             val lastClaim = user.lastClaimToken
             val cooldownClaim = TimeUnit.DAYS.toMillis(1) // 1 jour de délai entre la récupération des jetons
             if (Date().time - lastClaim  > cooldownClaim){
@@ -118,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"+ 30 Jetons !",Toast.LENGTH_SHORT).show()
                 user.lastClaimToken = Date().time
                 jetons.text = user.token.toString()
+                (homeFragment as HomeFragment).updateToken()
                 mainViewModel.updateUser(user)
             }
 

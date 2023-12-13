@@ -12,8 +12,10 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,15 +29,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/nb_jeton"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/nombre_de_jetons"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/taille8"
-                    android:text="Nombre de jetons"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/back_rounded_search_bar"
+                    android:backgroundTint="@color/surfaceDim"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/nb_jeton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre de jetons"
+                        android:textAlignment="center"
+                        android:textSize="40sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="@dimen/taille8"
+                        android:src="@drawable/img_coin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/nb_jeton"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageButton
                     android:id="@+id/image_rond"
@@ -46,12 +70,14 @@
                     android:src="@drawable/back_rond_ouverture_x1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nb_jeton" />
+                    app:layout_constraintTop_toBottomOf="@+id/nombre_de_jetons" />
 
                 <ImageView
                     android:id="@+id/image_carte_1"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+
+                    android:layout_marginTop="8dp"
                     android:scaleType="centerInside"
                     android:scaleX="0.65"
                     android:scaleY="0.65"
@@ -59,7 +85,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/image_rond"
                     app:layout_constraintEnd_toEndOf="@+id/image_rond"
                     app:layout_constraintStart_toStartOf="@+id/image_rond"
-                    app:layout_constraintTop_toBottomOf="@+id/nb_jeton" />
+                    app:layout_constraintTop_toTopOf="@+id/image_rond" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"

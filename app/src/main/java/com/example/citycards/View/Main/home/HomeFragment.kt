@@ -10,8 +10,11 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
 
 class HomeFragment : Fragment() {
+
+    lateinit var nb_jeton:TextView;
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,8 +23,9 @@ class HomeFragment : Fragment() {
     ): View {
         return inflater.inflate(R.layout.fragment_home, container, false)
 
-
-
+    }
+    fun updateToken(){
+        nb_jeton.text = UserRepository.getUserLogin().token.toString()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +37,8 @@ class HomeFragment : Fragment() {
             TitreActivity.text="Ouverture"
         }
         val switch = view.findViewById<Switch>(R.id.switch1)
-        val nb_jeton = view.findViewById<TextView>(R.id.nb_jeton)
+        nb_jeton = view.findViewById(R.id.nb_jeton)
+        updateToken()
         val image_rond = view.findViewById<ImageButton>(R.id.image_rond);
         val image_carte = view.findViewById<ImageView>(R.id.image_carte_1);
         val texte_carte = view.findViewById<TextView>(R.id.tirer_carte);
@@ -57,4 +62,6 @@ class HomeFragment : Fragment() {
             HomeFragment().apply {
             }
     }
+
+
 }

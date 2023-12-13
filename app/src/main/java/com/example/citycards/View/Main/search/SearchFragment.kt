@@ -108,6 +108,7 @@ class SearchFragment : Fragment() {
     }
     private fun searchTimerTick() {
         // Faire la recherche ici
+        query.offset = 0
         askAPI()
     }
     fun askAPI(){
