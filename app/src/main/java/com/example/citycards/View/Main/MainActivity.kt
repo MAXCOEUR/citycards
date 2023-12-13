@@ -27,6 +27,7 @@ import com.example.citycards.View.Profile.ProfileActivity
 import com.example.citycards.dataBase.CityListDataBase
 import com.example.citycards.dataBase.DBDataSource
 import com.example.citycards.dataSource.CacheDataSource
+import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
@@ -129,6 +130,12 @@ class MainActivity : AppCompatActivity() {
                 jetons.text = user.token.toString()
                 (homeFragment as HomeFragment).updateToken()
                 mainViewModel.updateUser(user)
+            }
+            else{
+                var prochainClaim = cooldownClaim - ((Date().time - lastClaim) % cooldownClaim)
+                val sdf = SimpleDateFormat("HH:mm:ss")
+                val date =sdf.format(prochainClaim)
+                Toast.makeText(this, "Prochain tirage possible dans $date", Toast.LENGTH_SHORT).show()
             }
 
         }
