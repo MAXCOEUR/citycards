@@ -17,6 +17,14 @@
         android:theme="@style/Theme.CityCards"
         tools:targetApi="31">
         <activity
+            android:name=".View.TirageCard.TirageCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.TirageCard.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.CityCards" />
+        <activity
             android:name=".View.CityDetail.CityDetail"
             android:exported="false" />
         <!--
@@ -37,9 +45,7 @@
         <activity
             android:name=".View.MapCollection.MapCollection"
             android:exported="true"
-            android:label="@string/title_activity_map_collection" >
-
-        </activity>
+            android:label="@string/title_activity_map_collection" />
         <activity
             android:name=".View.Login.LoginActivity"
             android:exported="true">

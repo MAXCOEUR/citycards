@@ -1,5 +1,6 @@
 package com.example.citycards.View.Main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,22 +11,23 @@ import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
-import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.Main.MainViewModel
+import com.example.citycards.View.TirageCard.TirageCardActivity
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 class HomeFragment : Fragment() {
     var user = UserRepository.getUserLogin();
     val mainViewModel by activityViewModels<MainViewModel>()
     val query = QueryDataCity()
     lateinit var nb_jeton:TextView
+    lateinit var switch:Switch
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,34 +48,46 @@ class HomeFragment : Fragment() {
         if (TitreActivity != null) {
             TitreActivity.text="Ouverture"
         }
-        val switch = view.findViewById<Switch>(R.id.switch1)
+        switch = view.findViewById<Switch>(R.id.switch1)
+
         nb_jeton = view.findViewById(R.id.nb_jeton)
         updateToken()
-        val image_rond = view.findViewById<ImageButton>(R.id.image_rond);
-        val image_carte = view.findViewById<ImageView>(R.id.image_carte_1);
-        val texte_carte = view.findViewById<TextView>(R.id.tirer_carte);
+
+        val parentLayout = view.findViewById<ConstraintLayout>(R.id.parent_bt)
+        val btOpenLayout = view.findViewById<ConstraintLayout>(R.id.bt_open)
+        val bouton = btOpenLayout.findViewById<ImageButton>(R.id.image_rond)
+        initClick(bouton);
+
+
+
         switch.setOnClickListener {
+            parentLayout.removeView(btOpenLayout)
             if(switch.isChecked) {
-                image_rond.setImageResource(R.drawable.back_rond_ouverture_x10);
-                texte_carte.text="Tirer 10 cartes";
-                image_carte.setImageResource(R.drawable.img_multiple_card);
+                val btOpenX10 = LayoutInflater.from(requireContext()).inflate(R.layout.bouton_opening_x10, null)
+                parentLayout.addView(btOpenX10, btOpenLayout.layoutParams)
+                val bouton = btOpenX10.findViewById<ImageButton>(R.id.image_rond)
+                initClick(bouton);
             }
             else{
-                image_rond.setImageResource(R.drawable.back_rond_ouverture_x1);
-                texte_carte.text="Tirer 1 carte";
-                image_carte.setImageResource(R.drawable.img_logo);
+                val btOpenX1 = LayoutInflater.from(requireContext()).inflate(R.layout.bouton_opening_x1, null)
+                parentLayout.addView(btOpenX1, btOpenLayout.layoutParams)
+                val bouton = btOpenX1.findViewById<ImageButton>(R.id.image_rond)
+                initClick(bouton);
             }
         }
-        image_rond.setOnClickListener{
+
+    }
+
+    private fun initClick(view: View) {
+        view.setOnClickListener{
             if (switch.isChecked){
                 if(user.token<100){
                     Toast.makeText(this.context,"Il faut au minimum 100 jetons", Toast.LENGTH_LONG).show()
                 }
                 else{
-                    for (i in 1..10){
-                        GetOneCity()
-                        Thread.sleep(5_000)  // wait for 1 second
-                    }
+                    val intent = Intent(requireContext(), TirageCardActivity::class.java)
+                    intent.putExtra(TirageCardActivity.CLE_NBR_TIRAGE, 10)
+                    startActivity(intent)
                 }
             }
             else{
@@ -81,41 +95,19 @@ class HomeFragment : Fragment() {
                     Toast.makeText(this.context,"Il faut au minimum 10 jetons", Toast.LENGTH_LONG).show()
                 }
                 else {
-                    GetOneCity()
+                    val intent = Intent(requireContext(), TirageCardActivity::class.java)
+                    intent.putExtra(TirageCardActivity.CLE_NBR_TIRAGE, 1)
+                    startActivity(intent)
                     //Afficher page
                 }
             }
         }
     }
+
     companion object {
         @JvmStatic
         fun newInstance(param1: String?=null, param2: String?=null) =
             HomeFragment().apply {
-            }
-    }
-
-
-    fun GetOneCity(){
-            user.token=user.token-10
-            var rang= Random.nextInt(1,100)
-            when {
-                rang <= 80 -> rang= 5
-                rang <= 90 -> rang=4
-                rang <= 96 -> rang=3
-                rang <= 99 -> rang=2
-                rang <= 100 -> rang=1
-                else -> {
-                    rang=6
-                }
-            }
-
-            var plage= City.getPlagePop(rang)
-            var offset = City.getOffset(rang)
-            val cityResponseCreate = mainViewModel.getCitysRandom(1,offset,plage.first,plage.second)
-            cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
-                cityListe.body()?.let {
-                    Log.d("city", it.toString() )
-                }
             }
     }
 }
