@@ -1,6 +1,7 @@
 package com.example.citycards.View.Main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,22 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.example.citycards.Model.City
+import com.example.citycards.Model.QueryDataCity
+import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
+import com.example.citycards.View.Main.MainViewModel
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class HomeFragment : Fragment() {
-
-    lateinit var nb_jeton:TextView;
-
+    var user = UserRepository.getUserLogin();
+    val mainViewModel by activityViewModels<MainViewModel>()
+    val query = QueryDataCity()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +62,28 @@ class HomeFragment : Fragment() {
                 texte_carte.text="Tirer 1 carte";
                 image_carte.setImageResource(R.drawable.img_logo);
             }
-
+        }
+        image_rond.setOnClickListener{
+            if (switch.isChecked){
+                if(user.token<100){
+                    Toast.makeText(this.context,"Il faut au minimum 100 jetons", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    for (i in 1..10){
+                        GetOneCity()
+                        Thread.sleep(5_000)  // wait for 1 second
+                    }
+                }
+            }
+            else{
+                if(user.token<10){
+                    Toast.makeText(this.context,"Il faut au minimum 10 jetons", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    GetOneCity()
+                    //Afficher page
+                }
+            }
         }
     }
     companion object {
@@ -64,4 +94,27 @@ class HomeFragment : Fragment() {
     }
 
 
+    fun GetOneCity(){
+            user.token=user.token-10
+            var rang= Random.nextInt(1,100)
+            when {
+                rang <= 80 -> rang= 5
+                rang <= 90 -> rang=4
+                rang <= 96 -> rang=3
+                rang <= 99 -> rang=2
+                rang <= 100 -> rang=1
+                else -> {
+                    rang=6
+                }
+            }
+
+            var plage= City.getPlagePop(rang)
+            var offset = City.getOffset(rang)
+            val cityResponseCreate = mainViewModel.getCitysRandom(1,offset,plage.first,plage.second)
+            cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
+                cityListe.body()?.let {
+                    Log.d("city", it.toString() )
+                }
+            }
+    }
 }

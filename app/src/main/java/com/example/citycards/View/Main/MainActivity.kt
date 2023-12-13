@@ -8,6 +8,7 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Switch
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ import com.example.citycards.View.Main.search.SearchFragment
 import com.example.citycards.View.Profile.ProfileActivity
 import com.example.citycards.dataBase.CityListDataBase
 import com.example.citycards.dataBase.DBDataSource
+import com.example.citycards.dataSource.CacheDataSource
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
@@ -46,10 +48,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        UserRepository.getUserLogin().token=100000000;
+
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
+        val btnTirage = findViewById<ImageButton>(R.id.image_rond)
+        val switchTirage = findViewById<Switch>(R.id.switch1)
         val jetons = findViewById<TextView>(R.id.tv_nbrJeton)
         jetons.text = UserRepository.getUserLogin().token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
+
         val fragmentManager = supportFragmentManager
 
         // Commencez la transaction

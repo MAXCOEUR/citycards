@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.util.Date
+import kotlin.random.Random
 
 data class CityList(
     val currentOffset: Int,
@@ -49,14 +50,29 @@ data class City(
         }
     }
     companion object {
-        fun getPlagePop(nbrRang:Int): Pair<Int, Int>? {
+        fun getPlagePop(nbrRang:Int): Pair<Int, Int> {
             return when {
                 nbrRang == 5 -> Pair(0, 50000)
                 nbrRang == 4 -> Pair(50000, 100000)
                 nbrRang == 3 -> Pair(100000, 180000)
                 nbrRang == 2 -> Pair(180000, 500000)
                 nbrRang == 1 -> Pair(500000, Int.MAX_VALUE)
-                else -> {null}
+                else -> {
+                    Pair(0, Int.MAX_VALUE)
+                }
+            }
+        }
+
+        fun getOffset(nbrRang: Int): Int{
+            return when {
+                nbrRang == 5 -> Random.nextInt(1,520)
+                nbrRang == 4 ->  Random.nextInt(1,100)
+                nbrRang == 3 ->  Random.nextInt(1,37)
+                nbrRang == 2 ->  Random.nextInt(1,14)
+                nbrRang == 1 ->  Random.nextInt(1,4)
+                else -> {
+                    0
+                }
             }
         }
     }
