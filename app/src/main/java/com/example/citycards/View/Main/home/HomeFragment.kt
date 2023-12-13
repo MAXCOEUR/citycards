@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
     var user = UserRepository.getUserLogin();
     val mainViewModel by activityViewModels<MainViewModel>()
     val query = QueryDataCity()
+    lateinit var nb_jeton:TextView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
