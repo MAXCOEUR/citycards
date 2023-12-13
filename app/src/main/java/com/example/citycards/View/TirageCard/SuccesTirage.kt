@@ -1,5 +1,6 @@
 package com.example.citycards.View.TirageCard
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,6 +27,7 @@ class SuccesTirage : Fragment() {
     lateinit var tvRegionCity:TextView
     lateinit var imageButtonStar:ImageButton
     lateinit var ligneView: View
+    lateinit var bt_replay:Button
 
     var city:City?=null
 
@@ -45,7 +47,6 @@ class SuccesTirage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.e("TAG", "test" )
         cardCity = view.findViewById(R.id.card_city)
         tvNameCity = cardCity.findViewById(R.id.item_title)
         tvRegionCity = cardCity.findViewById(R.id.item_region)
@@ -53,8 +54,9 @@ class SuccesTirage : Fragment() {
         ligneView = cardCity.findViewById(R.id.separation_line)
         imageButtonStar.visibility = View.GONE
 
-        val bt_replay = view.findViewById<Button>(R.id.bt_replay)
+        bt_replay = view.findViewById<Button>(R.id.bt_replay)
         bt_replay.setOnClickListener {
+            updateBtReplay()
             (requireActivity() as TirageCardActivity).getOneCity()
         }
 
@@ -63,7 +65,19 @@ class SuccesTirage : Fragment() {
             requireActivity().onBackPressed()
         }
 
+        updateBtReplay()
         updateCity()
+    }
+
+    private fun updateBtReplay(){
+        if((requireActivity() as TirageCardActivity).compteurTirage==0){
+            bt_replay.text="rejouer"
+            (requireActivity() as TirageCardActivity).resetCompteur()
+        }  else{
+            val secondaryColor = ContextCompat.getColor(requireContext(), R.color.secondary)
+            bt_replay.backgroundTintList = ColorStateList.valueOf(secondaryColor)
+            bt_replay.text="suivant"
+        }
     }
 
     private fun updateCity(){

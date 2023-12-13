@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var homeFragment :Fragment
     lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
+    val user = UserRepository.getUserLogin()
+
+    lateinit var jetons:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val btnTirage = findViewById<ImageButton>(R.id.image_rond)
         val switchTirage = findViewById<Switch>(R.id.switch1)
-        val jetons = findViewById<TextView>(R.id.tv_nbrJeton)
+        jetons = findViewById<TextView>(R.id.tv_nbrJeton)
         jetons.text = UserRepository.getUserLogin().token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
 
@@ -120,15 +123,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         btToken.setOnClickListener{
-            val user = UserRepository.getUserLogin()
             val lastClaim = user.lastClaimToken
             val cooldownClaim = TimeUnit.DAYS.toMillis(1) // 1 jour de délai entre la récupération des jetons
             if (Date().time - lastClaim  > cooldownClaim){
                 user.token += 30
                 Toast.makeText(this,"+ 30 Jetons !",Toast.LENGTH_SHORT).show()
                 user.lastClaimToken = Date().time
-                jetons.text = user.token.toString()
-                (homeFragment as HomeFragment).updateToken()
+                updateToken()
                 mainViewModel.updateUser(user)
             }
             else{
@@ -141,6 +142,11 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    fun updateToken(){
+        jetons.text = user.token.toString()
+        (homeFragment as HomeFragment).updateToken()
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==CLE_USER_RETURN){
@@ -150,6 +156,11 @@ class MainActivity : AppCompatActivity() {
         else if(requestCode== CityDetail.CLE_CITY_RETURN){
             collectionFragment.onActivityResult(requestCode,resultCode,data)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateToken()
     }
 }
 
