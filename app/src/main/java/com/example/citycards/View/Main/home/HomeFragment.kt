@@ -1,6 +1,7 @@
 package com.example.citycards.View.Main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,18 +58,24 @@ class HomeFragment : Fragment() {
             }
         }
         image_rond.setOnClickListener{
-            if(user.token<10){
-                Toast.makeText(this.context,"Il faut au minimum 10 jetons", Toast.LENGTH_LONG).show()
+            if (switch.isChecked){
+                if(user.token<100){
+                    Toast.makeText(this.context,"Il faut au minimum 100 jetons", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    for (i in 1..10){
+                        GetOneCity()
+                        Thread.sleep(5_000)  // wait for 1 second
+                    }
+                }
             }
             else{
-                user.token=user.token-10
-                var rang= Random.nextInt(1,6)
-                var plage= City.getPlagePop(rang)
-                val cityResponseCreate = mainViewModel.getCitysRandom(offset=1,plage.first,plage.second)
-                cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
-                    cityListe.body()?.let {
-
-                    }
+                if(user.token<10){
+                    Toast.makeText(this.context,"Il faut au minimum 10 jetons", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    GetOneCity()
+                    //Afficher page
                 }
             }
         }
@@ -77,6 +84,29 @@ class HomeFragment : Fragment() {
         @JvmStatic
         fun newInstance(param1: String?=null, param2: String?=null) =
             HomeFragment().apply {
+            }
+    }
+    fun GetOneCity(){
+            user.token=user.token-10
+            var rang= Random.nextInt(1,100)
+            when {
+                rang <= 80 -> rang= 5
+                rang <= 90 -> rang=4
+                rang <= 96 -> rang=3
+                rang <= 99 -> rang=2
+                rang <= 100 -> rang=1
+                else -> {
+                    rang=6
+                }
+            }
+
+            var plage= City.getPlagePop(rang)
+            var offset = City.getOffset(rang)
+            val cityResponseCreate = mainViewModel.getCitysRandom(1,offset,plage.first,plage.second)
+            cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
+                cityListe.body()?.let {
+                    Log.d("city", it.toString() )
+                }
             }
     }
 }

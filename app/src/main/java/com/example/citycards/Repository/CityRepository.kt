@@ -23,10 +23,10 @@ object CityRepository {
         emit(response)
     }
 
-    suspend fun getCityRandom(offet: Int, minPop: Int, maxPop: Int): Flow<Response<CityList>> =
+    suspend fun getCityRandom(limit: Int, offet: Int, minPop: Int, maxPop: Int): Flow<Response<CityList>> =
         flow {
             val Api = ApiClient.getApiService
-            val response = Api.getCities(offset = offet, minPop = minPop, maxPop = maxPop)
+            val response = Api.getCities(limiteur= limit,offset = offet, minPop = minPop, maxPop = maxPop)
             emit(response)
         }
 

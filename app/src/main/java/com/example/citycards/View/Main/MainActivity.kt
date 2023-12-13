@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.Switch
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -42,8 +43,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        UserRepository.getUserLogin().token=100000000;
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
+        val btnTirage = findViewById<ImageButton>(R.id.image_rond)
+        val switchTirage = findViewById<Switch>(R.id.switch1)
 
 
         val fragmentManager = supportFragmentManager
@@ -106,8 +110,6 @@ class MainActivity : AppCompatActivity() {
             val changePage = Intent(this, ProfileActivity::class.java)
             startActivityForResult(changePage,CLE_USER_RETURN)
         }
-
-
 
 
 
