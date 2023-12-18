@@ -28,6 +28,7 @@ interface CityDAO {
     @Query("Select distinct(region) from City where owner=:idUser")
     suspend fun getAllRegion(idUser: Int): List<String>
 
+    //Faire un select unique
 
 
 
