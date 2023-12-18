@@ -91,21 +91,6 @@ class MainViewModel : ViewModel() {
         return livedata
     }
 
-
-    fun getCitysRandom(limit:Int, offset:Int,minPop:Int, maxPop:Int): LiveData<Response<CityList>> {
-        var livedata = MutableLiveData<Response<CityList>>()
-        viewModelScope.launch {
-            CityRepository.getCityRandom(limit, offset,minPop,maxPop)
-                .catch {
-                    Log.e("erreur",it.toString())
-                }
-                .collect{
-                    livedata.postValue(it)
-                }
-            }
-        return livedata
-    }
-
     fun updateUser(user:User): LiveData<User>{
         var livedata = MutableLiveData<User>()
         viewModelScope.launch {

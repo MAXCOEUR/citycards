@@ -59,33 +59,29 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/nb_jeton"
                         app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageButton
-                    android:id="@+id/image_rond"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/parent_bt"
                     android:layout_width="0dp"
-                    android:layout_height="339dp"
-                    android:backgroundTint="#00FFFFFF"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/back_rond_ouverture_x1"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/surfaceDim"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nombre_de_jetons" />
+                    app:layout_constraintTop_toBottomOf="@+id/nombre_de_jetons">
+                    <include
+                        android:id="@+id/bt_open"
+                        layout="@layout/bouton_opening_x1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/taille8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/image_carte_1"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerInside"
-                    android:scaleX="0.65"
-                    android:scaleY="0.65"
-                    android:src="@drawable/img_logo"
-                    app:layout_constraintBottom_toBottomOf="@+id/image_rond"
-                    app:layout_constraintEnd_toEndOf="@+id/image_rond"
-                    app:layout_constraintStart_toStartOf="@+id/image_rond"
-                    app:layout_constraintTop_toTopOf="@+id/image_rond" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
@@ -93,12 +89,13 @@
                     android:layout_marginTop="@dimen/taille8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_rond">
+                    app:layout_constraintTop_toBottomOf="@+id/parent_bt">
 
                     <Switch
                         android:id="@+id/switch1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -125,16 +122,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tirer_carte"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:text="TextView"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/image_rond"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

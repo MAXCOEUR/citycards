@@ -1,5 +1,5 @@
-
 <resources>
+
     <style name="Theme.CityCards" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
@@ -27,5 +27,10 @@
         <item name="colorSurfaceInverse">@color/inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/inversePrimary</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CityCards" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>
