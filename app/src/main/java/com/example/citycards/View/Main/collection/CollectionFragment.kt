@@ -18,6 +18,7 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -75,35 +76,31 @@ class CollectionFragment : Fragment() {
         adapter = ItemAdapter(requireContext(), tabcity)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = adapter
-        if (tabcity.size == 0) {
-            askAPI()
-        }
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    query.offset += 10
-                    askAPI()
-                }
-            }
-        })
 
         dropdown_region.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedRang = dropdown_rang.selectedItem.toString()
-                val selectedRegion = dropdown_region.selectedItem.toString()
-                applyFilter(selectedRang, selectedRegion)
+                query.region=dropdown_region.selectedItem.toString();
+                askAPI()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Faites quelque chose si rien n'est sélectionné
+            }
+        }
+        dropdown_rang.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                query.rang= Math.abs(dropdown_rang.selectedItemPosition-dropdown_rang.adapter.count)
+                askAPI()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // Faites quelque chose si rien n'est sélectionné
             }
         }
         btn_favori.setOnClickListener {
-            tabcity.clear()
             favori_checked = !favori_checked
             if (favori_checked) {
                 btn_favori.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary))
                 btn_favori.setTextColor(ContextCompat.getColor(requireContext(), R.color.onPrimary))
+
             }
             else {
                 btn_favori.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.background))
@@ -112,6 +109,7 @@ class CollectionFragment : Fragment() {
             askAPI()
         }
 
+
         recherche_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -119,7 +117,6 @@ class CollectionFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val searchtext = s.toString().lowercase()
                 query.namePrefix=searchtext
-                tabcity.clear()
                 askAPI()
                 adapter.notifyDataSetChanged()
                 }
@@ -138,6 +135,7 @@ class CollectionFragment : Fragment() {
             val cityResponseCreate = mainViewModel.getCitysCollection_favori(query)
             cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
                 cityListe.body()?.let {
+                    tabcity.clear()
                     tabcity.addAll(it.data)
                     adapter.notifyDataSetChanged()
                 }
@@ -147,6 +145,7 @@ class CollectionFragment : Fragment() {
             val cityResponseCreate = mainViewModel.getCitysCollection(query)
             cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
                 cityListe.body()?.let {
+                    tabcity.clear()
                     tabcity.addAll(it.data)
                     adapter.notifyDataSetChanged()
                 }
@@ -158,9 +157,6 @@ class CollectionFragment : Fragment() {
         var regions = mainViewModel.getRegion()
         regions.observe(viewLifecycleOwner){ regions ->
             regions.body()?.let{
-                //val region_adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it)
-
-                //region_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 dropdown_region.adapter = CustomSpinnerAdapter(requireContext(), it)
             }
         }
@@ -170,18 +166,10 @@ class CollectionFragment : Fragment() {
         var rangs = mainViewModel.getRang()
         rangs.observe(viewLifecycleOwner){ rangs ->
             rangs.body()?.let{
-                //val rang_adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it)
-                //rang_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 dropdown_rang.adapter =  CustomSpinnerAdapter(requireContext(), it)
             }
 
         }
-    }
-
-    fun applyFilter(selectedRang: String, selectedRegion: String) {
-        query.region = selectedRegion
-        tabcity.clear()
-        askAPI()
     }
 
     companion object {

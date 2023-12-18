@@ -9,12 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citycards.Model.City
 import com.example.citycards.R
+import com.example.citycards.Repository.CityRepository
 import com.example.citycards.View.CityDetail.CityDetail
+import com.example.citycards.View.Main.MainViewModel
+
 
 class ItemAdapter(
     private val context: Context,
@@ -82,13 +86,6 @@ class ItemAdapter(
                 holder.textViewRegion.setTextColor(ContextCompat.getColorStateList(context,R.color.onTertiary))
                 holder.textViewTitle.setTextColor(ContextCompat.getColorStateList(context,R.color.onTertiary))
                 holder.ligneView.setBackgroundColor(ContextCompat.getColor(context,R.color.onTertiary))
-            }
-        }
-        holder.favoriButton.setOnClickListener{
-            dataset[position].favori?.let {
-                dataset[position].favori= !it
-                //set favori bd
-                notifyDataSetChanged()
             }
         }
         holder.constraintBack.setOnClickListener{

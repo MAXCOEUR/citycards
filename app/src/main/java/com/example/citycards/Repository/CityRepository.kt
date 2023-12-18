@@ -47,6 +47,11 @@ object CityRepository {
                 filteredCity = filteredCity.filter { it.region == dataQuery.region }
             }
         }
+        if (dataQuery.rang!=null && dataQuery.rang != 6) {
+            if (filteredCity != null) {
+                filteredCity = filteredCity.filter { it.getRang() == dataQuery.rang }
+            }
+        }
         val response =
             Response.success(filteredCity?.let { CityList(data = it, currentOffset = 0, totalCount = 0) })
         emit(response)
@@ -77,6 +82,12 @@ object CityRepository {
         }
         val response = Response.success(regionList)
         emit(response)
+    }
+
+    suspend fun setFavori(City: City): Flow<City> = flow {
+        var user= CacheDataSource.getInstance().getUserLogin()
+        val response = Response.success(DBDataSource.setFavori(City))
+        emit(City)
     }
 
     suspend fun getRank(): Flow<Response<List<String>>> = flow {
