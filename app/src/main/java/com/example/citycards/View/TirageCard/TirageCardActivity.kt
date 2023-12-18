@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import com.example.citycards.Model.City
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
+import com.example.citycards.dataBase.CityListDataBase
+import java.util.Date
 import kotlin.random.Random
 
 class TirageCardActivity : AppCompatActivity() {
@@ -33,7 +35,6 @@ class TirageCardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tirage_card)
-
 
         nbrTirage = intent.getIntExtra(CLE_NBR_TIRAGE, 0)
         compteurTirage=nbrTirage
@@ -74,7 +75,7 @@ class TirageCardActivity : AppCompatActivity() {
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_tirage, transitionFragment)
 
-        var rang= Random.nextInt(1,100)
+        var rang= Random.nextInt(1,101)
 
         if(nbrTirage==1){
             user.token=user.token-10
@@ -91,14 +92,12 @@ class TirageCardActivity : AppCompatActivity() {
         }
         else if (nbrTirage==10){
             if(compteurTirage==10){
-                user.token=user.token-90
+                user.token=user.token-100
             }
             else if(compteurTirage==1){
                 when {
-                    rang <= 80 -> rang= 5
-                    rang <= 90 -> rang=4
-                    rang <= 96 -> rang=3
-                    rang <= 99 -> rang=2
+                    rang <= 80 -> rang=3
+                    rang <= 95 -> rang=2
                     rang <= 100 -> rang=1
                     else -> {
                         rang=6
@@ -129,6 +128,11 @@ class TirageCardActivity : AppCompatActivity() {
             cityListe.body()?.let {
                 Log.d("city", it.toString() )
                 setCity(it.data[0]);
+                if(user.id!=null){
+                    it.data[0].owner=user.id!!
+                    it.data[0].dateObtention= Date().time
+                }
+                tirageCardActivityViewModel.addCity(it.data[0])
             }
         }
     }
