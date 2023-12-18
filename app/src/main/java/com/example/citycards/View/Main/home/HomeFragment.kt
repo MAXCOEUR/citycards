@@ -2,6 +2,7 @@ package com.example.citycards.View.Main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ import com.example.citycards.View.TirageCard.TirageCardActivity
 
 
 class HomeFragment : Fragment() {
-    var user = UserRepository.getUserLogin();
+    var user = UserRepository.getUserLogin()
     val mainViewModel by activityViewModels<MainViewModel>()
     val query = QueryDataCity()
     lateinit var nb_jeton:TextView
@@ -35,7 +36,7 @@ class HomeFragment : Fragment() {
 
     }
     fun updateToken(){
-        nb_jeton.text = UserRepository.getUserLogin().token.toString()
+        nb_jeton.text = user.token.toString()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class HomeFragment : Fragment() {
         if (TitreActivity != null) {
             TitreActivity.text="Ouverture"
         }
-        switch = view.findViewById<Switch>(R.id.switch1)
+        switch = view.findViewById(R.id.switch1)
 
         nb_jeton = view.findViewById(R.id.nb_jeton)
         updateToken()
@@ -105,5 +106,11 @@ class HomeFragment : Fragment() {
         fun newInstance(param1: String?=null, param2: String?=null) =
             HomeFragment().apply {
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        user = UserRepository.getUserLogin()
+        updateToken()
     }
 }

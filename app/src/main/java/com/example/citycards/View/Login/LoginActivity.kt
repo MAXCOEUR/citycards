@@ -25,9 +25,6 @@ class LoginActivity : AppCompatActivity() {
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_login)
 
-        //On instancie la base de données
-        CityListDataBase.initDatabase(this)
-
         val buttonSeConnecter = findViewById<Button>(R.id.bt_SeConnecter)
         val buttonCreationCompte = findViewById<Button>(R.id.bt_CreationCompte)
 
@@ -43,8 +40,7 @@ class LoginActivity : AppCompatActivity() {
         userResponseCreate.observe(this) { user->
             if(user.email!="" && user.username!=""){
                 UserRepository.setUserLogin(user)
-                val changePage = Intent(this, MainActivity::class.java)
-                startActivity(changePage)
+                finish()
             }
             else{
                 Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
@@ -73,8 +69,7 @@ class LoginActivity : AppCompatActivity() {
                 userResponseCreate.observe(this) { user->
                     if(user.email!="" && user.username!=""){
                         UserRepository.setUserLogin(user)
-                        val changePage = Intent(this, MainActivity::class.java)
-                        startActivity(changePage)
+                        finish()
                     }
                     else{
                         Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()

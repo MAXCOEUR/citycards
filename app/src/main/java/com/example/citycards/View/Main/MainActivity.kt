@@ -19,6 +19,7 @@ import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.CityDetail.CityDetail
+import com.example.citycards.View.Login.LoginActivity
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var homeFragment :Fragment
     lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
-    val user = UserRepository.getUserLogin()
+    var user = UserRepository.getUserLogin()
 
     lateinit var jetons:TextView
 
@@ -52,12 +53,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        UserRepository.getUserLogin().token=100000000;
+        //On instancie la base de données
+        CityListDataBase.initDatabase(this)
+
+        if (UserRepository.getUserLogin().email == ""){
+            val changePage = Intent(this, LoginActivity::class.java)
+            startActivity(changePage)
+        }
+
+
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val btnTirage = findViewById<ImageButton>(R.id.image_rond)
         val switchTirage = findViewById<Switch>(R.id.switch1)
-        jetons = findViewById<TextView>(R.id.tv_nbrJeton)
+        jetons = findViewById(R.id.tv_nbrJeton)
         jetons.text = UserRepository.getUserLogin().token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
 
@@ -129,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                 user.token += 30
                 Toast.makeText(this,"+ 30 Jetons !",Toast.LENGTH_SHORT).show()
                 user.lastClaimToken = Date().time
-                updateToken()
+
                 mainViewModel.updateUser(user)
             }
             else{
@@ -138,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                 val date =sdf.format(prochainClaim)
                 Toast.makeText(this, "Prochain tirage possible dans $date", Toast.LENGTH_SHORT).show()
             }
-
+            updateToken()
         }
 
     }
@@ -160,7 +169,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        user=UserRepository.getUserLogin()
         updateToken()
+
     }
 }
 
