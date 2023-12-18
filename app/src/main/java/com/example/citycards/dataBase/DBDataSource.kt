@@ -13,6 +13,10 @@ object DBDataSource{
         return CityListDataBase.getInstance().CityDAO().getAllOfCities(user)
     }
 
+    suspend fun setFavori(City : City){
+        return CityListDataBase.getInstance().CityDAO().updateCity(City)
+    }
+
     suspend fun getAllFavoriteCities(user: Int):List<City>{
         return CityListDataBase.getInstance().CityDAO().getAllOfFavoriteCitites(user)
     }

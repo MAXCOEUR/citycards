@@ -61,6 +61,20 @@ class MainViewModel : ViewModel() {
         return livedata
     }
 
+    fun setFavori(City: City): LiveData<City> {
+        var livedata = MutableLiveData<City>()
+        viewModelScope.launch {
+            CityRepository.setFavori(City)
+                .catch {
+                    Log.e("erreur",it.toString())
+                }
+                .collect{
+                    livedata.postValue(it)
+                }
+        }
+        return livedata
+    }
+
     fun getRegion(): LiveData<Response<List<String>>> {
         var livedata = MutableLiveData<Response<List<String>>>()
         viewModelScope.launch {
