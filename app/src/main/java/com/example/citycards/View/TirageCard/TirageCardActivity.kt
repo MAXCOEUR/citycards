@@ -76,7 +76,7 @@ class TirageCardActivity : AppCompatActivity() {
         val transitionFragment = TransitionTirage.newInstance()
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_tirage, transitionFragment)
-        transaction.addToBackStack(null) // Ajouter la transaction à la pile
+        transaction.addToBackStack(null)
         transaction.commit()
 
 
@@ -133,7 +133,7 @@ class TirageCardActivity : AppCompatActivity() {
             }
         }
         compteurTirage--
-
+        tirageCardActivityViewModel.updateUser()
 
 
         var plage= City.getPlagePop(rang)
@@ -166,7 +166,7 @@ class TirageCardActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         if(nbrTirage==compteurTirage){
-            super.onBackPressed()
+            finish()
             return
         }
         // Définissez le titre et le message de la boîte de dialogue
@@ -176,7 +176,7 @@ class TirageCardActivity : AppCompatActivity() {
         // Ajoutez les boutons "Oui" et "Non" à la boîte de dialogue
         builder.setPositiveButton("Oui") { dialogInterface: DialogInterface, i: Int ->
             // Si l'utilisateur clique sur "Oui", appelez la méthode onBackPressed pour quitter
-            super.onBackPressed()
+            finish()
         }
 
         builder.setNegativeButton("Non") { dialogInterface: DialogInterface, i: Int ->
