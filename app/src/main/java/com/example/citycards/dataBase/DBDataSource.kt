@@ -32,6 +32,10 @@ object DBDataSource{
         CityListDataBase.getInstance().UserDAO()
     }
 
+    suspend fun getAllRegion(user: Int): List<String>{
+        return CityListDataBase.getInstance().CityDAO().getAllRegion(user)
+    }
+
     suspend fun deleteCity(city: City){
         var rang=city.getRang()
         var user = UserRepository.getUserLogin();

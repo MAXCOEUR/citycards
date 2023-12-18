@@ -131,4 +131,12 @@ class MainViewModel : ViewModel() {
         }
         return livedata
     }
+
+    fun addCity(city: City): LiveData<City>{
+        var livedata = MutableLiveData<City>()
+        viewModelScope.launch {
+            CityRepository.addCity(city)
+        }
+        return livedata
+    }
 }

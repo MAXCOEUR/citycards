@@ -19,6 +19,7 @@ import com.example.citycards.R
 import com.example.citycards.Repository.CityRepository
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.Main.MainViewModel
+import java.util.Date
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -115,7 +116,9 @@ class HomeFragment : Fragment() {
             val cityResponseCreate = mainViewModel.getCitysRandom(1,offset,plage.first,plage.second)
             cityResponseCreate.observe(viewLifecycleOwner) { cityListe ->
                 cityListe.body()?.let {
-
+                    it.data.first().owner= user.id!!
+                    it.data.first().dateObtention= Date().time
+                    mainViewModel.addCity(it.data.first())
                 }
             }
     }

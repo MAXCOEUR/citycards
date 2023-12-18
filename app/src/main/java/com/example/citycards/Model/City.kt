@@ -19,7 +19,7 @@ data class CityList(
     onDelete = ForeignKey.CASCADE)))
 data class City(
     @SerializedName("idUnique")
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val idUnique: Int?=null,
     @SerializedName("name")
     val name: String?=null,
@@ -36,7 +36,7 @@ data class City(
 
     var favori: Boolean?=null,
     var dateObtention: Long= Date().time,
-    val owner: Int
+    var owner: Int
 
 ): java.io.Serializable {
     fun getRang(): Int {

@@ -21,6 +21,9 @@ interface CityDAO {
     @Query("Select * from City where favori=1 and owner=:idUser ")
     suspend fun getAllOfFavoriteCitites(idUser: Int): List<City>
 
+    @Query("Select distinct(region) from City where owner=:idUser")
+    suspend fun getAllRegion(idUser: Int): List<String>
+
 
 
 
