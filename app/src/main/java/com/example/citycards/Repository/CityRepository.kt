@@ -71,7 +71,7 @@ object CityRepository {
 
     suspend fun getRegion(): Flow<Response<List<String>>> = flow {
         var user= CacheDataSource.getInstance().getUserLogin()
-        var regionList :List<String> = listOf("Toutes les regions")
+        var regionList :List<String> = listOf("Toutes les régions")
         if(user.id != null){
             regionList += DBDataSource.getAllRegion(user.id!!)
         }

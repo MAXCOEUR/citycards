@@ -1,5 +1,6 @@
 package com.example.citycards.Model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -33,7 +34,6 @@ data class City(
     val latitude: Float?=null,
     @SerializedName("country")
     val country: String?=null,
-
     var favori: Boolean?=null,
     var dateObtention: Long= Date().time,
     var owner: Int

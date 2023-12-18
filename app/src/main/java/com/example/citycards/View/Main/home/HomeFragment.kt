@@ -2,27 +2,23 @@ package com.example.citycards.View.Main.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.citycards.Model.City
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.R
-import com.example.citycards.Repository.CityRepository
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.Main.MainViewModel
 import com.example.citycards.View.TirageCard.TirageCardActivity
-import java.util.Date
-import kotlin.random.Random
+
 
 class HomeFragment : Fragment() {
     var user = UserRepository.getUserLogin();
@@ -61,10 +57,9 @@ class HomeFragment : Fragment() {
         initClick(bouton);
 
 
-
-        switch.setOnClickListener {
+        switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             parentLayout.removeView(btOpenLayout)
-            if(switch.isChecked) {
+            if(isChecked) {
                 val btOpenX10 = LayoutInflater.from(requireContext()).inflate(R.layout.bouton_opening_x10, null)
                 parentLayout.addView(btOpenX10, btOpenLayout.layoutParams)
                 val bouton = btOpenX10.findViewById<ImageButton>(R.id.image_rond)
@@ -76,8 +71,7 @@ class HomeFragment : Fragment() {
                 val bouton = btOpenX1.findViewById<ImageButton>(R.id.image_rond)
                 initClick(bouton);
             }
-        }
-
+        })
     }
 
     private fun initClick(view: View) {

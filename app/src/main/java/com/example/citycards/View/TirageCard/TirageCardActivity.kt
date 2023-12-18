@@ -131,6 +131,7 @@ class TirageCardActivity : AppCompatActivity() {
                 if(user.id!=null){
                     it.data[0].owner=user.id!!
                     it.data[0].dateObtention= Date().time
+                    it.data[0].favori=false
                 }
                 tirageCardActivityViewModel.addCity(it.data[0])
             }
