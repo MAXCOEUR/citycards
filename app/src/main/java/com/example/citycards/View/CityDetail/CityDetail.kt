@@ -142,8 +142,11 @@ class CityDetail : AppCompatActivity() {
             city.favori?.let {
                 city.favori= !it
                 updateStar()
+                mainViewModel.setFavori(city)
             }
         }
+
+
         bt_bin.setOnClickListener(){
             Log.i("bt_bin","bt_bin")
             val resultIntent = Intent()
