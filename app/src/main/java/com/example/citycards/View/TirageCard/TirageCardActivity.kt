@@ -93,6 +93,16 @@ class TirageCardActivity : AppCompatActivity() {
         else if (nbrTirage==10){
             if(compteurTirage==10){
                 user.token=user.token-100
+                when {
+                    rang <= 80 -> rang= 5
+                    rang <= 90 -> rang=4
+                    rang <= 96 -> rang=3
+                    rang <= 99 -> rang=2
+                    rang <= 100 -> rang=1
+                    else -> {
+                        rang=6
+                    }
+                }
             }
             else if(compteurTirage==1){
                 when {
