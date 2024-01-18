@@ -15,7 +15,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.example.citycards.Model.City
+import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.Main.MainViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
@@ -65,14 +67,24 @@ class SuccesTirage : Fragment() {
         bt_sell.setOnClickListener{
             city?.let {
                 Toast.makeText(context, "+ jetons", Toast.LENGTH_SHORT).show()
-                mainViewModel.deleteCity(it)
+                var livedata = mainViewModel.getCitysCollection(QueryDataCity(limiteur = 1))
+
+                livedata.observe(viewLifecycleOwner) { cityListe ->
+                    cityListe.body()?.let {
+                        mainViewModel.deleteCity(it.data[0])
+                        mainViewModel.updateUser(UserRepository.getUserLogin())
+                    }
+                }
+
+
             }
             updateBtReplay()
             //Si cette carte est la derniere a etre tirer alors on part
             if ((requireActivity() as TirageCardActivity).compteurTirage==(requireActivity() as TirageCardActivity).nbrTirage){
                 requireActivity().finish()
             }
-            (requireActivity() as TirageCardActivity).getOneCity()
+            else
+                    (requireActivity() as TirageCardActivity).getOneCity()
         }
 
         bt_replay.setOnClickListener {

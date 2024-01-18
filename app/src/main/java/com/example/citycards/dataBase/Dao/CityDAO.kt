@@ -19,7 +19,7 @@ interface CityDAO {
     @Delete
     suspend fun deleteCity(city: City)
 
-    @Query("Select * from City where owner=:idUser")
+    @Query("Select * from City where owner=:idUser order by idUnique desc")
     suspend fun getAllOfCities(idUser: Int): List<City>
 
     @Query("Select * from City where favori=1 and owner=:idUser ")
