@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import com.example.citycards.R
 import kotlinx.coroutines.selects.select
@@ -27,14 +28,13 @@ class TransitionTirage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         background = view.findViewById(R.id.frameLayout2)
-        StartTimer()
     }
 
-    fun StartTimer(){
+    fun startTimer(){
         timer.start()
     }
 
-    fun StopTimer(){
+    fun stopTimer(){
         timer.cancel()
     }
 
@@ -53,7 +53,7 @@ class TransitionTirage : Fragment() {
 
             }
     }
-    val timer = object : CountDownTimer(100000, 1000) {
+    val timer = object : CountDownTimer(9999999, 500) {
         override fun onTick(p0: Long) {
             changeBackGround(background, compteur)
             compteur += 1
@@ -68,15 +68,15 @@ class TransitionTirage : Fragment() {
         var compteur = (compteur % 5) + 1
         when(compteur){
             1 -> {Log.e("primaryContainer","primary")
-                background.setBackgroundColor(resources.getColor(R.color.primaryContainer))}
+                background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.primaryContainer))}
             2 -> {Log.e("secondaryContainer","secondary")
-                background.setBackgroundColor(resources.getColor(R.color.secondaryContainer))}
+                background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.secondaryContainer))}
             3 -> {Log.e("primary","primary 2")
-                background.setBackgroundColor(resources.getColor(R.color.primary))}
+                background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.primary))}
             4 -> {Log.e("secondary","secondary 2")
-                background.setBackgroundColor(resources.getColor(R.color.secondary))}
+                background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.secondary))}
             5 -> {Log.e("tertiary","tertiary")
-                background.setBackgroundColor(resources.getColor(R.color.tertiary))}
+                background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.tertiary))}
         }
     }
 }

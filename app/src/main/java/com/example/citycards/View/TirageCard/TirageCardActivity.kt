@@ -28,6 +28,7 @@ class TirageCardActivity : AppCompatActivity() {
     public var compteurTirage:Int = 0;
     var user = UserRepository.getUserLogin();
     val fragmentManager = supportFragmentManager
+    lateinit var transitionFragment:TransitionTirage
 
     var city:City?=null
     val timer = object : CountDownTimer(3750, 3750) {
@@ -38,6 +39,7 @@ class TirageCardActivity : AppCompatActivity() {
 
         override fun onFinish() {
             // La méthode onFinish est appelée lorsque le timer atteint 0
+            transitionFragment.stopTimer()
             city?.let {
                 updateCity(it)
             }
@@ -59,6 +61,7 @@ class TirageCardActivity : AppCompatActivity() {
 
         nbrTirage = intent.getIntExtra(CLE_NBR_TIRAGE, 0)
         compteurTirage=nbrTirage
+        transitionFragment = TransitionTirage.newInstance()
 
         getOneCity()
     }
@@ -91,11 +94,12 @@ class TirageCardActivity : AppCompatActivity() {
             return
         }
 
-        val transitionFragment = TransitionTirage.newInstance()
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_tirage, transitionFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+
+        transitionFragment.startTimer()
 
 
         var rang= Random.nextInt(1,101)
