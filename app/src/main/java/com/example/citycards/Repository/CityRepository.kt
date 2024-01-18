@@ -1,5 +1,6 @@
 package com.example.citycards.Repository
 
+import android.util.Log
 import com.example.citycards.Model.City
 import com.example.citycards.Model.CityList
 import com.example.citycards.Model.QueryDataCity
@@ -26,6 +27,7 @@ object CityRepository {
 
     suspend fun getCityRandom(limit: Int, offset: Int, minPop: Int, maxPop: Int): Flow<Response<CityList>> =
         flow {
+            Log.e("erreur","getCityRandom: Ropository")
             val Api = ApiClient.getApiService
             val response = Api.getCities(limiteur= limit,offset = offset, minPop = minPop, maxPop = maxPop)
             emit(response)

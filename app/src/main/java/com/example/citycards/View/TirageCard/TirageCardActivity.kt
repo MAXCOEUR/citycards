@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
@@ -17,6 +18,8 @@ import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.dataBase.CityListDataBase
 import java.util.Date
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.random.Random
 
 class TirageCardActivity : AppCompatActivity() {
@@ -25,6 +28,21 @@ class TirageCardActivity : AppCompatActivity() {
     public var compteurTirage:Int = 0;
     var user = UserRepository.getUserLogin();
     val fragmentManager = supportFragmentManager
+
+    var city:City?=null
+    val timer = object : CountDownTimer(3750, 3750) {
+        override fun onTick(millisUntilFinished: Long) {
+            // La méthode onTick est appelée à chaque tick du timer
+            // Cependant, dans votre cas, vous semblez vouloir exécuter une action seulement après le délai complet, pas à chaque tick.
+        }
+
+        override fun onFinish() {
+            // La méthode onFinish est appelée lorsque le timer atteint 0
+            city?.let {
+                updateCity(it)
+            }
+        }
+    }
 
     public var cityWin:City?=null
     public fun resetCompteur(){
@@ -138,21 +156,24 @@ class TirageCardActivity : AppCompatActivity() {
 
         var plage= City.getPlagePop(rang)
         var offset = City.getOffset(rang)
+        Log.e("API", "demande api")
         val cityResponseCreate = tirageCardActivityViewModel.getCitysRandom(1,offset,plage.first,plage.second)
         cityResponseCreate.observe(this) { cityListe ->
             cityListe.body()?.let {
-                Log.d("city", it.toString() )
-                setCity(it.data[0]);
+                Log.e("API", "recois api "+it.toString())
+                timer.start()
+                city=it.data[0]
                 if(user.id!=null){
                     it.data[0].owner=user.id!!
                     it.data[0].dateObtention= Date().time
                     it.data[0].favori=false
                 }
                 tirageCardActivityViewModel.addCity(it.data[0])
+
             }
         }
     }
-    fun setCity(city:City){
+    fun updateCity(city:City){
         cityWin=city
 
         val succesFragment = SuccesTirage.newInstance()
