@@ -72,7 +72,6 @@ class SuccesTirage : Fragment() {
                 livedata.observe(viewLifecycleOwner) { cityListe ->
                     cityListe.body()?.let {
                         mainViewModel.deleteCity(it.data[0])
-                        mainViewModel.updateUser(UserRepository.getUserLogin())
                     }
                 }
 
