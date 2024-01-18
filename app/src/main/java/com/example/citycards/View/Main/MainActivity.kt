@@ -61,8 +61,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(changePage)
         }
 
-
-
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val btnTirage = findViewById<ImageButton>(R.id.image_rond)
         val switchTirage = findViewById<Switch>(R.id.switch1)
