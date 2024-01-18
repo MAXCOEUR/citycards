@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.citycards.Model.City
 import com.example.citycards.Model.CityList
+import com.example.citycards.Model.User
 import com.example.citycards.Repository.CityRepository
+import com.example.citycards.Repository.UserRepository
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -30,6 +32,18 @@ class TirageCardActivityViewModel: ViewModel() {
         var livedata = MutableLiveData<City>()
         viewModelScope.launch {
             CityRepository.addCity(city)
+        }
+        return livedata
+    }
+    fun updateUser(): LiveData<User>{
+        var livedata = MutableLiveData<User>()
+        viewModelScope.launch {
+            UserRepository.updateUser(UserRepository.getUserLogin())
+                .catch {
+                    Log.e("erreur update",it.toString())
+                }.collect{
+                    livedata.postValue(it)
+                }
         }
         return livedata
     }

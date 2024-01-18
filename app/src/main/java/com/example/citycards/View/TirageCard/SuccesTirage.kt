@@ -87,6 +87,7 @@ class SuccesTirage : Fragment() {
         }
 
         bt_replay.setOnClickListener {
+            bt_replay.isEnabled=false
             updateBtReplay()
             (requireActivity() as TirageCardActivity).getOneCity()
         }

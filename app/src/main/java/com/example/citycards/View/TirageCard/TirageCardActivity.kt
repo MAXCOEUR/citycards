@@ -1,6 +1,8 @@
 package com.example.citycards.View.TirageCard
 
 import android.R.bool
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +24,7 @@ class TirageCardActivity : AppCompatActivity() {
     var nbrTirage:Int = 0;
     public var compteurTirage:Int = 0;
     var user = UserRepository.getUserLogin();
+    val fragmentManager = supportFragmentManager
 
     public var cityWin:City?=null
     public fun resetCompteur(){
@@ -71,9 +74,11 @@ class TirageCardActivity : AppCompatActivity() {
         }
 
         val transitionFragment = TransitionTirage.newInstance()
-        val fragmentManager = supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_tirage, transitionFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
 
         var rang= Random.nextInt(1,101)
 
@@ -128,7 +133,7 @@ class TirageCardActivity : AppCompatActivity() {
             }
         }
         compteurTirage--
-
+        tirageCardActivityViewModel.updateUser()
 
 
         var plage= City.getPlagePop(rang)
@@ -151,11 +156,34 @@ class TirageCardActivity : AppCompatActivity() {
         cityWin=city
 
         val succesFragment = SuccesTirage.newInstance()
-        val fragmentManager = supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_tirage, succesFragment)
-
-        // Validez la transaction
+        transaction.addToBackStack(null) // Ajouter la transaction à la pile
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+
+        if(nbrTirage==compteurTirage){
+            finish()
+            return
+        }
+        // Définissez le titre et le message de la boîte de dialogue
+        builder.setTitle("Confirmation")
+        builder.setMessage("Êtes-vous sûr de vouloir quitter ? Vous allez perdre $compteurTirage cartes.")
+
+        // Ajoutez les boutons "Oui" et "Non" à la boîte de dialogue
+        builder.setPositiveButton("Oui") { dialogInterface: DialogInterface, i: Int ->
+            // Si l'utilisateur clique sur "Oui", appelez la méthode onBackPressed pour quitter
+            finish()
+        }
+
+        builder.setNegativeButton("Non") { dialogInterface: DialogInterface, i: Int ->
+            // Si l'utilisateur clique sur "Non", ne faites rien (la boîte de dialogue se fermera)
+        }
+
+        // Affichez la boîte de dialogue
+        builder.show()
     }
 }
