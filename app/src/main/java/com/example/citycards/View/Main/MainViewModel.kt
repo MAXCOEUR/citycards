@@ -128,6 +128,7 @@ class MainViewModel : ViewModel() {
                     livedata.postValue(it)
                 }
         }
+        updateUser(UserRepository.getUserLogin())
         return livedata
     }
 }

@@ -10,10 +10,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import com.example.citycards.Model.City
+import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.R
+import com.example.citycards.Repository.UserRepository
+import com.example.citycards.View.Main.MainViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -22,12 +27,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class SuccesTirage : Fragment() {
 
+    val mainViewModel by activityViewModels<MainViewModel>()
     lateinit var cardCity:ConstraintLayout
     lateinit var tvNameCity:TextView
     lateinit var tvRegionCity:TextView
     lateinit var imageButtonStar:ImageButton
     lateinit var ligneView: View
     lateinit var bt_replay:Button
+    lateinit var bt_sell:Button
 
     var city:City?=null
 
@@ -52,9 +59,33 @@ class SuccesTirage : Fragment() {
         tvRegionCity = cardCity.findViewById(R.id.item_region)
         imageButtonStar = cardCity.findViewById(R.id.star)
         ligneView = cardCity.findViewById(R.id.separation_line)
+        bt_sell = view.findViewById(R.id.bt_sell)
         imageButtonStar.visibility = View.GONE
 
         bt_replay = view.findViewById<Button>(R.id.bt_replay)
+
+        bt_sell.setOnClickListener{
+            city?.let {
+                Toast.makeText(context, "+ jetons", Toast.LENGTH_SHORT).show()
+                var livedata = mainViewModel.getCitysCollection(QueryDataCity(limiteur = 1))
+
+                livedata.observe(viewLifecycleOwner) { cityListe ->
+                    cityListe.body()?.let {
+                        mainViewModel.deleteCity(it.data[0])
+                    }
+                }
+
+
+            }
+            updateBtReplay()
+            //Si cette carte est la derniere a etre tirer alors on part
+            if ((requireActivity() as TirageCardActivity).compteurTirage==(requireActivity() as TirageCardActivity).nbrTirage){
+                requireActivity().finish()
+            }
+            else
+                    (requireActivity() as TirageCardActivity).getOneCity()
+        }
+
         bt_replay.setOnClickListener {
             bt_replay.isEnabled=false
             updateBtReplay()
