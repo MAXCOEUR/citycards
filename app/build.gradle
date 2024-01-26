@@ -19,6 +19,23 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        setProperty("archivesBaseName", "CityCard-$versionName")
+    }
+
+    flavorDimensions = ["environment"]
+
+    productFlavors {
+        develop {
+            dimension  "environment"
+            versionNameSuffix "-dev"
+
+            buildConfigField('int', 'FLAVOR_ID', '1')
+        }
+        tintin {
+            dimension "environment"
+            versionNameSuffix "-tintin"
+        }
     }
 
     buildTypes {
@@ -36,6 +53,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
