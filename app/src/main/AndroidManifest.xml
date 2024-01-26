@@ -10,9 +10,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/img_logo"
+        android:icon="@string/logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/img_logo"
+        android:roundIcon="@string/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.CityCards"
         tools:targetApi="31">
@@ -31,8 +31,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA3Zbqwevdt3VHxlEhWthpwfQZlHW8hRCw" />
-
+            android:value="@string/google_maps_key" />
         <activity
             android:name=".View.TirageCard.TirageCardActivity"
             android:exported="false" />

@@ -7,6 +7,13 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+def localProperties = new Properties()
+try {
+    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+} catch (Throwable t) {
+    print(t)
+}
+
 android {
     namespace 'com.example.citycards'
     compileSdk 33
@@ -28,20 +35,29 @@ android {
     productFlavors {
         dev {
             dimension  "environment"
+            resValue("string", "google_maps_key", localProperties['MAPS_API_KEY_DEV'])
             versionNameSuffix "-dev"
             buildConfigField('int', 'FLAVOR_ID', '1')
+            resValue("string", "logo", localProperties['LOGO_DEV'])
+            buildConfigField('String', 'citycards_key', "\"${localProperties['CITY_API_DEV']}\"")
         }
         preproduction {
             dimension "environment"
+            resValue("string", "google_maps_key", localProperties['MAPS_API_KEY_PREPROD'])
             versionNameSuffix "-preproduction"
             applicationIdSuffix ".preproduction"
             buildConfigField('int', 'FLAVOR_ID', '2')
+            resValue("string", "logo", localProperties['LOGO_PREPROD'])
+            buildConfigField('String', 'citycards_key', "\"${localProperties['CITY_API_PREPROD']}\"")
         }
         production {
             dimension "environment"
+            resValue("string", "google_maps_key", localProperties['MAPS_API_KEY_PROD'])
             versionNameSuffix "-production"
             applicationIdSuffix ".production"
             buildConfigField('int', 'FLAVOR_ID', '3')
+            resValue("string", "logo", localProperties['LOGO_PROD'])
+            buildConfigField('String', 'citycards_key', "\"${localProperties['CITY_API_PROD']}\"")
         }
     }
 

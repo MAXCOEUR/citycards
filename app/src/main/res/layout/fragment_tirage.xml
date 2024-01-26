@@ -88,7 +88,7 @@
                     android:scaleType="centerInside"
                     android:scaleX="0.65"
                     android:scaleY="0.65"
-                    android:src="@drawable/img_logo"
+                    android:src="@drawable/img_logo_prod"
                     app:layout_constraintBottom_toBottomOf="@+id/image_rond"
                     app:layout_constraintEnd_toEndOf="@+id/image_rond"
                     app:layout_constraintHorizontal_bias="0.466"

@@ -1,5 +1,8 @@
 package com.example.citycards.RetrofitAPi
 
+import android.provider.Settings.Secure.getString
+import com.example.citycards.BuildConfig
+import com.example.citycards.R
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -22,8 +25,10 @@ object ApiClient {
             override fun intercept(chain: Interceptor.Chain): Response {
                 val original = chain.request()
 
+                val apiKey= BuildConfig.citycards_key
+
                 val request = original.newBuilder()
-                    .header("X-RapidAPI-Key", "28911db767msha7f0ad07554072fp110999jsna92ff89a4cbc")
+                    .header("X-RapidAPI-Key", apiKey)
                     .header("X-RapidAPI-Host", "wft-geo-db.p.rapidapi.com")
                     .build()
 
