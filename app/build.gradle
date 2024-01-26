@@ -26,17 +26,22 @@ android {
     flavorDimensions = ["environment"]
 
     productFlavors {
-        develop {
+        dev {
             dimension  "environment"
             versionNameSuffix "-dev"
-
             buildConfigField('int', 'FLAVOR_ID', '1')
         }
-        tintin {
+        preproduction {
             dimension "environment"
-            versionNameSuffix "-tintin"
-
+            versionNameSuffix "-preproduction"
+            applicationIdSuffix ".preproduction"
             buildConfigField('int', 'FLAVOR_ID', '2')
+        }
+        production {
+            dimension "environment"
+            versionNameSuffix "-production"
+            applicationIdSuffix ".production"
+            buildConfigField('int', 'FLAVOR_ID', '3')
         }
     }
 
