@@ -35,6 +35,8 @@ android {
         tintin {
             dimension "environment"
             versionNameSuffix "-tintin"
+
+            buildConfigField('int', 'FLAVOR_ID', '2')
         }
     }
 
