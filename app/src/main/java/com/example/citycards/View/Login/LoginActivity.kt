@@ -3,6 +3,7 @@ package com.example.citycards.View.Login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
@@ -20,6 +21,10 @@ import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
     val loginViewModel by viewModels<LoginViewModel>()
+
+
+    private lateinit var inputEmail: TextInputEditText
+    private lateinit var inputPassword: TextInputEditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -28,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
         val buttonSeConnecter = findViewById<Button>(R.id.bt_SeConnecter)
         val buttonCreationCompte = findViewById<Button>(R.id.bt_CreationCompte)
 
-        val inputEmail = findViewById<TextInputEditText>(R.id.textInputChgMdp)
-        val inputPassword = findViewById<TextInputEditText>(R.id.textInputChgConMdp)
+        inputEmail = findViewById(R.id.textInputChgMdp)
+        inputPassword = findViewById(R.id.textInputChgConMdp)
 
         val inputLayoutUsernameEmail = findViewById<TextInputLayout>(R.id.TinputLayoutUserNameEmail)
         val inputLayoutPassword = findViewById<TextInputLayout>(R.id.textInputLayoutChgConMdp)
@@ -83,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
             val changePage = Intent(this, CreateUserActivity::class.java)
             startActivity(changePage)
         }
+
         /*
         val Api = ApiClient.getApiService
         CoroutineScope(Dispatchers.IO).launch {
@@ -101,5 +107,27 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }*/
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        val email = sh.getString("email", "")
+        val psw = sh.getInt("password", 0)
+
+        inputEmail.setText(email)
+        inputPassword.setText(psw)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Creating a shared pref object with a file name "MySharedPref" in private mode
+        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        val myEdit = sharedPreferences.edit()
+
+        // write all the data entered by the user in SharedPreference and apply
+        myEdit.putString("email", inputEmail.text.toString())
+        myEdit.putInt("password", inputPassword.text.toString().toInt())
+        myEdit.apply()
     }
 }
