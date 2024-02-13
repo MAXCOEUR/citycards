@@ -65,9 +65,13 @@ class UserFragment : Fragment() {
         imagePickerView = view.findViewById<ImageView>(R.id.iv_ImagePicker2)
         val avatar = view.findViewById<ImageView>(R.id.iv_ImagePicker2)
 
+        val TitreActivity = activity?.findViewById<TextView>(R.id.tv_Titre);
+        if (TitreActivity != null) {
+            TitreActivity.text = "Profil"
+        }
 
         username.text = UserRepository.getUserLogin().username
-        email.text = UserRepository.getUserLogin().password
+        email.text = UserRepository.getUserLogin().email
 
         avatar.setOnClickListener {
             imagePicker()
