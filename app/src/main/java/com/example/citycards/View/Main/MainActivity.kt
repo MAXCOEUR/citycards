@@ -6,31 +6,27 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.Switch
 import androidx.activity.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.citycards.Model.LoginUser
-import com.example.citycards.Model.QueryDataCity
-import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.View.Login.LoginActivity
 import com.example.citycards.View.Login.LoginViewModel
-import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.search.SearchFragment
 import com.example.citycards.View.Profile.ProfileActivity
 import com.example.citycards.dataBase.CityListDataBase
-import com.example.citycards.dataBase.DBDataSource
-import com.example.citycards.dataSource.CacheDataSource
+import com.example.citycards.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.concurrent.TimeUnit
@@ -176,11 +172,16 @@ class MainActivity : AppCompatActivity() {
                     UserRepository.setUserLogin(user)
                     mainViewModel.updateUser(UserRepository.getUserLogin())
                     updateToken()
-                    // Remplacez le contenu du FragmentContainerView par votre fragment
-                    transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
 
-                    // Validez la transaction
-                    transaction.commit()
+                    val existingFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+                    if(existingFragment == null || existingFragment !is HomeFragment){
+                        // Remplacez le contenu du FragmentContainerView par votre fragment
+                        transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+
+                        // Validez la transaction
+                        transaction.commit()
+                    }
+
                 }
                 else{
                     val changePage = Intent(this, LoginActivity::class.java)
@@ -191,11 +192,14 @@ class MainActivity : AppCompatActivity() {
 
         }
         else {
-//            updateToken()
-            transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+            val existingFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+            if(existingFragment == null || existingFragment !is HomeFragment){
+                // Remplacez le contenu du FragmentContainerView par votre fragment
+                transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
 
-            // Validez la transaction
-            transaction.commit()
+                // Validez la transaction
+                transaction.commit()
+            }
         }
     }
 }
