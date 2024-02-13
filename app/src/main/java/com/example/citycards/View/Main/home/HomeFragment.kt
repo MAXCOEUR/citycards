@@ -22,7 +22,6 @@ import com.example.citycards.View.TirageCard.TirageCardActivity
 
 
 class HomeFragment : Fragment() {
-    var user = UserRepository.getUserLogin()
     val mainViewModel by activityViewModels<MainViewModel>()
     val query = QueryDataCity()
     lateinit var nb_jeton:TextView
@@ -36,7 +35,7 @@ class HomeFragment : Fragment() {
 
     }
     fun updateToken(){
-        nb_jeton.text = user.token.toString()
+        nb_jeton.text = UserRepository.getUserLogin().token.toString()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,7 +77,7 @@ class HomeFragment : Fragment() {
     private fun initClick(view: View) {
         view.setOnClickListener{
             if (switch.isChecked){
-                if(user.token<100){
+                if(UserRepository.getUserLogin().token<100){
                     Toast.makeText(this.context,"Il faut au minimum 100 jetons", Toast.LENGTH_LONG).show()
                 }
                 else{
@@ -88,7 +87,7 @@ class HomeFragment : Fragment() {
                 }
             }
             else{
-                if(user.token<10){
+                if(UserRepository.getUserLogin().token<10){
                     Toast.makeText(this.context,"Il faut au minimum 10 jetons", Toast.LENGTH_LONG).show()
                 }
                 else {
@@ -110,7 +109,6 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        user = UserRepository.getUserLogin()
         updateToken()
     }
 }

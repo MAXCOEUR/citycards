@@ -16,7 +16,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.citycards.Model.LoginUser
 import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
@@ -74,6 +76,11 @@ class UserFragment : Fragment() {
         btnExit.setOnClickListener{
             val changePage = Intent(requireActivity(), LoginActivity::class.java)
             changePage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            // Obtenez une référence aux SharedPreferences
+            val sharedPreferences = requireActivity().getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
+
+            sharedPreferences.edit().clear().apply()
+
             startActivity(changePage)
         }
 

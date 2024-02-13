@@ -3,6 +3,7 @@ package com.example.citycards.View.Login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
@@ -20,6 +21,10 @@ import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
     val loginViewModel by viewModels<LoginViewModel>()
+
+
+    private lateinit var inputEmail: TextInputEditText
+    private lateinit var inputPassword: TextInputEditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -28,24 +33,28 @@ class LoginActivity : AppCompatActivity() {
         val buttonSeConnecter = findViewById<Button>(R.id.bt_SeConnecter)
         val buttonCreationCompte = findViewById<Button>(R.id.bt_CreationCompte)
 
-        val inputEmail = findViewById<TextInputEditText>(R.id.textInputChgMdp)
-        val inputPassword = findViewById<TextInputEditText>(R.id.textInputChgConMdp)
+        inputEmail = findViewById(R.id.textInputChgMdp)
+        inputPassword = findViewById(R.id.textInputChgConMdp)
 
         val inputLayoutUsernameEmail = findViewById<TextInputLayout>(R.id.TinputLayoutUserNameEmail)
         val inputLayoutPassword = findViewById<TextInputLayout>(R.id.textInputLayoutChgConMdp)
 
         //for dev
-        val userResponseCreate=loginViewModel.loginUser(LoginUser("aze@gmail.com","Azerty123?"))
-
-        userResponseCreate.observe(this) { user->
-            if(user.email!="" && user.username!=""){
-                UserRepository.setUserLogin(user)
-                finish()
-            }
-            else{
-                Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
-            }
-        }
+//        val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+//        val email = sh.getString("email", "").toString()
+//        val psw = sh.getString("password", "").toString()
+//
+//        val userResponseCreate=loginViewModel.loginUser(LoginUser(email,psw))
+//
+//        userResponseCreate.observe(this) { user->
+//            if(user.email!="" && user.username!=""){
+//                UserRepository.setUserLogin(user)
+//                finish()
+//            }
+//            else{
+//                Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
+//            }
+//        }
 
         buttonSeConnecter.setOnClickListener {
 
@@ -69,6 +78,12 @@ class LoginActivity : AppCompatActivity() {
                 userResponseCreate.observe(this) { user->
                     if(user.email!="" && user.username!=""){
                         UserRepository.setUserLogin(user)
+                        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                        val myEdit = sharedPreferences.edit()
+
+                        myEdit.putString("email", inputEmail.text.toString())
+                        myEdit.putString("password", inputPassword.text.toString())
+                        myEdit.apply()
                         finish()
                     }
                     else{
@@ -83,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
             val changePage = Intent(this, CreateUserActivity::class.java)
             startActivity(changePage)
         }
+
         /*
         val Api = ApiClient.getApiService
         CoroutineScope(Dispatchers.IO).launch {
@@ -102,4 +118,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }*/
     }
+
 }
