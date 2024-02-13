@@ -9,9 +9,14 @@ import kotlinx.coroutines.flow.flow
 
 object UserRepository {
     suspend fun createUser(createuser: User) : Flow<User> = flow {
-        DBDataSource.insertUser(createuser);
-        val user = DBDataSource.getUser(createuser.email)
-        emit(user)
+        try{
+            DBDataSource.insertUser(createuser);
+            val user = DBDataSource.getUser(createuser.email)
+            emit(user)
+        }catch (e:Exception){
+            emit(User(username = "", email = ""))
+        }
+
     }
     suspend fun loginUser(loginUser: LoginUser) : Flow<User> = flow {
         val user = DBDataSource.getUser(loginUser.userEmail)

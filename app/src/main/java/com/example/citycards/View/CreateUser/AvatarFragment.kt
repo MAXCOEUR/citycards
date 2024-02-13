@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -58,11 +59,18 @@ class AvatarFragment : Fragment() {
             val userResponseCreate=createUserViewModel.createUser(createUser)
 
             userResponseCreate.observe(viewLifecycleOwner) { user->
+                if(user.email!="" && user.username!=""){
+                    val transaction = parentFragmentManager.beginTransaction()
+                    val fragment = SuccesFragment.newInstance(user)
+                    transaction.replace(R.id.fragmentContainerView, fragment)
+                    transaction.commit()
+                }
+                else{
+                    Toast.makeText(context, "creation echoué", Toast.LENGTH_SHORT).show()
+                    Log.e("create","create faild")
+                    activity?.onBackPressed()
+                }
 
-                val transaction = parentFragmentManager.beginTransaction()
-                val fragment = SuccesFragment.newInstance(user)
-                transaction.replace(R.id.fragmentContainerView, fragment)
-                transaction.commit()
 
             }
 
