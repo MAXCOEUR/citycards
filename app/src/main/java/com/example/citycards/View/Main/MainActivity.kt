@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
                     updateToken()
 
                     val existingFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-                    if(existingFragment == null || existingFragment !is HomeFragment){
+                    if(existingFragment == null){
                         // Remplacez le contenu du FragmentContainerView par votre fragment
                         transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
 
@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             val existingFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-            if(existingFragment == null || existingFragment !is HomeFragment){
+            if(existingFragment == null){
                 // Remplacez le contenu du FragmentContainerView par votre fragment
                 transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
 
