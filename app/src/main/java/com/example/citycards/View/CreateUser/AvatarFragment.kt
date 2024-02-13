@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.citycards.Model.User
@@ -62,6 +63,16 @@ class AvatarFragment : Fragment() {
                 if(user.email!="" && user.username!=""){
                     val transaction = parentFragmentManager.beginTransaction()
                     val fragment = SuccesFragment.newInstance(user)
+
+                    val sharedPreferences = requireActivity().getSharedPreferences("MySharedPref",
+                        AppCompatActivity.MODE_PRIVATE
+                    )
+                    val myEdit = sharedPreferences.edit()
+
+                    myEdit.putString("email", createUser.email)
+                    myEdit.putString("password", createUser.password)
+                    myEdit.apply()
+
                     transaction.replace(R.id.fragmentContainerView, fragment)
                     transaction.commit()
                 }
