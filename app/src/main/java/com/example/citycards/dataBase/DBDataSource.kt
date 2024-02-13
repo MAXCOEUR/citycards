@@ -7,6 +7,7 @@ import com.example.citycards.Repository.UserRepository
 object DBDataSource{
 
     suspend fun insertUser(user: User) {
+        user.token=150
         CityListDataBase.getInstance().UserDAO().insertUser(user)
     }
     suspend fun getAllCities(user: Int):List<City>{

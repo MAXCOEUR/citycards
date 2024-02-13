@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var homeFragment :Fragment
     lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
-    var user = UserRepository.getUserLogin()
 
     lateinit var jetons:TextView
 
@@ -76,11 +75,32 @@ class MainActivity : AppCompatActivity() {
         searchFragment = SearchFragment.newInstance()
         collectionFragment = CollectionFragment.newInstance()
 
-        // Remplacez le contenu du FragmentContainerView par votre fragment
-        transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+        if (UserRepository.getUserLogin().email == ""){
+            val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+            val email = sh.getString("email", "").toString()
+            val psw = sh.getString("password", "").toString()
 
-        // Validez la transaction
-        transaction.commit()
+            val userResponseCreate=loginViewModel.loginUser(LoginUser(email,psw))
+
+            userResponseCreate.observe(this) { user->
+                if(user.email!="" && user.username!=""){
+                    UserRepository.setUserLogin(user)
+                    mainViewModel.updateUser(UserRepository.getUserLogin())
+                    updateToken()
+                    // Remplacez le contenu du FragmentContainerView par votre fragment
+                    transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+
+                    // Validez la transaction
+                    transaction.commit()
+                }
+                else{
+                    val changePage = Intent(this, LoginActivity::class.java)
+                    startActivity(changePage)
+                }
+
+            }
+
+        }
 
         val navView: BottomNavigationView = binding.navView
         navView.setOnNavigationItemSelectedListener {
@@ -122,41 +142,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        if (UserRepository.getUserLogin().email == ""){
-            val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-            val email = sh.getString("email", "").toString()
-            val psw = sh.getString("password", "").toString()
-
-            val userResponseCreate=loginViewModel.loginUser(LoginUser(email,psw))
-
-            userResponseCreate.observe(this) { user->
-                if(user.email!="" && user.username!=""){
-                    UserRepository.setUserLogin(user)
-                }
-                else{
-                    val changePage = Intent(this, LoginActivity::class.java)
-                    startActivity(changePage)
-                }
-            }
-            mainViewModel.updateUser(user)
-            //updateToken()
-        }
-
         btProfile.setOnClickListener {
             val changePage = Intent(this, ProfileActivity::class.java)
             startActivityForResult(changePage,CLE_USER_RETURN)
         }
 
         btToken.setOnClickListener{
-            val lastClaim = user.lastClaimToken
+            val lastClaim = UserRepository.getUserLogin().lastClaimToken
             val cooldownClaim = TimeUnit.DAYS.toMillis(1) // 1 jour de délai entre la récupération des jetons
             if (Date().time - lastClaim  > cooldownClaim){
-                user.token += 30
+                UserRepository.getUserLogin().token += 30
                 Toast.makeText(this,"+ 30 Jetons !",Toast.LENGTH_SHORT).show()
-                user.lastClaimToken = Date().time
+                UserRepository.getUserLogin().lastClaimToken = Date().time
 
-                mainViewModel.updateUser(user)
+                mainViewModel.updateUser(UserRepository.getUserLogin())
             }
             else{
                 var prochainClaim = cooldownClaim - ((Date().time - lastClaim) % cooldownClaim)
@@ -170,8 +169,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateToken(){
-        jetons.text = user.token.toString()
-        (homeFragment as HomeFragment).updateToken()
+        jetons.text = UserRepository.getUserLogin().token.toString()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -186,7 +184,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        user=UserRepository.getUserLogin()
         updateToken()
 
     }
