@@ -17,10 +17,7 @@ CityCards est une application qui permet aux passionnés de voyages et aux colle
 - Suivez votre progression en collectionnant des cartes de villes.
 - Personnalisez votre profil.
 - Recherchez des villes spécifiques pour accéder aux détails.
-- Mettez en favori vos villes préférées 
-
-## Captures d'écran
-
+- Mettez en favori vos villes préférées
 
 ## Installation
 
@@ -34,7 +31,23 @@ Pour utiliser CityCards, suivez ces étapes :
 
 2. Ouvrez le projet dans Android Studio.
 
-3. Compilez et exécutez l'application sur un émulateur Android ou un appareil physique.
+3. Remplir le fichier local.properties avec ceci :
+
+   ```
+   MAPS_API_KEY_DEV=<Your Google Map api key>
+   MAPS_API_KEY_PREPROD=<Your Google Map api key>
+   MAPS_API_KEY_PROD=<Your Google Map api key>
+   
+   CITY_API_DEV = <Key api citie>
+   CITY_API_PREPROD = <Key api citie>
+   CITY_API_PROD = <Key api citie>
+   
+   LOGO_DEV = @drawable/img_logo_dev
+   LOGO_PREPROD = @drawable/img_logo_preprod
+   LOGO_PROD = @drawable/img_logo_prod
+   ```
+
+4. Compilez et exécutez l'application sur un émulateur Android ou un appareil physique.
 
 ## Utilisation
 
