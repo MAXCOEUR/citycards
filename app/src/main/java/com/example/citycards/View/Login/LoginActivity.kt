@@ -40,17 +40,21 @@ class LoginActivity : AppCompatActivity() {
         val inputLayoutPassword = findViewById<TextInputLayout>(R.id.textInputLayoutChgConMdp)
 
         //for dev
-        val userResponseCreate=loginViewModel.loginUser(LoginUser("aze@gmail.com","Azerty123?"))
-
-        userResponseCreate.observe(this) { user->
-            if(user.email!="" && user.username!=""){
-                UserRepository.setUserLogin(user)
-                finish()
-            }
-            else{
-                Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
-            }
-        }
+//        val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+//        val email = sh.getString("email", "").toString()
+//        val psw = sh.getString("password", "").toString()
+//
+//        val userResponseCreate=loginViewModel.loginUser(LoginUser(email,psw))
+//
+//        userResponseCreate.observe(this) { user->
+//            if(user.email!="" && user.username!=""){
+//                UserRepository.setUserLogin(user)
+//                finish()
+//            }
+//            else{
+//                Toast.makeText(this,"email ou password faux",Toast.LENGTH_LONG).show()
+//            }
+//        }
 
         buttonSeConnecter.setOnClickListener {
 
@@ -74,6 +78,12 @@ class LoginActivity : AppCompatActivity() {
                 userResponseCreate.observe(this) { user->
                     if(user.email!="" && user.username!=""){
                         UserRepository.setUserLogin(user)
+                        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                        val myEdit = sharedPreferences.edit()
+
+                        myEdit.putString("email", inputEmail.text.toString())
+                        myEdit.putString("password", inputPassword.text.toString())
+                        myEdit.apply()
                         finish()
                     }
                     else{
@@ -109,25 +119,4 @@ class LoginActivity : AppCompatActivity() {
         }*/
     }
 
-    override fun onResume() {
-        super.onResume()
-        val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-        val email = sh.getString("email", "")
-        val psw = sh.getInt("password", 0)
-
-        inputEmail.setText(email)
-        inputPassword.setText(psw)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        // Creating a shared pref object with a file name "MySharedPref" in private mode
-        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-        val myEdit = sharedPreferences.edit()
-
-        // write all the data entered by the user in SharedPreference and apply
-        myEdit.putString("email", inputEmail.text.toString())
-        myEdit.putInt("password", inputPassword.text.toString().toInt())
-        myEdit.apply()
-    }
 }

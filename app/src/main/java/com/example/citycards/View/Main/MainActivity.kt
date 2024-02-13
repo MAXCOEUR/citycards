@@ -14,12 +14,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.example.citycards.Model.LoginUser
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.Model.User
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.View.Login.LoginActivity
+import com.example.citycards.View.Login.LoginViewModel
 import com.example.citycards.databinding.ActivityMainBinding
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
@@ -34,6 +36,7 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
+    val loginViewModel by viewModels<LoginViewModel>()
     companion object {
         //const val CLE_USER = "CLE_USER1"
         const val CLE_USER_RETURN = 1
@@ -55,11 +58,6 @@ class MainActivity : AppCompatActivity() {
 
         //On instancie la base de données
         CityListDataBase.initDatabase(this)
-
-        if (UserRepository.getUserLogin().email == ""){
-            val changePage = Intent(this, LoginActivity::class.java)
-            startActivity(changePage)
-        }
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val btnTirage = findViewById<ImageButton>(R.id.image_rond)
@@ -122,6 +120,27 @@ class MainActivity : AppCompatActivity() {
                 // Ajoutez d'autres cas pour chaque élément de votre BottomNavigationView
                 else -> return@setOnNavigationItemSelectedListener false
             }
+        }
+
+
+        if (UserRepository.getUserLogin().email == ""){
+            val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+            val email = sh.getString("email", "").toString()
+            val psw = sh.getString("password", "").toString()
+
+            val userResponseCreate=loginViewModel.loginUser(LoginUser(email,psw))
+
+            userResponseCreate.observe(this) { user->
+                if(user.email!="" && user.username!=""){
+                    UserRepository.setUserLogin(user)
+                }
+                else{
+                    val changePage = Intent(this, LoginActivity::class.java)
+                    startActivity(changePage)
+                }
+            }
+            mainViewModel.updateUser(user)
+            //updateToken()
         }
 
         btProfile.setOnClickListener {
