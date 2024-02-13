@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.citycards.Model.LoginUser
 import com.example.citycards.R
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var homeFragment :Fragment
     lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
-    lateinit var transaction: FragmentTransaction
+    lateinit var fragmentManager: FragmentManager
     lateinit var jetons:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,17 +56,14 @@ class MainActivity : AppCompatActivity() {
         //On instancie la base de données
         CityListDataBase.initDatabase(this)
 
+        fragmentManager=supportFragmentManager
+
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val btnTirage = findViewById<ImageButton>(R.id.image_rond)
         val switchTirage = findViewById<Switch>(R.id.switch1)
         jetons = findViewById(R.id.tv_nbrJeton)
         jetons.text = UserRepository.getUserLogin().token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
-
-        val fragmentManager = supportFragmentManager
-
-        // Commencez la transaction
-        transaction = fragmentManager.beginTransaction()
 
         // Créez une instance du fragment que vous souhaitez afficher
         homeFragment = HomeFragment.newInstance()
@@ -135,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Prochain tirage possible dans $date", Toast.LENGTH_SHORT).show()
             }
             updateToken()
+            (homeFragment as HomeFragment).updateToken()
         }
 
     }
@@ -160,6 +159,9 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun sharedPref() {
+        // Commencez la transaction
+        val transaction = fragmentManager.beginTransaction()
+
         if (UserRepository.getUserLogin().email == ""){
             val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
             val email = sh.getString("email", "").toString()
@@ -172,15 +174,11 @@ class MainActivity : AppCompatActivity() {
                     UserRepository.setUserLogin(user)
                     mainViewModel.updateUser(UserRepository.getUserLogin())
                     updateToken()
+                    // Remplacez le contenu du FragmentContainerView par votre fragment
+                    transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
 
-                    val existingFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-                    if(existingFragment == null){
-                        // Remplacez le contenu du FragmentContainerView par votre fragment
-                        transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
-
-                        // Validez la transaction
-                        transaction.commit()
-                    }
+                    // Validez la transaction
+                    transaction.commit()
 
                 }
                 else{
@@ -192,14 +190,11 @@ class MainActivity : AppCompatActivity() {
 
         }
         else {
-            val existingFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-            if(existingFragment == null){
-                // Remplacez le contenu du FragmentContainerView par votre fragment
-                transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+            // Remplacez le contenu du FragmentContainerView par votre fragment
+            transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
 
-                // Validez la transaction
-                transaction.commit()
-            }
+            // Validez la transaction
+            transaction.commit()
         }
     }
 }

@@ -84,7 +84,7 @@ class UserFragment : Fragment() {
             val sharedPreferences = requireActivity().getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
 
             sharedPreferences.edit().clear().apply()
-
+            activity?.onBackPressed()
             startActivity(changePage)
         }
 
