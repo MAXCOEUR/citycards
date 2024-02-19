@@ -39,6 +39,7 @@ android {
             versionNameSuffix "-dev"
             buildConfigField('int', 'FLAVOR_ID', '1')
             resValue("string", "logo", localProperties['LOGO_DEV'])
+            resValue("string", "logo_drawable", '@drawable/img_logo_dev')
             buildConfigField('String', 'citycards_key', "\"${localProperties['CITY_API_DEV']}\"")
         }
         preproduction {
@@ -48,6 +49,7 @@ android {
             applicationIdSuffix ".preproduction"
             buildConfigField('int', 'FLAVOR_ID', '2')
             resValue("string", "logo", localProperties['LOGO_PREPROD'])
+            resValue("string", "logo_drawable", '@drawable/img_logo_preprod')
             buildConfigField('String', 'citycards_key', "\"${localProperties['CITY_API_PREPROD']}\"")
         }
         production {
@@ -57,6 +59,7 @@ android {
             applicationIdSuffix ".production"
             buildConfigField('int', 'FLAVOR_ID', '3')
             resValue("string", "logo", localProperties['LOGO_PROD'])
+            resValue("string", "logo_drawable", '@drawable/img_logo_prod')
             buildConfigField('String', 'citycards_key', "\"${localProperties['CITY_API_PROD']}\"")
         }
     }

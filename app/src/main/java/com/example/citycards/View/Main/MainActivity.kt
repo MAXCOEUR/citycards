@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.citycards.Model.LoginUser
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
@@ -188,6 +187,15 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+        }else{
+            val fragment = fragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+            if(fragment==null){
+                // Remplacez le contenu du FragmentContainerView par votre fragment
+                transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+
+                // Validez la transaction
+                transaction.commit()
+            }
         }
     }
 }
