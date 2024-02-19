@@ -67,7 +67,7 @@ class TirageCardActivity : AppCompatActivity() {
     }
 
     private fun verifRight(): Boolean {
-        if (nbrTirage==10){
+        if (nbrTirage==10 && compteurTirage==10){
             if(user.token<100){
                 Toast.makeText(baseContext,"Il faut au minimum 100 jetons", Toast.LENGTH_LONG).show()
                 return false;
