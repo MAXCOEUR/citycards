@@ -12,7 +12,7 @@ interface ApiService {
     suspend fun getCities(@Query("limit")  limiteur: Int=10,
                           @Query("namePrefix") namePrefix: String="",
                           @Query("offset") offset :Int=0,
-                          @Query("minPopulation") minPop: Int=15000,
+                          @Query("minPopulation") minPop: Int=0,
                           @Query("maxPopulation") maxPop: Int?=null,
     ): Response<CityList>
 }

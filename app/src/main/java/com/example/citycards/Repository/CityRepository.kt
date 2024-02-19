@@ -3,6 +3,7 @@ package com.example.citycards.Repository
 import android.util.Log
 import com.example.citycards.Model.City
 import com.example.citycards.Model.CityList
+import com.example.citycards.Model.Metadata
 import com.example.citycards.Model.QueryDataCity
 import com.example.citycards.RetrofitAPi.ApiClient
 import com.example.citycards.dataBase.DBDataSource
@@ -54,8 +55,9 @@ object CityRepository {
                 filteredCity = filteredCity.filter { it.getRang() == dataQuery.rang }
             }
         }
+        val meta=Metadata(0,0)
         val response =
-            Response.success(filteredCity?.let { CityList(data = it, currentOffset = 0, totalCount = 0) })
+            Response.success(filteredCity?.let { CityList(data = it, metadata = meta) })
         emit(response)
     }
 
@@ -71,8 +73,9 @@ object CityRepository {
                 filteredCity = filteredCity.filter { it.region == dataQuery.region }
             }
         }
+        val meta=Metadata(0,0)
         val response =
-            Response.success(filteredCity?.let { CityList(data = it, currentOffset = 0, totalCount = 0) })
+            Response.success(filteredCity?.let { CityList(data = it, metadata = meta) })
         emit(response)
     }
 

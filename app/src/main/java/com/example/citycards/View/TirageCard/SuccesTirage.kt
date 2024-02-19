@@ -73,17 +73,18 @@ class SuccesTirage : Fragment() {
                     cityListe.body()?.let {
                         mainViewModel.deleteCity(it.data[0])
                     }
+
+                    updateBtReplay()
+                    //Si cette carte est la derniere a etre tirer alors on part
+                    if ((requireActivity() as TirageCardActivity).compteurTirage==(requireActivity() as TirageCardActivity).nbrTirage){
+                        requireActivity().finish()
+                    }
+                    else
+                        (requireActivity() as TirageCardActivity).getOneCity()
                 }
 
 
             }
-            updateBtReplay()
-            //Si cette carte est la derniere a etre tirer alors on part
-            if ((requireActivity() as TirageCardActivity).compteurTirage==(requireActivity() as TirageCardActivity).nbrTirage){
-                requireActivity().finish()
-            }
-            else
-                    (requireActivity() as TirageCardActivity).getOneCity()
         }
 
         bt_replay.setOnClickListener {

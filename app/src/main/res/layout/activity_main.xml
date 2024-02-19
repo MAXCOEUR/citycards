@@ -30,20 +30,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_titre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/taille8"
-            android:layout_marginEnd="@dimen/taille8"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="@color/onPrimary"
-            android:textSize="@dimen/TitreNavBar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/bt_profil"
-            app:layout_constraintStart_toEndOf="@+id/bt_token"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_titre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/taille8"
+                android:layout_marginEnd="@dimen/taille8"
+                android:gravity="center"
+                android:text="Chargement..."
+                android:textColor="@color/onPrimary"
+                android:textSize="@dimen/TitreNavBar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bt_profil"
+                app:layout_constraintStart_toEndOf="@+id/bt_token"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bt_token"

@@ -189,13 +189,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-        else {
-            // Remplacez le contenu du FragmentContainerView par votre fragment
-            transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
-
-            // Validez la transaction
-            transaction.commit()
-        }
     }
 }
 
