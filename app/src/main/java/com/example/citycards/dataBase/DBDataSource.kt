@@ -1,5 +1,6 @@
 package com.example.citycards.dataBase
 
+import android.util.Log
 import com.example.citycards.Model.City
 import com.example.citycards.Model.User
 import com.example.citycards.Repository.UserRepository
@@ -7,7 +8,13 @@ import com.example.citycards.Repository.UserRepository
 object DBDataSource{
 
     suspend fun insertUser(user: User) {
-        CityListDataBase.getInstance().UserDAO().insertUser(user)
+        try{
+            user.token=150
+            CityListDataBase.getInstance().UserDAO().insertUser(user)
+        }
+        catch (e:Exception){
+            throw e
+        }
     }
     suspend fun getAllCities(user: Int):List<City>{
         return CityListDataBase.getInstance().CityDAO().getAllOfCities(user)

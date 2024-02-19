@@ -6,34 +6,35 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.Switch
 import androidx.activity.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.citycards.Model.QueryDataCity
-import com.example.citycards.Model.User
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.citycards.Model.LoginUser
 import com.example.citycards.R
 import com.example.citycards.Repository.UserRepository
 import com.example.citycards.View.CityDetail.CityDetail
 import com.example.citycards.View.Login.LoginActivity
-import com.example.citycards.databinding.ActivityMainBinding
+import com.example.citycards.View.Login.LoginViewModel
 import com.example.citycards.View.Main.collection.CollectionFragment
 import com.example.citycards.View.Main.home.HomeFragment
 import com.example.citycards.View.Main.search.SearchFragment
 import com.example.citycards.View.Profile.ProfileActivity
 import com.example.citycards.dataBase.CityListDataBase
-import com.example.citycards.dataBase.DBDataSource
-import com.example.citycards.dataSource.CacheDataSource
+import com.example.citycards.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel by viewModels<MainViewModel>()
+    val loginViewModel by viewModels<LoginViewModel>()
     companion object {
         //const val CLE_USER = "CLE_USER1"
         const val CLE_USER_RETURN = 1
@@ -43,8 +44,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var homeFragment :Fragment
     lateinit var searchFragment :Fragment
     lateinit var collectionFragment :Fragment
-    var user = UserRepository.getUserLogin()
-
+    lateinit var fragmentManager: FragmentManager
     lateinit var jetons:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,10 +56,7 @@ class MainActivity : AppCompatActivity() {
         //On instancie la base de données
         CityListDataBase.initDatabase(this)
 
-        if (UserRepository.getUserLogin().email == ""){
-            val changePage = Intent(this, LoginActivity::class.java)
-            startActivity(changePage)
-        }
+        fragmentManager=supportFragmentManager
 
         val btProfile = findViewById<ImageButton>(R.id.bt_profil)
         val btnTirage = findViewById<ImageButton>(R.id.image_rond)
@@ -68,21 +65,11 @@ class MainActivity : AppCompatActivity() {
         jetons.text = UserRepository.getUserLogin().token.toString()
         val btToken = findViewById<ConstraintLayout>(R.id.bt_token)
 
-        val fragmentManager = supportFragmentManager
-
-        // Commencez la transaction
-        val transaction = fragmentManager.beginTransaction()
-
         // Créez une instance du fragment que vous souhaitez afficher
         homeFragment = HomeFragment.newInstance()
         searchFragment = SearchFragment.newInstance()
         collectionFragment = CollectionFragment.newInstance()
 
-        // Remplacez le contenu du FragmentContainerView par votre fragment
-        transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
-
-        // Validez la transaction
-        transaction.commit()
 
         val navView: BottomNavigationView = binding.navView
         navView.setOnNavigationItemSelectedListener {
@@ -130,14 +117,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         btToken.setOnClickListener{
-            val lastClaim = user.lastClaimToken
+            val lastClaim = UserRepository.getUserLogin().lastClaimToken
             val cooldownClaim = TimeUnit.DAYS.toMillis(1) // 1 jour de délai entre la récupération des jetons
             if (Date().time - lastClaim  > cooldownClaim){
-                user.token += 30
+                UserRepository.getUserLogin().token += 30
                 Toast.makeText(this,"+ 30 Jetons !",Toast.LENGTH_SHORT).show()
-                user.lastClaimToken = Date().time
+                UserRepository.getUserLogin().lastClaimToken = Date().time
 
-                mainViewModel.updateUser(user)
+                mainViewModel.updateUser(UserRepository.getUserLogin())
             }
             else{
                 var prochainClaim = cooldownClaim - ((Date().time - lastClaim) % cooldownClaim)
@@ -146,13 +133,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Prochain tirage possible dans $date", Toast.LENGTH_SHORT).show()
             }
             updateToken()
+            (homeFragment as HomeFragment).updateToken()
         }
 
     }
 
     fun updateToken(){
-        jetons.text = user.token.toString()
-        (homeFragment as HomeFragment).updateToken()
+        jetons.text = UserRepository.getUserLogin().token.toString()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -167,9 +154,48 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        user=UserRepository.getUserLogin()
+        sharedPref()
         updateToken()
 
+    }
+    fun sharedPref() {
+        // Commencez la transaction
+        val transaction = fragmentManager.beginTransaction()
+
+        if (UserRepository.getUserLogin().email == ""){
+            val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+            val email = sh.getString("email", "").toString()
+            val psw = sh.getString("password", "").toString()
+
+            val userResponseCreate=loginViewModel.loginUser(LoginUser(email,psw))
+
+            userResponseCreate.observe(this) { user->
+                if(user.email!="" && user.username!=""){
+                    UserRepository.setUserLogin(user)
+                    mainViewModel.updateUser(UserRepository.getUserLogin())
+                    updateToken()
+                    // Remplacez le contenu du FragmentContainerView par votre fragment
+                    transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+
+                    // Validez la transaction
+                    transaction.commit()
+
+                }
+                else{
+                    val changePage = Intent(this, LoginActivity::class.java)
+                    startActivity(changePage)
+                }
+
+            }
+
+        }
+        else {
+            // Remplacez le contenu du FragmentContainerView par votre fragment
+            transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+
+            // Validez la transaction
+            transaction.commit()
+        }
     }
 }
 
